@@ -1,0 +1,85 @@
+﻿using EntityLayer.Infrastructure;
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace EntityLayer.Entities
+{
+    public class RC_Profile_BusinessInfor : BaseEntity 
+    {
+        public long ID { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string BusinessName { get; set; }
+        public int Category { get; set; }
+        public int SubCategory { get; set; }
+        public string Website { get; set; }
+        public string LoyaltyMembership { get; set; }
+        public string GSTNo { get; set; }
+        public string Logo { get; set; }
+        [Column(TypeName = "nvarchar(5000)")]
+        public string Description { get; set; }
+        public string BusinessRegCertificateImg { get; set; }
+
+        public string UserID { get; set; } 
+        [ForeignKey("UserID")]
+        public virtual ExtendedUser User { get; set; }
+
+    }
+    public class RC_Profile_BankingDetails : BaseEntity
+    {
+        public long ID { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string BnakName { get; set; }
+        public string BranchCode { get; set; }
+        public string AccountNumber { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string AccountHolderName { get; set; }
+
+        public string UserID { get; set; }
+        [ForeignKey("UserID")]
+        public virtual ExtendedUser User { get; set; }
+
+    }
+    public class RC_Profile_CardDetails : BaseEntity
+    {
+        public long ID { get; set; } 
+        public int Type { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string CardHoldername { get; set; }
+        public string CardNumber { get; set; }
+        public string ExpirationDate { get; set; }
+        public string CVVCode { get; set; }
+        [Column(TypeName = "nvarchar(1000)")]
+        public string BillingAddress { get; set; }
+        public string Email { get; set; }
+        public string UserID { get; set; }
+        [ForeignKey("UserID")]
+        public virtual ExtendedUser User { get; set; }
+
+    }
+    public class RC_Profile_Legal : BaseEntity
+    {
+        public long ID { get; set; }
+        public string PhotoId { get; set; }
+        public int Country { get; set; }
+        public string PhotIDNumber { get; set; }
+        public string ImageURL { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string SecurityQuestion1 { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string SecurityQuestion2 { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string Answer1 { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string Answer2 { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        //public string UserID { get; set; }
+        //[ForeignKey("UserID")]
+        public virtual ExtendedUser User { get; set; }
+
+    }
+
+
+
+
+}
