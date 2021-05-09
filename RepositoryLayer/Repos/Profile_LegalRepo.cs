@@ -31,21 +31,40 @@ namespace RepositoryLayer.Repos
             return  Get(); 
         }
      
-        public async Task Post(BusinessDetailsDTO model)
+        public async Task Post(LegalDTO model)
         {
 
             var entity = new RC_Profile_Legal()
             {
- 
-            };
+                PhotoId =model.PhotoId,
+                Country =model.Country,
+                PhotIDNumber =model.PhotIDNumber,
+                ImageURL =model.ImageURL,
+                SecurityQuestion1 =model.SecurityQuestion1,
+                SecurityQuestion2 =model.SecurityQuestion2,
+                Answer1 =model.Answer1,
+                Answer2 =model.Answer2,
+                CreatedBy =Utils.GetUserId(_serviceProvider),
+                CreatedDate =DateTime.Now
+                
+    };
             await Post(entity);    
         }
-        public void Put(BusinessDetailsDTO model)
+        public void Put(LegalDTO model)
         {
             var entity = GetById(model.Id); 
             if (entity != null)
             {
- 
+                entity.PhotoId = model.PhotoId;
+                entity.Country = model.Country;
+                entity.PhotIDNumber = model.PhotIDNumber;
+                entity.ImageURL = model.ImageURL;
+                entity.SecurityQuestion1 = model.SecurityQuestion1;
+                entity.SecurityQuestion2 = model.SecurityQuestion2;
+                entity.Answer1 = model.Answer1;
+                entity.Answer2 = model.Answer2;
+                entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
+                entity.ModifiedDate = DateTime.Now;
                 Put(entity);
             }
         }

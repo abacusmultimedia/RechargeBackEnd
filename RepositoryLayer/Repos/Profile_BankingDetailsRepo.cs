@@ -36,7 +36,14 @@ namespace RepositoryLayer.Repos
 
             var entity = new RC_Profile_BankingDetails()
             {
- 
+                BnakName = model.bank,
+                BranchCode = model.branchCode,
+                AccountNumber = model.accountNo,
+                AccountHolderName = model.accountHolderName,
+                UserID = Utils.GetUserId(_serviceProvider),
+                CreatedBy= Utils.GetUserId(_serviceProvider),
+                CreatedDate =DateTime.Now
+
             };
             await Post(entity);    
         }
@@ -45,6 +52,13 @@ namespace RepositoryLayer.Repos
             var entity = GetById(model.Id); 
             if (entity != null)
             {
+                entity.BnakName = model.bank;
+                entity.BranchCode = model.branchCode;
+                entity.AccountNumber = model.accountNo;
+                entity.AccountHolderName = model.accountHolderName;
+                entity.UserID = Utils.GetUserId(_serviceProvider);
+                entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
+                entity.ModifiedDate = DateTime.Now;
  
                 Put(entity);
             }

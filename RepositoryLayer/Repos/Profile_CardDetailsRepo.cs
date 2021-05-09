@@ -31,21 +31,42 @@ namespace RepositoryLayer.Repos
             return  Get(); 
         }
      
-        public async Task Post(BusinessDetailsDTO model)
+        public async Task Post(CardDTO model)
         {
 
             var entity = new RC_Profile_CardDetails()
             {
- 
+                Type= model.Type,
+                CardNumber=model.CardNumber,
+                ExpirationDate=model.ExpirationDate,
+                CVVCode=model.CVVCode,
+                BillingAddress=model.BillingAddress,
+                Email=model.BillingAddress,
+                UserID=Utils.GetUserId(_serviceProvider),
+                CreatedBy= Utils.GetUserId(_serviceProvider),
+                CreatedDate=DateTime.Now
+
+
+
             };
             await Post(entity);    
         }
-        public void Put(BusinessDetailsDTO model)
+        public void Put(CardDTO model)
         {
             var entity = GetById(model.Id); 
             if (entity != null)
             {
- 
+                entity.Type = model.Type;
+                entity.CardNumber = model.CardNumber;
+                entity.ExpirationDate = model.ExpirationDate;
+                entity.CVVCode = model.CVVCode;
+                entity.BillingAddress = model.BillingAddress;
+                entity.Email = model.BillingAddress;
+                entity.UserID = Utils.GetUserId(_serviceProvider);
+                entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
+                entity.ModifiedDate = DateTime.Now;
+
+
                 Put(entity);
             }
         }

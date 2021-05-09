@@ -10,8 +10,8 @@ namespace RepositoryLayer.Infrastructures
     public interface IProfile_LegalRepo : IRepositoryBase<RC_Profile_Legal>
     {
         IEnumerable<RC_Profile_Legal> GetAll();
-        Task Post(BusinessDetailsDTO model);
-        void Put(BusinessDetailsDTO model);
+        Task Post(LegalDTO model);
+        void Put(LegalDTO model);
         void SoftDelete(int id);
 
 

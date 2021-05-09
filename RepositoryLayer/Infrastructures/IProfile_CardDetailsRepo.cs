@@ -10,8 +10,8 @@ namespace RepositoryLayer.Infrastructures
     public interface IProfile_CardDetailsRepo : IRepositoryBase<RC_Profile_CardDetails>
     {
         IEnumerable<RC_Profile_CardDetails> GetAll();
-        Task Post(BusinessDetailsDTO model);
-        void Put(BusinessDetailsDTO model);
+        Task Post(CardDTO model);
+        void Put(CardDTO model);
         void SoftDelete(int id);
 
 
