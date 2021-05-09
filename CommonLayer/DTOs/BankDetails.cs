@@ -9,10 +9,8 @@ namespace CommonLayer.DTOs
         public int Id { get; set; }
         public string bank { get; set; }
         public string branchCode { get; set; }
-      
         public string accountNo { get; set; }
-
         public string accountHolderName { get; set; }
-      	
+
     }
 }

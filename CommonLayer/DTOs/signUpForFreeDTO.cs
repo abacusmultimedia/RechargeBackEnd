@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CommonLayer.DTOs
 {
-    class signUpForFreeDTO
+    public class signUpForFreeDTO
     {
        public string Email {get; set;}
         public string Password {get; set;}
