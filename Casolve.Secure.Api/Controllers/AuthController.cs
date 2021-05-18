@@ -46,6 +46,14 @@ namespace Casolve.Secure.Api.Controllers
         {
             return constructResponse(await _unitOfWork.ExtendedUsersRepository.GenerateForgotPasswordToken(email));
         }
+
+        [HttpPost]
+        [Route("Stage2BusinessDTOPost")]
+        public async Task<BaseResponse> ResetPassword([FromBody] Stage2BusinessDTO model)
+        {     
+            return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage2BusinessDTOPost(model));
+        }
+       
         [HttpPost]
         [Route("ResetPassword")]
         public async Task<BaseResponse> ResetPassword([FromBody] ResetPasswordDTO model)

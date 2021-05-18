@@ -247,6 +247,11 @@ namespace RepositoryLayer.Repos
             return OtherConstants.isSuccessful;
         }
 
+        public async Task<bool> Stage2BusinessDTOPost(Stage2BusinessDTO model)
+        {
+            return false;
+        }
+
         public async Task<bool> ResetPassword(ResetPasswordDTO model)
         {
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
