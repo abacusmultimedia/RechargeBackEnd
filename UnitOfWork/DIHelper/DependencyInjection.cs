@@ -34,6 +34,16 @@ namespace UnitOfWork.DIHelper
             services.AddScoped<ILoginsRepo, LoginsRepo>();
             services.AddScoped<IProjectsRepo, ProjectsRepo>(); 
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ITransactionRepo, TransactionRepo>();
+            services.AddScoped<IChildTransactionRepo, ChildTransactionRepo>();
+            services.AddScoped<ILedgerRepo, LedgerRepo>();
+            services.AddScoped<ILedgerGroupRepo, LedgerGroupRepo>();
+            services.AddScoped<IChildTransactionRepo, ChildTransactionRepo>();
+            services.AddScoped<IProfile_BankingDetailsRepo, Profile_BankingDetailsRepo>();
+            services.AddScoped<IProfile_BusinessInforRepo, Profile_BusinessInfoRepo>();
+            services.AddScoped<IProfile_CardDetailsRepo, Profile_CardDetailsRepo>();
+
+
 
 
             //services.AddScoped<IProjectAllowedToInvitRepo, ProjectAllowedToInvitRepo>();
