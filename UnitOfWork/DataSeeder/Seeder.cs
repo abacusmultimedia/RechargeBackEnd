@@ -42,11 +42,11 @@ namespace UnitOfWork.DataSeeder
                 var roles = new List<ExtendedRole>()
                 {
                      new ExtendedRole(){ Name = "Admin", Description = "Super User"},
-                     new ExtendedRole(){ Name = "Researcher", Description = "Work with students " },
-                     new ExtendedRole(){ Name = "Student", Description = "Project and idia creator User" },
+                     new ExtendedRole(){ Name = "Personal", Description = "Personal " },
+                     new ExtendedRole(){ Name = "Business", Description = "Business" },
                      new ExtendedRole(){ Name = "Bank", Description = "Provide Investor , and Security" },
                      new ExtendedRole(){ Name = "Investor", Description = "Provide Funding for Project Implementation and development" },
-                     new ExtendedRole(){ Name = "Evaluator", Description = "Project Evaluator" },
+                     new ExtendedRole(){ Name = "Partner", Description = "Project Partner" },
 
 
                 };
@@ -115,13 +115,13 @@ namespace UnitOfWork.DataSeeder
                     LastName = "Hussain",
                     Email = "std@yopmail.com",
                     TenantId = "0",
-                    UserName = "Student",
+                    UserName = "Personal",
                     EmailConfirmed = true,
                     MemberStatus = true
                 };
 
                 await _userManager.CreateAsync(user, "Test@0000");
-                await _userManager.AddToRoleAsync(user, "Student");
+                await _userManager.AddToRoleAsync(user, "Personal");
 
                 createdById = _userManager.FindByEmailAsync("std@yopmail.com").Result.Id;
              
