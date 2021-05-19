@@ -15,7 +15,18 @@ namespace RepositoryLayer.Infrastructures
         Task<bool> GenerateForgotPasswordToken(string email);
         Task<bool> ResetPasswordWithToken(ResetPasswordDTO model);
         Task<bool> InvitationToJoinProject(string email);
-        Task<bool> Stage2BusinessDTOPost(Stage2BusinessDTO model);
+        Task<bool> Stage2BusinessPost(SignUpStage2BusinessDTO model);
+        Task<bool> Stage2PersonalPost(SignUPStage2PersonalDTO model);
+        Task<bool> Stage2PartnerPost(SignUPStage2PartnerDTO model);
+        Task<bool> Stage3Post(signUpstage3DTO model);
+        Task<bool> Stage4Post(signUpstage4DTO model);
+
+        Task<bool> Stage5BusinessPost(SignUPStage5BusinessDTO model);
+        Task<bool> Stage5PersonalPost(SignUPStage5PersonalDTO model);
+
+        Task<bool> Stage5PartnerPost(SignUPStage5PartnerDTO model);
+
+ 
         //Task<UserDTO> GetUserDetails();
         //Task<bool> UpdateUser(UpdateUserDTO model);
         //Task<bool> CheckIsEmailExist(string Email, bool isFromAdmin = false);

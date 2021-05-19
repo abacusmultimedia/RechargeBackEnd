@@ -247,10 +247,7 @@ namespace RepositoryLayer.Repos
             return OtherConstants.isSuccessful;
         }
 
-        public async Task<bool> Stage2BusinessDTOPost(Stage2BusinessDTO model)
-        {
-            return false;
-        }
+
 
         public async Task<bool> ResetPassword(ResetPasswordDTO model)
         {
@@ -332,6 +329,44 @@ namespace RepositoryLayer.Repos
 
             return OtherConstants.isSuccessful;
         }
+
+
+        #region stages
+
+        public async Task<bool> Stage2BusinessPost(SignUpStage2BusinessDTO model)
+        {
+            return false;
+        }
+        public async Task<bool> Stage2PersonalPost(SignUPStage2PersonalDTO model)
+        {
+            return false;
+        }
+        public async Task<bool> Stage2PartnerPost(SignUPStage2PartnerDTO model)
+        {
+            return false;
+        }
+        public async Task<bool> Stage3Post(signUpstage3DTO model)
+        {
+            return false;
+        }
+        public async Task<bool> Stage4Post(signUpstage4DTO model)
+        {
+            return false;
+        }
+
+        public async Task<bool> Stage5BusinessPost(SignUPStage5BusinessDTO model)
+        {
+            return false;
+        }
+        public async Task<bool> Stage5PersonalPost(SignUPStage5PersonalDTO model)
+        {
+            return false;
+        }
+        public async Task<bool> Stage5PartnerPost(SignUPStage5PartnerDTO model)
+        {
+            return false;
+        }
+        #endregion
 
 
 
