@@ -6,14 +6,14 @@ namespace CommonLayer.DTOs
 {
     public class SignUPStage2BusinessDTO
     {
-        public string businessRegistrationNo { get; set; }
-        public string businessDescription { get; set; }
         public string businessName { get; set; }
         public string category { get; set; }
         public string subCategory { get; set; }
         public string website { get; set; }
         public string contactnumber { get; set; }
         public string loyaltyMembership { get; set; }
+        public string businessRegistrationNo { get; set; }
+        public string businessDescription { get; set; }
     }
     public class SignUPStage2PersonalDTO
     {

@@ -24,11 +24,22 @@ namespace RepositoryLayer.Repos
     public class ExtendedUsersRepo : RepositoryBase<ExtendedUser>, IExtendedUsersRepo
     {
         private readonly IServiceProvider _serviceProvider;
-
-
-        public ExtendedUsersRepo(IServiceProvider serviceProvider, RechargeDbContext
+        private readonly IProfile_BankingDetailsRepo _BankingDetailsRepo;
+        private readonly IProfile_BusinessInforRepo _BusinessInforRepo;
+        private readonly IProfile_CardDetailsRepo _CardDetailsRepo;
+        private readonly IProfile_LegalRepo _LegalRepo;
+        public ExtendedUsersRepo(IServiceProvider serviceProvider,
+            IProfile_BusinessInforRepo businessInforRepo,
+            IProfile_LegalRepo legalRepo,
+            IProfile_CardDetailsRepo cardDetailsRepo,
+            IProfile_BankingDetailsRepo bankingDetailsRepo, RechargeDbContext
             context) : base(context)
         {
+            _BankingDetailsRepo = bankingDetailsRepo;
+            _BusinessInforRepo = businessInforRepo;
+            _CardDetailsRepo = cardDetailsRepo;
+            _LegalRepo = legalRepo;
+
             _serviceProvider = serviceProvider;
             //  _mapper = _serviceProvider.GetRequiredService<IMapper>();
             ///  _blobUploader = _serviceProvider.GetRequiredService<IBlobUploader>();
@@ -58,7 +69,7 @@ namespace RepositoryLayer.Repos
                     OtherConstants.responseMsg = "User status is not active";
                     return null;
                 }
-                var userRoles = await _userManager.GetRolesAsync(user); 
+                var userRoles = await _userManager.GetRolesAsync(user);
                 var signIn = await _serviceProvider.GetRequiredService<SignInManager<ExtendedUser>>().PasswordSignInAsync(user, model.Password, true, true);
                 if (signIn.Succeeded)
                 {
@@ -89,7 +100,7 @@ namespace RepositoryLayer.Repos
                         UserId = user.Id,
                         CreatedBy = user.Id,
                         TenantId = user.TenantId
-                    }, true); 
+                    }, true);
                     int daysLeft = 0;
 
 
@@ -174,7 +185,8 @@ namespace RepositoryLayer.Repos
 
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
             var usr = await _userManager.FindByEmailAsync(model.Email);
-            ExtendedUser newUser = new ExtendedUser() {
+            ExtendedUser newUser = new ExtendedUser()
+            {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
@@ -184,7 +196,93 @@ namespace RepositoryLayer.Repos
                 EmailConfirmed = true ////////////// to be removed if Email confirmation required in future
             };
             newUser.PasswordHash = _userManager.PasswordHasher.HashPassword(newUser, model.Password);
-             
+
+            var resonser = await _userManager.CreateAsync(newUser);
+
+            // var role = await _userManager.GetRolesAsync(user);
+            // await _userManager.RemoveFromRolesAsync(user, role);
+            await _userManager.AddToRoleAsync(newUser, model.role);
+
+            if (resonser.Succeeded)
+            {
+                OtherConstants.isSuccessful = true;
+                var currentUser = newUser;
+
+                var entity = new RC_Profile_BankingDetails()
+                {
+                    BnakName = "",
+                    BranchCode = "",
+                    AccountNumber = "",
+                    AccountHolderName = "",
+                    UserID = currentUser.Id,
+                    CreatedBy = currentUser.Id,
+                    CreatedDate = DateTime.Now
+                };
+                await _BankingDetailsRepo.PostInitial(entity);
+
+                var Legal_entity = new RC_Profile_Legal()
+                {
+                    Country = 0,
+                    PhotoId = "",
+                    Answer1 = "",
+                    Answer2 = "",
+                    ImageURL = "",
+                    PhotIDNumber = "",
+                    SecurityQuestion1 = "",
+                    SecurityQuestion2 = "",
+                    User = currentUser,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = currentUser.Id
+                };
+
+                await _LegalRepo.PostInitial(Legal_entity);
+
+                var BusinessInfo_entity = new RC_Profile_BusinessInfor()
+                {
+                    Description = "",
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = currentUser.Id,
+                    IsDeleted = false,
+                    UserID = currentUser.Id,
+                    GSTNo = "",
+                    BusinessName = "",
+                    //               BusinessRegCertificateImg = model.u
+                    //Logo
+                    // Category
+                    //
+                    //SubCategory
+                    Website = "",
+                    LoyaltyMembership = "",
+                };
+                await _BusinessInforRepo.PostInitial(BusinessInfo_entity);
+
+
+
+            }
+            else
+            {
+                OtherConstants.isSuccessful = false;
+            }
+            return OtherConstants.isSuccessful;
+        }
+
+        public async Task<bool> RegisterOld(RegisterDTO model)
+        {
+
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var usr = await _userManager.FindByEmailAsync(model.Email);
+            ExtendedUser newUser = new ExtendedUser()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                UserName = model.Email,
+                MemberStatus = true,
+                TenantId = "1",
+                EmailConfirmed = true ////////////// to be removed if Email confirmation required in future
+            };
+            newUser.PasswordHash = _userManager.PasswordHasher.HashPassword(newUser, model.Password);
+
             var resonser = await _userManager.CreateAsync(newUser);
             // var role = await _userManager.GetRolesAsync(user);
             // await _userManager.RemoveFromRolesAsync(user, role);
@@ -200,6 +298,7 @@ namespace RepositoryLayer.Repos
             }
             return OtherConstants.isSuccessful;
         }
+
         private UserDTO CreateUserModel(ExtendedUser user, string role)
         {
             return new UserDTO()
@@ -216,7 +315,7 @@ namespace RepositoryLayer.Repos
 
         public List<ExtendedRole> GetRoles()
         {
-            return  _serviceProvider.GetRequiredService<RoleManager<ExtendedRole>>().Roles.ToList();
+            return _serviceProvider.GetRequiredService<RoleManager<ExtendedRole>>().Roles.ToList();
         }
 
         public async Task<bool> ResetPasswordWithToken(ResetPasswordDTO model)
@@ -314,8 +413,8 @@ namespace RepositoryLayer.Repos
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
-            { 
-                var url =   DomainConfiguration.PortalAppDomain+$"#/auth/registration";
+            {
+                var url = DomainConfiguration.PortalAppDomain + $"#/auth/registration";
                 var body = CreateEmailTemplateForInivitationToApply(url, EmailTemplateConfiguration.ResetEmailDescription, EmailTemplateConfiguration.ResetEmailButtonTitle, EmailTemplateConfiguration.ResetEmailMessage, EmailTemplateConfiguration.ResetEmailAddress);
 
                 var isEmailSent = _serviceProvider.GetRequiredService<IEmailService>().SendEmailWithoutTemplate(email, "Invitation to Apply", body, true);
@@ -333,8 +432,10 @@ namespace RepositoryLayer.Repos
 
         #region stages
 
-        public async Task<bool> Stage2BusinessPost(SignUpStage2BusinessDTO model)
+        public async Task<bool> Stage2BusinessPost(SignUPStage2BusinessDTO model)
         {
+
+
             return false;
         }
         public async Task<bool> Stage2PersonalPost(SignUPStage2PersonalDTO model)

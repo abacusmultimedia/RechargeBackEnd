@@ -76,7 +76,7 @@ namespace Casolve.Secure.Api.Controllers
 
         [HttpPost]
         [Route("Stage2BusinessDTOPost")]
-        public async Task<BaseResponse> Stage2BusinessDTOPost([FromBody] SignUpStage2BusinessDTO model)
+        public async Task<BaseResponse> Stage2BusinessDTOPost([FromBody] SignUPStage2BusinessDTO model)
         {
             return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage2BusinessPost(model));
         }

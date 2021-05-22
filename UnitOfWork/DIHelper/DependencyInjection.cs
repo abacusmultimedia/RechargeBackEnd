@@ -42,7 +42,7 @@ namespace UnitOfWork.DIHelper
             services.AddScoped<IProfile_BankingDetailsRepo, Profile_BankingDetailsRepo>();
             services.AddScoped<IProfile_BusinessInforRepo, Profile_BusinessInfoRepo>();
             services.AddScoped<IProfile_CardDetailsRepo, Profile_CardDetailsRepo>();
-
+            services.AddScoped<IProfile_LegalRepo, Profile_LegalRepo>();
 
 
 

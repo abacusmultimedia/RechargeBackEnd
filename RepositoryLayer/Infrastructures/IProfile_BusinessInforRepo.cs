@@ -12,6 +12,7 @@ namespace RepositoryLayer.Infrastructures
         IEnumerable<RC_Profile_BusinessInfor> GetAll();
         Task Post(BusinessDetailsDTO model);
         void Put(BusinessDetailsDTO model);
+        Task PostInitial(RC_Profile_BusinessInfor model);
         void SoftDelete(int id);
 
 

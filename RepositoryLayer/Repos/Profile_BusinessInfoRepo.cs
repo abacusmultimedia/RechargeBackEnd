@@ -14,23 +14,21 @@ using System.Linq;
 
 namespace RepositoryLayer.Repos
 {
-    public class  Profile_BusinessInfoRepo : RepositoryBase<RC_Profile_BusinessInfor>, IProfile_BusinessInforRepo
+    public class Profile_BusinessInfoRepo : RepositoryBase<RC_Profile_BusinessInfor>, IProfile_BusinessInforRepo
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMapper _mapper;
-        private readonly IExtendedUsersRepo _extendedUsersRepo;
-        public Profile_BusinessInfoRepo(IServiceProvider serviceProvider, IExtendedUsersRepo extendedUsersRepo , RechargeDbContext context) : base(context)
+        public Profile_BusinessInfoRepo(IServiceProvider serviceProvider, RechargeDbContext context) : base(context)
         {
-            _extendedUsersRepo = extendedUsersRepo;
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
 
         public IEnumerable<RC_Profile_BusinessInfor> GetAll()
         {
-            return  Get(); 
+            return Get();
         }
-     
+
         public async Task Post(BusinessDetailsDTO model)
         {
 
@@ -51,11 +49,17 @@ namespace RepositoryLayer.Repos
                 Website = model.website,
                 LoyaltyMembership = model.loyaltyMembership,
             };
-            await Post(entity);    
+            await Post(entity);
         }
+        public async Task PostInitial(RC_Profile_BusinessInfor model)
+        {
+            await Post(model);
+        }
+
+
         public void Put(BusinessDetailsDTO model)
         {
-            var entity = GetById(model.Id); 
+            var entity = GetById(model.Id);
             if (entity != null)
             {
                 entity.BusinessName = model.businessName;
@@ -75,7 +79,7 @@ namespace RepositoryLayer.Repos
                 Put(entity);
             }
         }
- 
+
 
         public void SoftDelete(int id)
         {

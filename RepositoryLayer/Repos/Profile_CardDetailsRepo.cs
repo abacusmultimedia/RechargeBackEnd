@@ -18,10 +18,8 @@ namespace RepositoryLayer.Repos
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMapper _mapper;
-        private readonly IExtendedUsersRepo _extendedUsersRepo;
-        public Profile_CardDetailsRepo(IServiceProvider serviceProvider, IExtendedUsersRepo extendedUsersRepo , RechargeDbContext context) : base(context)
-        {
-            _extendedUsersRepo = extendedUsersRepo;
+        public Profile_CardDetailsRepo(IServiceProvider serviceProvider,  RechargeDbContext context) : base(context)
+        { 
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }

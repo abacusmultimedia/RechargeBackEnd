@@ -18,10 +18,8 @@ namespace RepositoryLayer.Repos
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMapper _mapper;
-        private readonly IExtendedUsersRepo _extendedUsersRepo;
-        public Profile_BankingDetailsRepo(IServiceProvider serviceProvider, IExtendedUsersRepo extendedUsersRepo , RechargeDbContext context) : base(context)
+        public Profile_BankingDetailsRepo(IServiceProvider serviceProvider,RechargeDbContext context) : base(context)
         {
-            _extendedUsersRepo = extendedUsersRepo;
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
@@ -47,6 +45,12 @@ namespace RepositoryLayer.Repos
             };
             await Post(entity);    
         }
+        public async Task PostInitial(RC_Profile_BankingDetails entity)
+        {
+
+            await Post(entity);
+        }
+
         public void Put(BankDetails model)
         {
             var entity = GetById(model.Id); 

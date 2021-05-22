@@ -16,13 +16,12 @@ namespace UnitOfWork
         public IExtendedUsersRepo ExtendedUsersRepository => _serviceProvider.GetRequiredService<IExtendedUsersRepo>();
         public IExtendedRolesRepo ExtendedRolesRepository => _serviceProvider.GetRequiredService<IExtendedRolesRepo>();
         public IProjectsRepo ProjectsRepository => _serviceProvider.GetRequiredService<IProjectsRepo>();
-        //public IProjectAllowedToInvitRepo ProjectAllowedToInvitRepo => _serviceProvider.GetRequiredService<IProjectAllowedToInvitRepo>();
-        //public IProjectFeatureRepo ProjectFeatureRepo => _serviceProvider.GetRequiredService<IProjectFeatureRepo>();
-        //public IProjectGroupRepo ProjectGroupRepo => _serviceProvider.GetRequiredService<IProjectGroupRepo>();
-        //public IProjectTagsRepo ProjectTagsRepo => _serviceProvider.GetRequiredService<IProjectTagsRepo>();
-        //public IProjectTypeRepo ProjectTypeRepo => _serviceProvider.GetRequiredService<IProjectTypeRepo>();
-        //public IProjectVisibilityTypeRepo ProjectVisibilityTypeRepo => _serviceProvider.GetRequiredService<IProjectVisibilityTypeRepo>();
-         
+        public IProfile_BankingDetailsRepo profile_BankingDetailsRepo => _serviceProvider.GetRequiredService<IProfile_BankingDetailsRepo>();
+        public IProfile_BusinessInforRepo Profile_BusinessInforRepo => _serviceProvider.GetRequiredService<IProfile_BusinessInforRepo>();
+        public IProfile_LegalRepo profile_LegalRepo => _serviceProvider.GetRequiredService<IProfile_LegalRepo>();
+        public IProfile_CardDetailsRepo cardDetailsRepo => _serviceProvider.GetRequiredService<IProfile_CardDetailsRepo>();
+
+
 
 
         public ILoginsRepo LoginsRepository => _serviceProvider.GetRequiredService<ILoginsRepo>();

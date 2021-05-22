@@ -14,13 +14,10 @@ namespace UnitOfWork
         IExtendedUsersRepo ExtendedUsersRepository { get; }
         IExtendedRolesRepo ExtendedRolesRepository { get; }
         IProjectsRepo ProjectsRepository { get; }
-        //IProjectAllowedToInvitRepo ProjectAllowedToInvitRepo { get; }
-        //IProjectFeatureRepo ProjectFeatureRepo { get; }
-        //IProjectGroupRepo ProjectGroupRepo { get; }
-        //IProjectTagsRepo ProjectTagsRepo { get; }
-        //IProjectTypeRepo ProjectTypeRepo { get; }
-        //IProjectVisibilityTypeRepo ProjectVisibilityTypeRepo { get; }
-
+        IProfile_BankingDetailsRepo profile_BankingDetailsRepo { get; } 
+        IProfile_BusinessInforRepo Profile_BusinessInforRepo { get; }
+        IProfile_LegalRepo profile_LegalRepo { get; }
+        IProfile_CardDetailsRepo cardDetailsRepo { get; }
 
         Task<bool> SaveChanges();
         Task<bool> Save();

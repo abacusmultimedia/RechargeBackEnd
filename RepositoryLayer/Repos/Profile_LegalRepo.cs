@@ -18,41 +18,45 @@ namespace RepositoryLayer.Repos
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMapper _mapper;
-        private readonly IExtendedUsersRepo _extendedUsersRepo;
-        public Profile_LegalRepo(IServiceProvider serviceProvider, IExtendedUsersRepo extendedUsersRepo , RechargeDbContext context) : base(context)
+        public Profile_LegalRepo(IServiceProvider serviceProvider, RechargeDbContext context) : base(context)
         {
-            _extendedUsersRepo = extendedUsersRepo;
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
 
         public IEnumerable<RC_Profile_Legal> GetAll()
         {
-            return  Get(); 
+            return Get();
         }
-     
+
         public async Task Post(LegalDTO model)
         {
 
             var entity = new RC_Profile_Legal()
             {
-                PhotoId =model.PhotoId,
-                Country =model.Country,
-                PhotIDNumber =model.PhotIDNumber,
-                ImageURL =model.ImageURL,
-                SecurityQuestion1 =model.SecurityQuestion1,
-                SecurityQuestion2 =model.SecurityQuestion2,
-                Answer1 =model.Answer1,
-                Answer2 =model.Answer2,
-                CreatedBy =Utils.GetUserId(_serviceProvider),
-                CreatedDate =DateTime.Now
-                
-    };
-            await Post(entity);    
+                PhotoId = model.PhotoId,
+                Country = model.Country,
+                PhotIDNumber = model.PhotIDNumber,
+                ImageURL = model.ImageURL,
+                SecurityQuestion1 = model.SecurityQuestion1,
+                SecurityQuestion2 = model.SecurityQuestion2,
+                Answer1 = model.Answer1,
+                Answer2 = model.Answer2,
+                CreatedBy = Utils.GetUserId(_serviceProvider),
+                CreatedDate = DateTime.Now
+
+            };
+            await Post(entity);
         }
+
+        public async Task PostInitial(RC_Profile_Legal model)
+        {
+            await Post(model);
+        }
+
         public void Put(LegalDTO model)
         {
-            var entity = GetById(model.Id); 
+            var entity = GetById(model.Id);
             if (entity != null)
             {
                 entity.PhotoId = model.PhotoId;
@@ -68,7 +72,7 @@ namespace RepositoryLayer.Repos
                 Put(entity);
             }
         }
- 
+
 
         public void SoftDelete(int id)
         {

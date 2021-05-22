@@ -42,7 +42,7 @@ namespace UnitOfWork.DataSeeder
                 var roles = new List<ExtendedRole>()
                 {
                      new ExtendedRole(){ Name = "Admin", Description = "Super User"},
-                     new ExtendedRole(){ Name = "Personal", Description = "Personal " },
+                     new ExtendedRole(){ Name = "Personal", Description = "Personal" },
                      new ExtendedRole(){ Name = "Business", Description = "Business" },
                      new ExtendedRole(){ Name = "Bank", Description = "Provide Investor , and Security" },
                      new ExtendedRole(){ Name = "Investor", Description = "Provide Funding for Project Implementation and development" },
