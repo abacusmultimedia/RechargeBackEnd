@@ -26,11 +26,13 @@ namespace EntityLayer
         public DbSet<Accounts_childTransaction> Accounts_childTransaction { get; set; }
         public DbSet<Accounts_Ledger> Accounts_Ledger { get; set; }
         public DbSet<Accounts_LedgerGroup> Accounts_LedgerGroup { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
 
 
 
 
-   ////     public DbSet<SBI_Project> SBI_Project { get; set; }
+        ////     public DbSet<SBI_Project> SBI_Project { get; set; }
 
 
 

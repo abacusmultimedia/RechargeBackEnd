@@ -18,7 +18,8 @@ namespace UnitOfWork
         IProfile_BusinessInforRepo Profile_BusinessInforRepo { get; }
         IProfile_LegalRepo profile_LegalRepo { get; }
         IProfile_CardDetailsRepo cardDetailsRepo { get; }
-
+        ICategoryRepo CategoryRepo { get; }
+        ISubCategoryRepo SubCategoryRepo { get; }
         Task<bool> SaveChanges();
         Task<bool> Save();
     }

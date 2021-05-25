@@ -51,9 +51,9 @@ namespace RepositoryLayer.Repos
             };
             await Post(entity);
         }
-        public async Task PostInitial(RC_Profile_BusinessInfor model)
+        public async Task PostInitial(RC_Profile_BusinessInfor entity)
         {
-            await Post(model);
+            await Post(entity, true);
         }
 
 

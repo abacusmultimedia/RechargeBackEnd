@@ -43,6 +43,8 @@ namespace UnitOfWork.DIHelper
             services.AddScoped<IProfile_BusinessInforRepo, Profile_BusinessInfoRepo>();
             services.AddScoped<IProfile_CardDetailsRepo, Profile_CardDetailsRepo>();
             services.AddScoped<IProfile_LegalRepo, Profile_LegalRepo>();
+            services.AddScoped<ICategoryRepo, CategoryRepo>();
+            services.AddScoped<ISubCategoryRepo, SubCategoryRepo>();
 
 
 

@@ -26,17 +26,5 @@ namespace RepositoryLayer.Infrastructures
         Task<bool> Stage5PersonalPost(SignUPStage5PersonalDTO model);
 
         Task<bool> Stage5PartnerPost(SignUPStage5PartnerDTO model);
-
- 
-        //Task<UserDTO> GetUserDetails();
-        //Task<bool> UpdateUser(UpdateUserDTO model);
-        //Task<bool> CheckIsEmailExist(string Email, bool isFromAdmin = false);
-        //Task<bool> CheckIsUserEligibleForNewPswd(string UserId);
-        //Task<RegisterDTO> VerifyEmail(string userId, string token, string planId);
-        //Task<bool> CreateNewPassword(ResetPasswordDTO model);
-        //Task<RegisterDTO> RegisterUsingEmail(RegisterDTO model);
-        //Task<bool> ResendEmailConfirmationTokenMail(RegisterDTO model);
-        //bool VerifyUserAndPlan(string userId, string planId);
-        //Task<bool> SoftDelete(string id);
     }
 }

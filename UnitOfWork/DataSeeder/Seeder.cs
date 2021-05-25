@@ -108,7 +108,6 @@ namespace UnitOfWork.DataSeeder
 
         private async Task AddUsers()
         {
-             
                 var user = new ExtendedUser()
                 {
                     FirstName = "Khalid",
@@ -122,7 +121,6 @@ namespace UnitOfWork.DataSeeder
 
                 await _userManager.CreateAsync(user, "Test@0000");
                 await _userManager.AddToRoleAsync(user, "Personal");
-
                 createdById = _userManager.FindByEmailAsync("std@yopmail.com").Result.Id;
              
         }

@@ -182,6 +182,7 @@ namespace RepositoryLayer.Repos
         }
         public async Task<bool> Register(RegisterDTO model)
         {
+            var usersList = _BankingDetailsRepo.Get().ToList();
 
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
             var usr = await _userManager.FindByEmailAsync(model.Email);
@@ -212,11 +213,12 @@ namespace RepositoryLayer.Repos
                 {
                     BnakName = "",
                     BranchCode = "",
+                    IsDeleted = false,
                     AccountNumber = "",
                     AccountHolderName = "",
                     UserID = currentUser.Id,
                     CreatedBy = currentUser.Id,
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
                 };
                 await _BankingDetailsRepo.PostInitial(entity);
 
@@ -228,9 +230,10 @@ namespace RepositoryLayer.Repos
                     Answer2 = "",
                     ImageURL = "",
                     PhotIDNumber = "",
+                    IsDeleted = false,
+                    User = currentUser,
                     SecurityQuestion1 = "",
                     SecurityQuestion2 = "",
-                    User = currentUser,
                     CreatedDate = DateTime.Now,
                     CreatedBy = currentUser.Id
                 };
@@ -246,11 +249,10 @@ namespace RepositoryLayer.Repos
                     UserID = currentUser.Id,
                     GSTNo = "",
                     BusinessName = "",
-                    //               BusinessRegCertificateImg = model.u
-                    //Logo
-                    // Category
-                    //
-                    //SubCategory
+                    BusinessRegCertificateImg = "",
+                    Logo = "",
+                    Category = 1,
+                    SubCategory = 1,
                     Website = "",
                     LoyaltyMembership = "",
                 };

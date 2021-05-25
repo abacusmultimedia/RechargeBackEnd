@@ -10,8 +10,8 @@ namespace EntityLayer.Entities
         public long ID { get; set; }
         [Column(TypeName = "nvarchar(200)")]
         public string BusinessName { get; set; }
-        public int Category { get; set; }
-        public int SubCategory { get; set; }
+        public long Category { get; set; }
+        public long SubCategory { get; set; }
         public string Website { get; set; }
         public string LoyaltyMembership { get; set; }
         public string GSTNo { get; set; }
@@ -23,6 +23,8 @@ namespace EntityLayer.Entities
         public string UserID { get; set; } 
         [ForeignKey("UserID")]
         public virtual ExtendedUser User { get; set; }
+        [ForeignKey("SubCategory")]
+        public virtual SubCategory subcategory { get; set; }
 
     }
     public class RC_Profile_BankingDetails : BaseEntity
@@ -78,7 +80,26 @@ namespace EntityLayer.Entities
         public virtual ExtendedUser User { get; set; }
 
     }
+    [Table("rc_profile_category")]
+    public class Category  : BaseEntity
+    {
+        public long ID { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string Name { get; set; }
+        public int OrderBy { get; set; }
 
+    }
+    [Table("rc_profile_subcategory")]
+    public class SubCategory : BaseEntity
+    {
+        public long ID { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string Name { get; set; }
+        public int OrderBy { get; set; }
+        public long ParentID { get; set; }
+        [ForeignKey("ParentID")]
+        public virtual Category Category{ get; set; }
+    }
 
 
 

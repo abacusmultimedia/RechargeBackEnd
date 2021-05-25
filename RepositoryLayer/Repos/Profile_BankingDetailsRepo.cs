@@ -48,7 +48,7 @@ namespace RepositoryLayer.Repos
         public async Task PostInitial(RC_Profile_BankingDetails entity)
         {
 
-            await Post(entity);
+            await Post(entity,true);
         }
 
         public void Put(BankDetails model)
@@ -63,6 +63,7 @@ namespace RepositoryLayer.Repos
                 entity.UserID = Utils.GetUserId(_serviceProvider);
                 entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
                 entity.ModifiedDate = DateTime.Now;
+                entity.IsDeleted = false;
  
                 Put(entity);
             }

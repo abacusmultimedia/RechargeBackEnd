@@ -28,6 +28,10 @@ namespace RepositoryLayer
         {
             return _context.Set<T>().Find(id);
         }
+        public virtual T GetById(long id)
+        {
+            return _context.Set<T>().Find(id);
+        }
 
         public virtual IEnumerable<T> GetWithCondition(Expression<Func<T, bool>> expression)
         {

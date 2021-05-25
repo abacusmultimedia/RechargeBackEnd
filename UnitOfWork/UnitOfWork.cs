@@ -20,7 +20,8 @@ namespace UnitOfWork
         public IProfile_BusinessInforRepo Profile_BusinessInforRepo => _serviceProvider.GetRequiredService<IProfile_BusinessInforRepo>();
         public IProfile_LegalRepo profile_LegalRepo => _serviceProvider.GetRequiredService<IProfile_LegalRepo>();
         public IProfile_CardDetailsRepo cardDetailsRepo => _serviceProvider.GetRequiredService<IProfile_CardDetailsRepo>();
-
+        public ICategoryRepo CategoryRepo => _serviceProvider.GetRequiredService<ICategoryRepo>();
+        public ISubCategoryRepo SubCategoryRepo => _serviceProvider.GetRequiredService<ISubCategoryRepo>();
 
 
 

@@ -51,7 +51,7 @@ namespace RepositoryLayer.Repos
 
         public async Task PostInitial(RC_Profile_Legal model)
         {
-            await Post(model);
+            await Post(model,true);
         }
 
         public void Put(LegalDTO model)
