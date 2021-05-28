@@ -16,15 +16,13 @@ namespace RepositoryLayer.Infrastructures
         Task<bool> ResetPasswordWithToken(ResetPasswordDTO model);
         Task<bool> InvitationToJoinProject(string email);
        // Task<bool> stage1Post(SignUpstage1DTO model);
-        Task Stage2BusinessPost(SignUPStage2BusinessDTO model);
-        Task<bool> Stage2PersonalPost(SignUPStage2PersonalDTO model);
-        Task<bool> Stage2PartnerPost(SignUPStage2PartnerDTO model);
-        Task<bool> Stage3Post(signUpstage3DTO model);
-        Task<bool> Stage4Post(signUpstage4DTO model);
-
-        Task<bool> Stage5BusinessPost(SignUPStage5BusinessDTO model);
-        Task<bool> Stage5PersonalPost(SignUPStage5PersonalDTO model);
-
-        Task<bool> Stage5PartnerPost(SignUPStage5PartnerDTO model);
+        void Stage2BusinessPost(SignUPStage2BusinessDTO model);
+        Task Stage2PersonalPost(SignUPStage2PersonalDTO model);
+        void Stage2PartnerPost(SignUPStage2PartnerDTO model);
+        void Stage3Post(signUpstage3DTO model);
+        void Stage4Post(signUpstage4DTO model);
+        void Stage5BusinessPost(SignUPStage5BusinessDTO model);
+        void Stage5PersonalPost(SignUPStage5PersonalDTO model);
+        void Stage5PartnerPost(SignUPStage5PartnerDTO model);
     }
 }

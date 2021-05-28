@@ -94,8 +94,17 @@ namespace RepositoryLayer.Repos
             }
         }
 
+        public void PutStage2Peronal(string model)
+        {
+            var userId = Utils.GetUserId(_serviceProvider);
+            var entity = GetWithCondition(x => x.UserID == userId).FirstOrDefault();
+            if (entity != null)
+            { 
+                entity.LoyaltyMembership = model; 
+                Put(entity);
+            }
+        }
 
-   
 
         public void SoftDelete(int id)
         {

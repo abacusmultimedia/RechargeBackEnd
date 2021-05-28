@@ -47,9 +47,6 @@ namespace Casolve.Secure.Api.Controllers
         {
             return constructResponse(await _unitOfWork.ExtendedUsersRepository.GenerateForgotPasswordToken(email));
         }
-
-
-       
         [HttpPost]
         [Route("ResetPassword")]
         public async Task<BaseResponse> ResetPassword([FromBody] ResetPasswordDTO model)
@@ -70,64 +67,68 @@ namespace Casolve.Secure.Api.Controllers
         {
             return constructResponse( _unitOfWork.ExtendedRolesRepository.GetRoles());
         }
-
-
 #region Stages
 
         [HttpPost]
         [Route("Stage2BusinessDTOPost")]
         public async Task<BaseResponse> Stage2BusinessDTOPost([FromBody] SignUPStage2BusinessDTO model)
         {
-            await _unitOfWork.ExtendedUsersRepository.Stage2BusinessPost(model);
+             _unitOfWork.ExtendedUsersRepository.Stage2BusinessPost(model);
             return constructResponse(await _unitOfWork.Save());
         }
         [HttpPost]
         [Route("Stage2PersonalPost")]
         public async Task<BaseResponse> Stage2PersonalPost([FromBody]  SignUPStage2PersonalDTO model) 
         {
-            return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage2PersonalPost(model));
+            await _unitOfWork.ExtendedUsersRepository.Stage2PersonalPost(model);
+            return constructResponse(await _unitOfWork.Save());
         }
 
         [HttpPost]
         [Route("Stage2PartnerPost")]
         public async Task<BaseResponse> Stage2PartnerPost([FromBody] SignUPStage2PartnerDTO model)
         {
-            return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage2PartnerPost(model));
+            _unitOfWork.ExtendedUsersRepository.Stage2PartnerPost(model);
+            return constructResponse(await _unitOfWork.Save());
         }
 
         [HttpPost]
         [Route("Stage3Post")]
         public async Task<BaseResponse> Stage3Post([FromBody] signUpstage3DTO model)
         {
-            return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage3Post(model));
+            _unitOfWork.ExtendedUsersRepository.Stage3Post(model);
+            return constructResponse(await _unitOfWork.Save());
         }
 
         [HttpPost]
         [Route("Stage4Post")]
         public async Task<BaseResponse> Stage4Post([FromBody] signUpstage4DTO model)
         {
-            return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage4Post(model));
+            _unitOfWork.ExtendedUsersRepository.Stage4Post(model);
+            return constructResponse(await _unitOfWork.Save());
         }
 
         [HttpPost]
         [Route("Stage5BusinessPost")]
         public async Task<BaseResponse> Stage5BusinessPost([FromBody] SignUPStage5BusinessDTO model)
         {
-            return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage5BusinessPost(model));
+            _unitOfWork.ExtendedUsersRepository.Stage5BusinessPost(model);
+            return constructResponse(await _unitOfWork.Save());
         }
 
         [HttpPost]
         [Route("Stage5PersonalPost")]
         public async Task<BaseResponse> Stage5PersonalPost([FromBody] SignUPStage5PersonalDTO model)
-        {
-            return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage5PersonalPost(model));
+        {  
+            _unitOfWork.ExtendedUsersRepository.Stage5PersonalPost(model);
+            return constructResponse(await _unitOfWork.Save());
         }
 
         [HttpPost]
         [Route("Stage5PartnerPost")]
         public async Task<BaseResponse> Stage5PartnerPost([FromBody] SignUPStage5PartnerDTO model)
-        {
-            return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage5PartnerPost(model));
+        {   _unitOfWork.ExtendedUsersRepository.Stage5PartnerPost(model);
+            return constructResponse(await _unitOfWork.Save());
         }
          
 #endregion

@@ -439,39 +439,45 @@ namespace RepositoryLayer.Repos
 
         #region stages
 
-        public async Task Stage2BusinessPost(SignUPStage2BusinessDTO model)
+        public void Stage2BusinessPost(SignUPStage2BusinessDTO model)
         {
              _BusinessInforRepo.PutInitial(model);           
+        }
+        public async Task Stage2PersonalPost(SignUPStage2PersonalDTO model)
+        {
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>(); 
+            var userToUpdate = await _userManager.FindByIdAsync(Utils.GetUserId(_serviceProvider));
+            userToUpdate.FirstName = model.firstname;
+            userToUpdate.LastName = model.familyName;
+            userToUpdate.PhoneNumber = model.contactNumber;
+            userToUpdate.PeronalGreeting = model.personalGreeting;            
+            await _userManager.UpdateAsync(userToUpdate);
+            _BusinessInforRepo.PutStage2Peronal(model.loyaltyMembership);
+        }
+        public void Stage2PartnerPost(SignUPStage2PartnerDTO model)
+        {
+           
+        }
+        public void Stage3Post(signUpstage3DTO model)
+        {
+             
+        }
+        public void Stage4Post(signUpstage4DTO model)
+        {
+           
+        }
 
-        }
-        public async Task<bool> Stage2PersonalPost(SignUPStage2PersonalDTO model)
+        public void Stage5BusinessPost(SignUPStage5BusinessDTO model)
         {
-            return false;
+          
         }
-        public async Task<bool> Stage2PartnerPost(SignUPStage2PartnerDTO model)
+        public void Stage5PersonalPost(SignUPStage5PersonalDTO model)
         {
-            return false;
+            
         }
-        public async Task<bool> Stage3Post(signUpstage3DTO model)
+        public void Stage5PartnerPost(SignUPStage5PartnerDTO model)
         {
-            return false;
-        }
-        public async Task<bool> Stage4Post(signUpstage4DTO model)
-        {
-            return false;
-        }
-
-        public async Task<bool> Stage5BusinessPost(SignUPStage5BusinessDTO model)
-        {
-            return false;
-        }
-        public async Task<bool> Stage5PersonalPost(SignUPStage5PersonalDTO model)
-        {
-            return false;
-        }
-        public async Task<bool> Stage5PartnerPost(SignUPStage5PartnerDTO model)
-        {
-            return false;
+            
         }
         #endregion
 
