@@ -20,8 +20,8 @@ namespace EntityLayer.Entities
     {
         public int ID { get; set; }
         public string Type { get; set; }
-        public string Rate { get; set; }
-        public string Qty { get; set; }
+        public double Rate { get; set; }
+        public double Qty { get; set; }
         public string Description { get; set; }
         public string BillID { get; set; }
         public string ProviderRefNo { get; set; }

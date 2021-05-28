@@ -9,10 +9,10 @@ namespace RepositoryLayer.Infrastructures
 {
    public interface ITransactionRepo : IRepositoryBase<Accounts_Transacation>
     {
-        IEnumerable<Accounts_Transacation> GetAll();
-        Task Post(TransactionDTO model);
-        public void Put(TransactionDTO model);
+        IEnumerable<ParentTransactionDTO> GetAll();
+        Task Post(ParentTransactionDTO model);
+        public void Put(ParentTransactionDTO model);
         void SoftDelete(int id);
-
+        Task<long> PostRemotly(ParentTransactionDTO model);
     }
 }

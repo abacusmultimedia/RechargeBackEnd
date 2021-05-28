@@ -78,18 +78,15 @@ namespace Casolve.Secure.Api.Controllers
         [Route("Stage2BusinessDTOPost")]
         public async Task<BaseResponse> Stage2BusinessDTOPost([FromBody] SignUPStage2BusinessDTO model)
         {
-            return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage2BusinessPost(model));
+            await _unitOfWork.ExtendedUsersRepository.Stage2BusinessPost(model);
+            return constructResponse(await _unitOfWork.Save());
         }
-
-
         [HttpPost]
         [Route("Stage2PersonalPost")]
         public async Task<BaseResponse> Stage2PersonalPost([FromBody]  SignUPStage2PersonalDTO model) 
         {
             return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage2PersonalPost(model));
         }
-
-
 
         [HttpPost]
         [Route("Stage2PartnerPost")]

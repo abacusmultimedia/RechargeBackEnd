@@ -20,6 +20,10 @@ namespace UnitOfWork
         IProfile_CardDetailsRepo cardDetailsRepo { get; }
         ICategoryRepo CategoryRepo { get; }
         ISubCategoryRepo SubCategoryRepo { get; }
+        ITransactionRepo TransactionRepo { get; }
+        IChildTransactionRepo ChildTransactionRepo { get; }
+         
+
         Task<bool> SaveChanges();
         Task<bool> Save();
     }

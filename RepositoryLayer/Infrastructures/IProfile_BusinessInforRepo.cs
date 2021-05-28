@@ -14,6 +14,7 @@ namespace RepositoryLayer.Infrastructures
         void Put(BusinessDetailsDTO model);
         Task PostInitial(RC_Profile_BusinessInfor model);
         void SoftDelete(int id);
+        void PutInitial(SignUPStage2BusinessDTO model);
 
 
 

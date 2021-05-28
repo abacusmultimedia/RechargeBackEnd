@@ -22,8 +22,8 @@ namespace UnitOfWork
         public IProfile_CardDetailsRepo cardDetailsRepo => _serviceProvider.GetRequiredService<IProfile_CardDetailsRepo>();
         public ICategoryRepo CategoryRepo => _serviceProvider.GetRequiredService<ICategoryRepo>();
         public ISubCategoryRepo SubCategoryRepo => _serviceProvider.GetRequiredService<ISubCategoryRepo>();
-
-
+        public ITransactionRepo TransactionRepo => _serviceProvider.GetRequiredService<ITransactionRepo>();
+        public IChildTransactionRepo ChildTransactionRepo => _serviceProvider.GetRequiredService<IChildTransactionRepo>();
 
         public ILoginsRepo LoginsRepository => _serviceProvider.GetRequiredService<ILoginsRepo>();
         public UnitOfWork(IServiceProvider serviceProvider)

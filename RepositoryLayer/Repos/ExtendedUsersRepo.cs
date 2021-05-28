@@ -434,11 +434,10 @@ namespace RepositoryLayer.Repos
 
         #region stages
 
-        public async Task<bool> Stage2BusinessPost(SignUPStage2BusinessDTO model)
+        public async Task Stage2BusinessPost(SignUPStage2BusinessDTO model)
         {
+             _BusinessInforRepo.PutInitial(model);           
 
-
-            return false;
         }
         public async Task<bool> Stage2PersonalPost(SignUPStage2PersonalDTO model)
         {

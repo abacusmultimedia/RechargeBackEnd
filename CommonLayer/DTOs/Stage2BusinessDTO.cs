@@ -7,8 +7,8 @@ namespace CommonLayer.DTOs
     public class SignUPStage2BusinessDTO
     {
         public string businessName { get; set; }
-        public string category { get; set; }
-        public string subCategory { get; set; }
+        public int category { get; set; }
+        public int subCategory { get; set; }
         public string website { get; set; }
         public string contactnumber { get; set; }
         public string loyaltyMembership { get; set; }

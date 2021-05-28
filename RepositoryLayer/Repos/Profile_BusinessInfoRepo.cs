@@ -69,17 +69,33 @@ namespace RepositoryLayer.Repos
                 entity.IsDeleted = false;
                 entity.GSTNo = model.gst;
                 entity.BusinessName = model.businessName;
-                //               BusinessRegCertificateImg = model.u
-                //Logo
-                // Category
-                //
-                //SubCategory
                 entity.Website = model.website;
                 entity.LoyaltyMembership = model.loyaltyMembership;
                 Put(entity);
             }
         }
 
+        public void PutInitial(SignUPStage2BusinessDTO model)
+        {
+            var userId = Utils.GetUserId(_serviceProvider);
+            var entity = GetWithCondition(x => x.UserID == userId).FirstOrDefault();
+            if (entity != null)
+            {
+                entity.BusinessName = model.businessName;
+                entity.Description = model.businessDescription;
+                entity.ModifiedDate = DateTime.Now;
+                entity.ModifiedBy = Utils.GetUserId(_serviceProvider); 
+                entity.BusinessName = model.businessName;
+                entity.Website = model.website;
+                entity.LoyaltyMembership = model.loyaltyMembership;
+                entity.Category = model.category;
+                entity.SubCategory = model.subCategory;
+                Put(entity);
+            }
+        }
+
+
+   
 
         public void SoftDelete(int id)
         {
