@@ -10,7 +10,7 @@ namespace RepositoryLayer.Infrastructures
         Task<LoginResponseDTO> ProcessLogin(LoginDTO model);
         List<ExtendedUser> GetUsers();
         bool Logout();
-        Task<bool> Register(RegisterDTO model);
+        Task<LoginResponseDTO> Register(RegisterDTO model);
         Task<bool> ResetPassword(ResetPasswordDTO model);
         Task<bool> GenerateForgotPasswordToken(string email);
         Task<bool> ResetPasswordWithToken(ResetPasswordDTO model);

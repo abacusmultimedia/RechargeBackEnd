@@ -180,8 +180,8 @@ namespace RepositoryLayer.Repos
         {
             return _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>().Users.ToList();
         }
-        public async Task<bool> Register(RegisterDTO model)
-        {
+        public async Task<LoginResponseDTO> Register(RegisterDTO model)
+        { 
             var usersList = _BankingDetailsRepo.Get().ToList();
 
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
@@ -257,15 +257,20 @@ namespace RepositoryLayer.Repos
                     LoyaltyMembership = "",
                 };
                 await _BusinessInforRepo.PostInitial(BusinessInfo_entity);
+                var loginDto = new LoginDTO() {
+                    Email = model.Email,
+                    Password = model.Password,
+                    RememberMe = false
+                };
+              return  await ProcessLogin(loginDto);
 
-
-
+                
             }
             else
             {
                 OtherConstants.isSuccessful = false;
             }
-            return OtherConstants.isSuccessful;
+            return null;
         }
 
         public async Task<bool> RegisterOld(RegisterDTO model)
