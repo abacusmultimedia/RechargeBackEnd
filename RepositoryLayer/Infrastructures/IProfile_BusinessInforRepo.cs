@@ -16,5 +16,6 @@ namespace RepositoryLayer.Infrastructures
         void SoftDelete(int id);
         void PutInitial(SignUPStage2BusinessDTO model);
         void PutStage2Peronal(string model);
+        void PostPartnerBusinessinfo(Partner_BusinessInfo model);
     }
 }

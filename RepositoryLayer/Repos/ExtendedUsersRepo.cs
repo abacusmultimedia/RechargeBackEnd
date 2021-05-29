@@ -181,7 +181,7 @@ namespace RepositoryLayer.Repos
             return _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>().Users.ToList();
         }
         public async Task<LoginResponseDTO> Register(RegisterDTO model)
-        { 
+        {
             var usersList = _BankingDetailsRepo.Get().ToList();
 
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
@@ -232,8 +232,8 @@ namespace RepositoryLayer.Repos
                     PhotIDNumber = "",
                     IsDeleted = false,
                     User = currentUser,
-                    SecurityQuestion1 = "",
-                    SecurityQuestion2 = "",
+                    SecurityQuestion1 = 0,
+                    SecurityQuestion2 = 0,
                     CreatedDate = DateTime.Now,
                     CreatedBy = currentUser.Id
                 };
@@ -257,14 +257,15 @@ namespace RepositoryLayer.Repos
                     LoyaltyMembership = "",
                 };
                 await _BusinessInforRepo.PostInitial(BusinessInfo_entity);
-                var loginDto = new LoginDTO() {
+                var loginDto = new LoginDTO()
+                {
                     Email = model.Email,
                     Password = model.Password,
                     RememberMe = false
                 };
-              return  await ProcessLogin(loginDto);
+                return await ProcessLogin(loginDto);
 
-                
+
             }
             else
             {
@@ -441,44 +442,100 @@ namespace RepositoryLayer.Repos
 
         public void Stage2BusinessPost(SignUPStage2BusinessDTO model)
         {
-             _BusinessInforRepo.PutInitial(model);           
+            _BusinessInforRepo.PutInitial(model);
         }
         public async Task Stage2PersonalPost(SignUPStage2PersonalDTO model)
         {
-            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>(); 
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
             var userToUpdate = await _userManager.FindByIdAsync(Utils.GetUserId(_serviceProvider));
             userToUpdate.FirstName = model.firstname;
             userToUpdate.LastName = model.familyName;
             userToUpdate.PhoneNumber = model.contactNumber;
-            userToUpdate.PeronalGreeting = model.personalGreeting;            
+            userToUpdate.PeronalGreeting = model.personalGreeting;
             await _userManager.UpdateAsync(userToUpdate);
             _BusinessInforRepo.PutStage2Peronal(model.loyaltyMembership);
         }
         public void Stage2PartnerPost(SignUPStage2PartnerDTO model)
         {
-           
+            /// wiating for design 
         }
-        public void Stage3Post(signUpstage3DTO model)
+        public async Task Stage3Post(signUpstage3DTO model)
         {
-             
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var userToUpdate = await _userManager.FindByIdAsync(Utils.GetUserId(_serviceProvider));
+            userToUpdate.PhysicalAddress = model.PhysicalAddress;
+            userToUpdate.CityId = model.CityId;
+            userToUpdate.Address = model.Address1;
+            userToUpdate.Address2 = model.Address2;
+            userToUpdate.ZiPcode = model.ZipCode;
+            await _userManager.UpdateAsync(userToUpdate);
         }
         public void Stage4Post(signUpstage4DTO model)
         {
-           
+            _BankingDetailsRepo.PutInitial(model);
         }
 
-        public void Stage5BusinessPost(SignUPStage5BusinessDTO model)
+        public async Task Stage5BusinessPost(SignUPStage5BusinessDTO model)
         {
-          
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var userToUpdate = await _userManager.FindByIdAsync(Utils.GetUserId(_serviceProvider));
+
+            userToUpdate.FirstName = model.firstName;
+            userToUpdate.LastName = model.familyName;
+            userToUpdate.PhoneNumber = model.mobileNumber;
+            userToUpdate.PeronalGreeting = model.personalGreeting;
+
+            await _userManager.UpdateAsync(userToUpdate);
+
+            var legalInfo = new SignUPStage5PersonalDTO()
+            {
+                SecurityAnswer1 = model.SecurityAnswer1,
+                SecurityAnswer2 = model.SecurityAnswer2,
+                SecurityAnswer3 = model.SecurityAnswer3,
+                SecurityQuestion1 = model.SecurityQuestion1,
+                SecurityQuestion2 = model.SecurityQuestion2,
+                SecurityQuestion3 = model.SecurityQuestion3,
+                countryIssueId = model.countryIssuingPhotoID,
+                GovtissuedID = model.govtPhotoIDNo,
+                GovtPhotoIDNo = model.uploadScannedCopyID
+            };
+            _LegalRepo.PutInitial(legalInfo, "");
+
         }
         public void Stage5PersonalPost(SignUPStage5PersonalDTO model)
         {
-            
+            _LegalRepo.PutInitial(model, "");
+
         }
         public void Stage5PartnerPost(SignUPStage5PartnerDTO model)
         {
-            
-        }
+            var QsandAs = new QsAndAsDTO()
+            {
+                SecurityAnswer1 = model.SecurityAnswer1,
+                SecurityAnswer2 = model.SecurityAnswer2,
+                SecurityAnswer3 = model.SecurityAnswer3,
+                SecurityQuestion1 = model.SecurityQuestion1,
+                SecurityQuestion2 = model.SecurityQuestion2,
+                SecurityQuestion3 = model.SecurityQuestion3
+            };
+
+            _LegalRepo.PutSecurityQsandAs(QsandAs);
+
+            // need to upload files to blob or Wasabi 
+            // get url and 
+
+            /// Saving them to DB 
+            var partnerInfor = new Partner_BusinessInfo()
+            {
+                businessGSTNo = model.businessGSTNo,
+                uploadBusinessRegistrationNo = model.uploadBusinessRegistrationNo,
+                accountManagerID = model.accountManagerID,
+                authorizedPerson = model.authorizedPerson
+            };
+
+            _BusinessInforRepo.PostPartnerBusinessinfo(partnerInfor);
+
+    }
         #endregion
 
 

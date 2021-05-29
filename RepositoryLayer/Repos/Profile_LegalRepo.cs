@@ -72,6 +72,39 @@ namespace RepositoryLayer.Repos
                 Put(entity);
             }
         }
+        public void PutInitial(SignUPStage5PersonalDTO model , string url)
+        {
+            var entity = GetWithCondition(x=>x.User.Id == Utils.GetUserId(_serviceProvider)).FirstOrDefault();
+            if (entity != null)
+            {
+                entity.PhotoId = model.GovtPhotoIDNo;
+                entity.Country = model.countryIssueId;
+                entity.PhotIDNumber = model.GovtPhotoIDNo;
+                entity.ImageURL  =  url==null?"":url;
+                entity.SecurityQuestion1 = model.SecurityQuestion1;
+                entity.SecurityQuestion2 = model.SecurityQuestion2;
+                entity.Answer1 = model.SecurityAnswer1;
+                entity.Answer2 = model.SecurityAnswer2;
+                entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
+                entity.ModifiedDate = DateTime.Now;
+                Put(entity);
+            }
+        }
+
+        public void PutSecurityQsandAs(QsAndAsDTO model)
+        {
+            var entity = GetWithCondition(x => x.User.Id == Utils.GetUserId(_serviceProvider)).FirstOrDefault();
+            if (entity != null)
+            { 
+                entity.SecurityQuestion1 = model.SecurityQuestion1;
+                entity.SecurityQuestion2 = model.SecurityQuestion2;
+                entity.Answer1 = model.SecurityAnswer1;
+                entity.Answer2 = model.SecurityAnswer2;
+                entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
+                entity.ModifiedDate = DateTime.Now;
+                Put(entity);
+            }
+        }
 
 
         public void SoftDelete(int id)

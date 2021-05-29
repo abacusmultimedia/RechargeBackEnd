@@ -11,11 +11,11 @@ namespace RepositoryLayer.Infrastructures
     {
         IEnumerable<RC_Profile_Legal> GetAll();
         Task Post(LegalDTO model);
+        void PutInitial(SignUPStage5PersonalDTO model, string url);
         Task PostInitial(RC_Profile_Legal model);
         void Put(LegalDTO model);
+        void PutSecurityQsandAs(QsAndAsDTO model);
         void SoftDelete(int id);
-
-
 
     }
 }

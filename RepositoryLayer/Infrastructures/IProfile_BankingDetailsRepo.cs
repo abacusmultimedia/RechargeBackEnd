@@ -14,7 +14,6 @@ namespace RepositoryLayer.Infrastructures
         void Put(BankDetails model);
         void SoftDelete(int id);
         Task PostInitial(RC_Profile_BankingDetails entity);
-
-
+        void PutInitial(signUpstage4DTO model);
     }
 }

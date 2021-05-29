@@ -65,11 +65,9 @@ namespace EntityLayer.Entities
         public string PhotoId { get; set; }
         public int Country { get; set; }
         public string PhotIDNumber { get; set; }
-        public string ImageURL { get; set; }
-        [Column(TypeName = "nvarchar(200)")]
-        public string SecurityQuestion1 { get; set; }
-        [Column(TypeName = "nvarchar(200)")]
-        public string SecurityQuestion2 { get; set; }
+        public string ImageURL { get; set; } 
+        public int SecurityQuestion1 { get; set; } 
+        public int SecurityQuestion2 { get; set; }
         [Column(TypeName = "nvarchar(200)")]
         public string Answer1 { get; set; }
         [Column(TypeName = "nvarchar(200)")]

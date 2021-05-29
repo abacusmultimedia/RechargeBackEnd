@@ -41,11 +41,6 @@ namespace RepositoryLayer.Repos
                 UserID = Utils.GetUserId(_serviceProvider),
                 GSTNo = model.gst,
                 BusinessName = model.businessName,
-                //               BusinessRegCertificateImg = model.u
-                //Logo
-                // Category
-                //
-                //SubCategory
                 Website = model.website,
                 LoyaltyMembership = model.loyaltyMembership,
             };
@@ -90,6 +85,24 @@ namespace RepositoryLayer.Repos
                 entity.LoyaltyMembership = model.loyaltyMembership;
                 entity.Category = model.category;
                 entity.SubCategory = model.subCategory;
+                Put(entity);
+            }
+        }
+
+        public void PostPartnerBusinessinfo(Partner_BusinessInfo model)
+        {
+            var userId = Utils.GetUserId(_serviceProvider);
+            var entity = GetWithCondition(x => x.UserID == userId).FirstOrDefault();
+            if (entity != null)
+            {
+                entity.GSTNo = model.businessGSTNo;
+                entity.BusinessRegCertificateImg = model.uploadBusinessRegistrationNo;
+                /// Manager name  
+                /// Auth Person name  
+
+
+                entity.ModifiedDate = DateTime.Now;
+                entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
                 Put(entity);
             }
         }

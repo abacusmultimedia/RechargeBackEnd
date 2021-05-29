@@ -11,8 +11,8 @@ namespace CommonLayer.DTOs
         public int Country { get; set; }
         public string PhotIDNumber { get; set; }
         public string ImageURL { get; set; }
-        public string SecurityQuestion1 { get; set; }
-        public string SecurityQuestion2 { get; set; }
+        public int  SecurityQuestion1 { get; set; }
+        public int SecurityQuestion2 { get; set; }
         public string Answer1 { get; set; }
         public string Answer2 { get; set; }
     }

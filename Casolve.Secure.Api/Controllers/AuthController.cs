@@ -96,7 +96,7 @@ namespace Casolve.Secure.Api.Controllers
         [Route("Stage3Post")]
         public async Task<BaseResponse> Stage3Post([FromBody] signUpstage3DTO model)
         {
-            _unitOfWork.ExtendedUsersRepository.Stage3Post(model);
+            await _unitOfWork.ExtendedUsersRepository.Stage3Post(model);
             return constructResponse(await _unitOfWork.Save());
         }
 
@@ -104,7 +104,7 @@ namespace Casolve.Secure.Api.Controllers
         [Route("Stage4Post")]
         public async Task<BaseResponse> Stage4Post([FromBody] signUpstage4DTO model)
         {
-            _unitOfWork.ExtendedUsersRepository.Stage4Post(model);
+             _unitOfWork.ExtendedUsersRepository.Stage4Post(model);
             return constructResponse(await _unitOfWork.Save());
         }
 
@@ -112,7 +112,7 @@ namespace Casolve.Secure.Api.Controllers
         [Route("Stage5BusinessPost")]
         public async Task<BaseResponse> Stage5BusinessPost([FromBody] SignUPStage5BusinessDTO model)
         {
-            _unitOfWork.ExtendedUsersRepository.Stage5BusinessPost(model);
+            await _unitOfWork.ExtendedUsersRepository.Stage5BusinessPost(model);
             return constructResponse(await _unitOfWork.Save());
         }
 

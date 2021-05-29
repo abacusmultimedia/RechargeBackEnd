@@ -14,11 +14,11 @@ using System.Linq;
 
 namespace RepositoryLayer.Repos
 {
-    public class  Profile_BankingDetailsRepo : RepositoryBase<RC_Profile_BankingDetails>, IProfile_BankingDetailsRepo
+    public class Profile_BankingDetailsRepo : RepositoryBase<RC_Profile_BankingDetails>, IProfile_BankingDetailsRepo
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMapper _mapper;
-        public Profile_BankingDetailsRepo(IServiceProvider serviceProvider,RechargeDbContext context) : base(context)
+        public Profile_BankingDetailsRepo(IServiceProvider serviceProvider, RechargeDbContext context) : base(context)
         {
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
@@ -26,9 +26,9 @@ namespace RepositoryLayer.Repos
 
         public IEnumerable<RC_Profile_BankingDetails> GetAll()
         {
-            return  Get(); 
+            return Get();
         }
-     
+
         public async Task Post(BankDetails model)
         {
 
@@ -39,42 +39,58 @@ namespace RepositoryLayer.Repos
                 AccountNumber = model.accountNo,
                 AccountHolderName = model.accountHolderName,
                 UserID = Utils.GetUserId(_serviceProvider),
-                CreatedBy= Utils.GetUserId(_serviceProvider),
-                CreatedDate =DateTime.Now
+                CreatedBy = Utils.GetUserId(_serviceProvider),
+                CreatedDate = DateTime.Now
 
             };
-            await Post(entity);    
+            await Post(entity);
         }
         public async Task PostInitial(RC_Profile_BankingDetails entity)
         {
 
-            await Post(entity,true);
+            await Post(entity, true);
         }
-
-        public void Put(BankDetails model)
+        public void PutInitial(signUpstage4DTO model)
         {
-            var entity = GetById(model.Id); 
+            var entity = GetWithCondition(e => e.UserID == Utils.GetUserId(_serviceProvider)).FirstOrDefault();
             if (entity != null)
             {
-                entity.BnakName = model.bank;
-                entity.BranchCode = model.branchCode;
-                entity.AccountNumber = model.accountNo;
-                entity.AccountHolderName = model.accountHolderName;
+                entity.BnakName = model.Bank;
+                entity.BranchCode = model.BranchCode;
+                entity.AccountNumber = model.AccountNumber;
+                entity.AccountHolderName = model.AccountHolderName;
                 entity.UserID = Utils.GetUserId(_serviceProvider);
                 entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
                 entity.ModifiedDate = DateTime.Now;
                 entity.IsDeleted = false;
- 
                 Put(entity);
             }
         }
- 
 
-        public void SoftDelete(int id)
-        {
-            GetById(id).IsDeleted = true;
+            public void Put(BankDetails model)
+            {
+                var entity = GetById(model.Id);
+                if (entity != null)
+                {
+                    entity.BnakName = model.bank;
+                    entity.BranchCode = model.branchCode;
+                    entity.AccountNumber = model.accountNo;
+                    entity.AccountHolderName = model.accountHolderName;
+                    entity.UserID = Utils.GetUserId(_serviceProvider);
+                    entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
+                    entity.ModifiedDate = DateTime.Now;
+                    entity.IsDeleted = false;
+
+                    Put(entity);
+                }
+            }
+
+
+            public void SoftDelete(int id)
+            {
+                GetById(id).IsDeleted = true;
+            }
+
+
         }
-
-
     }
-}
