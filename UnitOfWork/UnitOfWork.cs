@@ -26,6 +26,11 @@ namespace UnitOfWork
         public IChildTransactionRepo ChildTransactionRepo => _serviceProvider.GetRequiredService<IChildTransactionRepo>();
 
         public ILoginsRepo LoginsRepository => _serviceProvider.GetRequiredService<ILoginsRepo>();
+        public ICountryRepo CountryRepo => _serviceProvider.GetRequiredService<ICountryRepo>();
+        public IStateRepo StateRepo => _serviceProvider.GetRequiredService<IStateRepo>();
+        public ICityRepo CityRepo  => _serviceProvider.GetRequiredService<ICityRepo>(); 
+        public ISecurity_QuestionRepo Security_Question => _serviceProvider.GetRequiredService<ISecurity_QuestionRepo>(); 
+        public IType_Govt_IDRepo Type_Govt_ID => _serviceProvider.GetRequiredService<IType_Govt_IDRepo>();
         public UnitOfWork(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;

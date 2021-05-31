@@ -22,7 +22,12 @@ namespace UnitOfWork
         ISubCategoryRepo SubCategoryRepo { get; }
         ITransactionRepo TransactionRepo { get; }
         IChildTransactionRepo ChildTransactionRepo { get; }
-         
+        IStateRepo StateRepo { get; }
+        ICountryRepo CountryRepo { get; }
+        ICityRepo CityRepo { get; }
+        ISecurity_QuestionRepo Security_Question{ get; }
+        IType_Govt_IDRepo Type_Govt_ID{ get; }
+
 
         Task<bool> SaveChanges();
         Task<bool> Save();

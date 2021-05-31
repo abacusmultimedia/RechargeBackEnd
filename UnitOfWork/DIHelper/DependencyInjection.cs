@@ -45,6 +45,12 @@ namespace UnitOfWork.DIHelper
             services.AddScoped<IProfile_LegalRepo, Profile_LegalRepo>();
             services.AddScoped<ICategoryRepo, CategoryRepo>();
             services.AddScoped<ISubCategoryRepo, SubCategoryRepo>();
+            services.AddScoped<IStateRepo, StateRepo>();
+            services.AddScoped<ICountryRepo, CountryRepo>();
+            services.AddScoped<ICityRepo, CityRepo>();
+            services.AddScoped<ISecurity_QuestionRepo, Security_QuestionRepo>();
+            services.AddScoped<IType_Govt_IDRepo, Type_Of_Govt_IDRepo>();
+            //services.AddScoped<ICityRepo, CityRepo>();
 
 
 
