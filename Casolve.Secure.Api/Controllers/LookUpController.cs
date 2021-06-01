@@ -11,19 +11,19 @@ namespace Casolve.Secure.Api.Controllers
 {
     public class LookUpController : BaseController
     {
-        public LookUpController(IUnitOfWork portalUnitOfWork ) : base(portalUnitOfWork)
+        public LookUpController(IUnitOfWork portalUnitOfWork) : base(portalUnitOfWork)
         {
 
         }
         #region Category
-         [HttpGet] 
-         [Route("GetCategoryAsLookup")]
-         public async Task<BaseResponse> GetRoleAsLookups()
-         { 
-             return constructResponse(_unitOfWork.CategoryRepo.GetAll());
-         }
+        [HttpGet]
+        [Route("GetCategoryAsLookup")]
+        public async Task<BaseResponse> GetRoleAsLookups()
+        {
+            return constructResponse(_unitOfWork.CategoryRepo.GetAll());
+        }
 
-        [HttpPost] 
+        [HttpPost]
         [Route("CategoryPost")]
         public async Task<BaseResponse> CategoryPost([FromBody] CategoryDTO model)
         {
@@ -33,8 +33,8 @@ namespace Casolve.Secure.Api.Controllers
         [HttpPut]
         [Route("CategoryUpdate")]
         public async Task<BaseResponse> CategoryUpdate([FromBody] CategoryDTO model)
-        { 
-            _unitOfWork.CategoryRepo.Put(model);  
+        {
+            _unitOfWork.CategoryRepo.Put(model);
             return constructResponse(await _unitOfWork.Save());
         }
 
@@ -47,9 +47,9 @@ namespace Casolve.Secure.Api.Controllers
 
         [HttpPost]
         [Route("CategoryIdPost/{id}")]
-        public  BaseResponse CategorybyId(int id)
+        public BaseResponse CategorybyId(int id)
         {
-            return constructResponse( _unitOfWork.CategoryRepo.GetbyId(id));
+            return constructResponse(_unitOfWork.CategoryRepo.GetbyId(id));
         }
 
         #endregion
@@ -64,7 +64,7 @@ namespace Casolve.Secure.Api.Controllers
         [HttpPost]
         [Route("SubCategoryPost")]
         public async Task<BaseResponse> SubCategoryPost([FromBody] SubCategoryDTO model)
-        { 
+        {
             await _unitOfWork.SubCategoryRepo.Post(model);
             return constructResponse(await _unitOfWork.Save());
         }
@@ -89,6 +89,13 @@ namespace Casolve.Secure.Api.Controllers
         {
             return constructResponse(_unitOfWork.SubCategoryRepo.GetbyId(id));
         }
+
+
+        /// City Lookup 
+        // Country Lookup 
+        ///  State Lookup 
+        ///  type Of Govt ID
+        ///  Security Questions ID
 
         #endregion
         //[HttpPost] 

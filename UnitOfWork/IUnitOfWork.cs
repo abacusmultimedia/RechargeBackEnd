@@ -27,7 +27,7 @@ namespace UnitOfWork
         ICityRepo CityRepo { get; }
         ISecurity_QuestionRepo Security_Question{ get; }
         IType_Govt_IDRepo Type_Govt_ID{ get; }
-
+        
 
         Task<bool> SaveChanges();
         Task<bool> Save();

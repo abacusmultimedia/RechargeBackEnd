@@ -169,11 +169,11 @@ namespace EntityLayer.Migrations
                     b.Property<string>("ProviderRefNo")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Qty")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<double>("Qty")
+                        .HasColumnType("double");
 
-                    b.Property<string>("Rate")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<double>("Rate")
+                        .HasColumnType("double");
 
                     b.Property<string>("Type")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -654,11 +654,11 @@ namespace EntityLayer.Migrations
                     b.Property<string>("PhotoId")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("SecurityQuestion1")
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<int>("SecurityQuestion1")
+                        .HasColumnType("int");
 
-                    b.Property<string>("SecurityQuestion2")
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<int>("SecurityQuestion2")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");

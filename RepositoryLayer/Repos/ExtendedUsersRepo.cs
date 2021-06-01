@@ -532,9 +532,7 @@ namespace RepositoryLayer.Repos
                 accountManagerID = model.accountManagerID,
                 authorizedPerson = model.authorizedPerson
             };
-
             _BusinessInforRepo.PostPartnerBusinessinfo(partnerInfor);
-
     }
         #endregion
 

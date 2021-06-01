@@ -24,6 +24,7 @@ namespace RepositoryLayer.Repos
         }
         public IEnumerable<TransactionDTO> GetAll()
         {
+            var list = Get().Select(x=> new {x.LedgerCr.Title, e = x.LedgerDr.Title}).ToList();
             return Get().Select(x => new TransactionDTO {
                 Account_ChildTransaction_ID=x.ID,
                 Type = x.Type,
@@ -35,6 +36,7 @@ namespace RepositoryLayer.Repos
                 ParentTransacatoinID = x.ParentTransacatoinID,
                 DrLedger = x.DrLedgerID,
                 CrLedger = x.CrLedgerID,
+               
             });
         }
 
@@ -78,18 +80,35 @@ namespace RepositoryLayer.Repos
                 Put(entity);
             }
         }
-        public void postTransactionWithchild(TransactionWithChildren model)
+        public async Task postTransactionWithchild(TransactionWithChildren model)
         {
+            long parentid = 0;
             ParentTransactionDTO parentEntity = new ParentTransactionDTO()
             {
-
+                Date = model.Transaction.Date,
+                Description = model.Transaction.Description,
+                Type ="Payment"
             };
-            _transactionRepo.PostRemotly(parentEntity);
+            parentid =  await _transactionRepo.PostRemotly(parentEntity);
             foreach (var item in model.childTransactions)
             {
-            
+                Accounts_childTransaction accounts = new Accounts_childTransaction()
+                {
+                    ParentTransacatoinID = parentid,
+                    Description = item.Child_Description,
+                    BillID = item.BillID,
+                    DrLedgerID = item.DrLedger,
+                    CrLedgerID = item.CrLedger,
+                    IsDeleted = false,
+                    Qty = item.Qty,
+                    Rate = item.Rate,
+                    CreatedBy = Utils.GetUserId(_serviceProvider),
+                    CreatedDate = DateTime.Now,
+                    ProviderRefNo = item.ProviderRefNo,
+                    Type = "Payment"
+                };
+                 await Post(accounts);                
             }
-
         }
 
         public void SoftDelete(int id)

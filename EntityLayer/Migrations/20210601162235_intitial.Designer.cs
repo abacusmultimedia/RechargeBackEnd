@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityLayer.Migrations
 {
     [DbContext(typeof(RechargeDbContext))]
-    [Migration("20210502084558_Initial")]
-    partial class Initial
+    [Migration("20210601162235_intitial")]
+    partial class intitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -171,11 +171,11 @@ namespace EntityLayer.Migrations
                     b.Property<string>("ProviderRefNo")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Qty")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<double>("Qty")
+                        .HasColumnType("double");
 
-                    b.Property<string>("Rate")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<double>("Rate")
+                        .HasColumnType("double");
 
                     b.Property<string>("Type")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -189,6 +189,38 @@ namespace EntityLayer.Migrations
                     b.HasIndex("ParentTransacatoinID");
 
                     b.ToTable("Accounts_childTransaction");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.Category", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("OrderBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("rc_profile_category");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.ExtendedRole", b =>
@@ -485,8 +517,8 @@ namespace EntityLayer.Migrations
                     b.Property<string>("BusinessRegCertificateImg")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
+                    b.Property<long>("Category")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -515,8 +547,8 @@ namespace EntityLayer.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("SubCategory")
-                        .HasColumnType("int");
+                    b.Property<long>("SubCategory")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("UserID")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -525,6 +557,8 @@ namespace EntityLayer.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("SubCategory");
 
                     b.HasIndex("UserID");
 
@@ -622,11 +656,11 @@ namespace EntityLayer.Migrations
                     b.Property<string>("PhotoId")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("SecurityQuestion1")
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<int>("SecurityQuestion1")
+                        .HasColumnType("int");
 
-                    b.Property<string>("SecurityQuestion2")
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<int>("SecurityQuestion2")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -717,6 +751,43 @@ namespace EntityLayer.Migrations
                     b.HasIndex("SBI_Project_owner");
 
                     b.ToTable("SBI_Project");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.SubCategory", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("OrderBy")
+                        .HasColumnType("int");
+
+                    b.Property<long>("ParentID")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ParentID");
+
+                    b.ToTable("rc_profile_subcategory");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.User", b =>
@@ -892,6 +963,12 @@ namespace EntityLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Entities.RC_Profile_BusinessInfor", b =>
                 {
+                    b.HasOne("EntityLayer.Entities.SubCategory", "subcategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategory")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EntityLayer.Entities.ExtendedUser", "User")
                         .WithMany()
                         .HasForeignKey("UserID");
@@ -916,6 +993,15 @@ namespace EntityLayer.Migrations
                     b.HasOne("EntityLayer.Entities.ExtendedUser", "Project_Owner")
                         .WithMany()
                         .HasForeignKey("SBI_Project_owner");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.SubCategory", b =>
+                {
+                    b.HasOne("EntityLayer.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("ParentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

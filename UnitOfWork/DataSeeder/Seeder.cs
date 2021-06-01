@@ -24,6 +24,8 @@ namespace UnitOfWork.DataSeeder
             _roleManager = _serviceProvider.GetRequiredService<RoleManager<ExtendedRole>>();
             _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
 
+
+
         }
 
         public async Task Seed()
@@ -31,7 +33,7 @@ namespace UnitOfWork.DataSeeder
             await _context.Database.MigrateAsync();
             await AddRoles();
             await AddSuperAdmin();
-           /// AddFeatures();
+            /// AddFeatures();
         }
 
 
@@ -54,6 +56,7 @@ namespace UnitOfWork.DataSeeder
                 foreach (var item in roles)
                     await _roleManager.CreateAsync(item);
             }
+            AddLookups();
         }
         //private async Task AddFeatures()
         //{
@@ -108,24 +111,72 @@ namespace UnitOfWork.DataSeeder
 
         private async Task AddUsers()
         {
-                var user = new ExtendedUser()
-                {
-                    FirstName = "Khalid",
-                    LastName = "Hussain",
-                    Email = "std@yopmail.com",
-                    TenantId = "0",
-                    UserName = "Personal",
-                    EmailConfirmed = true,
-                    MemberStatus = true
-                };
+            var user = new ExtendedUser()
+            {
+                FirstName = "Khalid",
+                LastName = "Hussain",
+                Email = "std@yopmail.com",
+                TenantId = "0",
+                UserName = "Personal",
+                EmailConfirmed = true,
+                MemberStatus = true
+            };
 
-                await _userManager.CreateAsync(user, "Test@0000");
-                await _userManager.AddToRoleAsync(user, "Personal");
-                createdById = _userManager.FindByEmailAsync("std@yopmail.com").Result.Id;
-             
+            await _userManager.CreateAsync(user, "Test@0000");
+            await _userManager.AddToRoleAsync(user, "Personal");
+            createdById = _userManager.FindByEmailAsync("std@yopmail.com").Result.Id;
+
         }
 
+        private void AddLookups()
+        {
+            Category c = new Category()
+            {
+                OrderBy = 1,
+                IsDeleted = false,
+                CreatedBy = "Seeder",
+                CreatedDate = DateTime.Now,
+                Name = "First",
+            };
+            _context.Add(c);
+            _context.SaveChanges();
+            SubCategory subCat = new SubCategory()
+            {
+                OrderBy = 1,
+                IsDeleted = false,
+                CreatedDate = DateTime.Now,
+                CreatedBy = "Seeder",
+                Name = "Frst Sub Cat",
+                ParentID = 1
+            };
+            _context.Add(subCat);
+            _context.SaveChanges();
 
+            Accounts_LedgerGroup acGroup = new Accounts_LedgerGroup()
+            {
+                CreatedBy = "Seeder",
+                IsDeleted = false,
+                CreatedDate = DateTime.Now
+            };
+            _context.Add(acGroup);
+            _context.SaveChanges();
+
+            Accounts_Ledger leger = new Accounts_Ledger()
+            {
+                IsDeleted = false,
+                Title = "First",
+                openingBalance = 90.00,
+                ParentLedgerGroupID = 1,
+                StartDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                CreatedBy = "Seeder",
+
+            };
+            _context.Add(leger);
+            _context.SaveChanges();
+
+
+        }
 
 
     }

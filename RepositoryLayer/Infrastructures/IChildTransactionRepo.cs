@@ -10,6 +10,7 @@ namespace RepositoryLayer.Infrastructures
    public interface IChildTransactionRepo : IRepositoryBase<Accounts_childTransaction>
     {
         IEnumerable<TransactionDTO> GetAll();
+        Task postTransactionWithchild(TransactionWithChildren model);
         Task Post(TransactionDTO model);
         public void Put(TransactionDTO model);
         void SoftDelete(int id);
