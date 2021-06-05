@@ -1,17 +1,19 @@
 ﻿using AutoMapper;
 using CommonLayer.DTOs;
+using CommonLayer.Helpers;
 using EntityLayer;
 using EntityLayer.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using RepositoryLayer.Infrastructures;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RepositoryLayer.Repos
 {
-   public class CountryRepo : RepositoryBase<Country>, ICountryRepo
+   public class CountryRepo : RepositoryBase<LookUp_Country>, ICountryRepo
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMapper _mapper;
@@ -22,17 +24,18 @@ namespace RepositoryLayer.Repos
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
-        /* public IEnumerable<StateDTO> GetAll()
+         public IEnumerable<CountryDTO> GetAll()
          {
 
-             return Get().Select(x => new StateDTO { Key = (int)x.ID, Value = x.Name });
+             return Get().Where(x=>!x.IsDeleted).Select(x => new CountryDTO { CountryID = (int)x.CountryID, CountryName = x.CountryName });
          }
+        /*
          public IEnumerable<LookupDTO> GetAllasLookup()
          {
 
              return Get().Select(x => new LookupDTO { Key = (int)x.ID, Value = x.Name });
          }*/
-        public CountryDTO GetbyId(int id)
+        public CountryDTO GetbyId(long id)
         {
             var cat = GetById(id);
             return new CountryDTO
@@ -41,15 +44,16 @@ namespace RepositoryLayer.Repos
                 CountryID = (int)cat.CountryID
             };
         }
+        
         public async Task Post(CountryDTO model)
         {
-            var entity = new CountryDTO()
+            var entity = new LookUp_Country()
             {
                 CountryName = model.CountryName,
-                //IsDeleted = false,
+                IsDeleted = false,
                 //OrderBy = 0,
-                //CreatedBy = Utils.GetUserId(_serviceProvider),
-                //CreatedDate = DateTime.Now,
+                CreatedBy = Utils.GetUserId(_serviceProvider),
+                CreatedDate = DateTime.Now,
             };
             await Post(entity);
         }
@@ -65,7 +69,7 @@ namespace RepositoryLayer.Repos
         }
 
 
-        public void SoftDelete(int id)
+        public void SoftDelete(long id)
         {
             GetById(id).IsDeleted = true;
         }

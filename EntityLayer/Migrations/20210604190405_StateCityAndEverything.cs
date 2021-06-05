@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EntityLayer.Migrations
 {
-    public partial class intitial : Migration
+    public partial class StateCityAndEverything : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -142,6 +142,60 @@ namespace EntityLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Login", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LookUp_Country",
+                columns: table => new
+                {
+                    CountryID = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CountryName = table.Column<string>(type: "nvarchar(200)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LookUp_Country", x => x.CountryID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LookUp_Security_Questions",
+                columns: table => new
+                {
+                    Question_ID = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    Question_Title = table.Column<string>(type: "nvarchar(200)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LookUp_Security_Questions", x => x.Question_ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LookUp_Type_Of_Govt_IDs",
+                columns: table => new
+                {
+                    Type_Govt_ID = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    Govt_Id_Type = table.Column<string>(type: "nvarchar(200)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LookUp_Type_Of_Govt_IDs", x => x.Type_Govt_ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -458,6 +512,31 @@ namespace EntityLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LookUp_State",
+                columns: table => new
+                {
+                    StateID = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    StateName = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    CountryID = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LookUp_State", x => x.StateID);
+                    table.ForeignKey(
+                        name: "FK_LookUp_State_LookUp_Country_CountryID",
+                        column: x => x.CountryID,
+                        principalTable: "LookUp_Country",
+                        principalColumn: "CountryID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "rc_profile_subcategory",
                 columns: table => new
                 {
@@ -524,6 +603,31 @@ namespace EntityLayer.Migrations
                         column: x => x.ParentTransacatoinID,
                         principalTable: "Accounts_Transacation",
                         principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LookUp_City",
+                columns: table => new
+                {
+                    CityID = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CityName = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    StateID = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LookUp_City", x => x.CityID);
+                    table.ForeignKey(
+                        name: "FK_LookUp_City_LookUp_State_StateID",
+                        column: x => x.StateID,
+                        principalTable: "LookUp_State",
+                        principalColumn: "StateID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -624,6 +728,16 @@ namespace EntityLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_LookUp_City_StateID",
+                table: "LookUp_City",
+                column: "StateID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LookUp_State_CountryID",
+                table: "LookUp_State",
+                column: "CountryID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RC_Profile_BankingDetails_UserID",
                 table: "RC_Profile_BankingDetails",
                 column: "UserID");
@@ -683,6 +797,15 @@ namespace EntityLayer.Migrations
                 name: "Login");
 
             migrationBuilder.DropTable(
+                name: "LookUp_City");
+
+            migrationBuilder.DropTable(
+                name: "LookUp_Security_Questions");
+
+            migrationBuilder.DropTable(
+                name: "LookUp_Type_Of_Govt_IDs");
+
+            migrationBuilder.DropTable(
                 name: "RC_Profile_BankingDetails");
 
             migrationBuilder.DropTable(
@@ -713,6 +836,9 @@ namespace EntityLayer.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "LookUp_State");
+
+            migrationBuilder.DropTable(
                 name: "rc_profile_subcategory");
 
             migrationBuilder.DropTable(
@@ -720,6 +846,9 @@ namespace EntityLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Accounts_LedgerGroup");
+
+            migrationBuilder.DropTable(
+                name: "LookUp_Country");
 
             migrationBuilder.DropTable(
                 name: "rc_profile_category");

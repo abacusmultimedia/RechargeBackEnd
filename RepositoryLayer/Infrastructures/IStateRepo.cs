@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.Infrastructures
 {
-   public interface IStateRepo : IRepositoryBase<State>
+   public interface IStateRepo : IRepositoryBase<LookUp_State>
     {
         //IEnumerable<LookupDTO> GetAllasLookup();
-        //IEnumerable<LookupDTO> GetAll();
-        StateDTO GetbyId(int id);
+        IEnumerable<StateDTO> GetAll();
+        StateDTO GetbyId(long id);
+        List<StateDTO> GetByCountryID(long id);
         Task Post(StateDTO model);
         public void Put(StateDTO model);
-        void SoftDelete(int id);
+        void SoftDelete(long id);
     }
 }

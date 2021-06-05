@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CommonLayer.DTOs;
+using CommonLayer.Helpers;
 using EntityLayer;
 using EntityLayer.Entities;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.Repos
 {
-    public class StateRepo :RepositoryBase<State>, IStateRepo
+    public class StateRepo :RepositoryBase<LookUp_State>, IStateRepo
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMapper _mapper;
@@ -23,34 +24,47 @@ namespace RepositoryLayer.Repos
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
-       /* public IEnumerable<StateDTO> GetAll()
+       public IEnumerable<StateDTO> GetAll()
         {
 
-            return Get().Select(x => new StateDTO { Key = (int)x.ID, Value = x.Name });
-        }
+            return Get().Where(x=> !x.IsDeleted).Select(x => new StateDTO { StateID = (int)x.StateID, StateName = x.StateName, CountryID = x.CountryID });
+        }/*
         public IEnumerable<LookupDTO> GetAllasLookup()
         {
 
             return Get().Select(x => new LookupDTO { Key = (int)x.ID, Value = x.Name });
         }*/
-        public StateDTO GetbyId(int id)
+        public StateDTO GetbyId(long id)
         {
             var cat = GetById(id);
             return new StateDTO
             {
                 StateName = cat.StateName,
                 StateID = (int)cat.StateID
+                
             };
+        }
+        public List<StateDTO> GetByCountryID(long id)
+        {
+            var cat = GetWithCondition(x=>x.CountryID==id).Select(x=> new StateDTO
+            {
+                StateName = x.StateName,
+                StateID = (int)x.StateID,
+                CountryID=x.CountryID 
+                
+            });
+            return cat.ToList();
         }
         public async Task Post(StateDTO model)
         {
-            var entity = new StateDTO()
+            var entity = new LookUp_State()
             {
                 StateName = model.StateName,
-                //IsDeleted = false,
+                IsDeleted = false,
+                CountryID=model.CountryID,
                 //OrderBy = 0,
-                //CreatedBy = Utils.GetUserId(_serviceProvider),
-                //CreatedDate = DateTime.Now,
+                CreatedBy = Utils.GetUserId(_serviceProvider),
+                CreatedDate = DateTime.Now,
             };
             await Post(entity);
         }
@@ -66,7 +80,7 @@ namespace RepositoryLayer.Repos
         }
 
 
-        public void SoftDelete(int id)
+        public void SoftDelete(long id)
         {
             GetById(id).IsDeleted = true;
         }

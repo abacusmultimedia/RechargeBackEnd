@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.Infrastructures
 {
-   public interface ICityRepo : IRepositoryBase<City>
+   public interface ICityRepo : IRepositoryBase<LookUp_City>
     {
         //IEnumerable<LookupDTO> GetAllasLookup();
-        //IEnumerable<LookupDTO> GetAll();
-        CityDTO GetbyId(int id);
+        IEnumerable<CityDTO> GetAll();
+        CityDTO GetbyId(long id);
+        List<CityDTO> GetCityByState(long id);
         Task Post(CityDTO model);
         public void Put(CityDTO model);
-        void SoftDelete(int id);
+        void SoftDelete(long id);
     }
 }

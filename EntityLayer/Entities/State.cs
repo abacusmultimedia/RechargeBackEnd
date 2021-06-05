@@ -6,26 +6,37 @@ using System.Text;
 
 namespace EntityLayer.Entities
 {
-   public class State : BaseEntity
+   public class LookUp_State : BaseEntity
     {
+        [Key]
         public long StateID { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
         public String StateName { get; set; }
-        public virtual ICollection<City> Cities { get; set; }
+        public long  CountryID { get; set; }
+        public virtual ICollection<LookUp_City> Cities { get; set; }
+        [ForeignKey("CountryID")]
+        public virtual LookUp_Country  Country { get; set; }
+
     }
 
-    public class City : BaseEntity
+    public class LookUp_City : BaseEntity
     {
+        [Key]
         public long CityID { get; set; }
-        public String CityName { get; set; }
-        [ForeignKey("State")]
+        [Column(TypeName = "nvarchar(200)")]
+        public string CityName { get; set; }
         public long StateID { get; set; }
+        [ForeignKey("StateID")]
+        public virtual LookUp_State States { get; set; }
 
     }
-    public class Country : BaseEntity
+    public class LookUp_Country : BaseEntity
     {
+        [Key]
         public long CountryID { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
         public string CountryName { get; set; }
-        public virtual ICollection<State> States { get; set; }
-
+        public virtual ICollection<LookUp_State> States { get; set; }
+ 
     }
 }

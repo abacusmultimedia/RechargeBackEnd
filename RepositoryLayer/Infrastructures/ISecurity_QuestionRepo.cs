@@ -10,7 +10,7 @@ namespace RepositoryLayer.Infrastructures
    public interface ISecurity_QuestionRepo  : IRepositoryBase<LookUp_Security_Question>
     {
         //IEnumerable<LookupDTO> GetAllasLookup();
-        //IEnumerable<LookupDTO> GetAll();
+        IEnumerable<SecurityQuestionDTO> GetAll();
         SecurityQuestionDTO GetbyId(int id);
         Task Post(SecurityQuestionDTO model);
         public void Put(SecurityQuestionDTO model);

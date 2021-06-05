@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityLayer.Migrations
 {
     [DbContext(typeof(RechargeDbContext))]
-    [Migration("20210601162235_intitial")]
-    partial class intitial
+    [Migration("20210604190405_StateCityAndEverything")]
+    partial class StateCityAndEverything
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -460,6 +460,161 @@ namespace EntityLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Login");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.LookUp_City", b =>
+                {
+                    b.Property<long>("CityID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CityName")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long>("StateID")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("CityID");
+
+                    b.HasIndex("StateID");
+
+                    b.ToTable("LookUp_City");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.LookUp_Country", b =>
+                {
+                    b.Property<long>("CountryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("CountryID");
+
+                    b.ToTable("LookUp_Country");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.LookUp_Security_Question", b =>
+                {
+                    b.Property<int>("Question_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Question_Title")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Question_ID");
+
+                    b.ToTable("LookUp_Security_Questions");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.LookUp_State", b =>
+                {
+                    b.Property<long>("StateID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("CountryID")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("StateName")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("StateID");
+
+                    b.HasIndex("CountryID");
+
+                    b.ToTable("LookUp_State");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.LookUp_Type_Of_Govt_ID", b =>
+                {
+                    b.Property<long>("Type_Govt_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Govt_Id_Type")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Type_Govt_ID");
+
+                    b.ToTable("LookUp_Type_Of_Govt_IDs");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.RC_Profile_BankingDetails", b =>
@@ -950,6 +1105,24 @@ namespace EntityLayer.Migrations
                     b.HasOne("EntityLayer.Entities.Accounts_Transacation", "Transacation")
                         .WithMany("childTransactions")
                         .HasForeignKey("ParentTransacatoinID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.LookUp_City", b =>
+                {
+                    b.HasOne("EntityLayer.Entities.LookUp_State", "States")
+                        .WithMany("Cities")
+                        .HasForeignKey("StateID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.LookUp_State", b =>
+                {
+                    b.HasOne("EntityLayer.Entities.LookUp_Country", "Country")
+                        .WithMany("States")
+                        .HasForeignKey("CountryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

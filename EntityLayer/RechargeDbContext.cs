@@ -29,6 +29,12 @@ namespace EntityLayer
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
 
+        public DbSet<LookUp_City> LookUp_City { get; set; }
+        public DbSet<LookUp_Country> LookUp_Country { get; set; }
+        public DbSet<LookUp_State> LookUp_State { get; set; }
+        public DbSet<LookUp_Security_Question> LookUp_Security_Questions { get; set; }
+        public DbSet<LookUp_Type_Of_Govt_ID> LookUp_Type_Of_Govt_IDs { get; set; }
+
 
 
 

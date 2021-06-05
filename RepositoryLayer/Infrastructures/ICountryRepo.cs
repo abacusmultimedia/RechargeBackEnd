@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.Infrastructures
 {
-   public interface ICountryRepo : IRepositoryBase<Country>
+   public interface ICountryRepo : IRepositoryBase<LookUp_Country>
     {
         //IEnumerable<LookupDTO> GetAllasLookup();
-        //IEnumerable<LookupDTO> GetAll();
-        CountryDTO GetbyId(int id);
+        IEnumerable<CountryDTO> GetAll();
+        CountryDTO GetbyId(long id);
         Task Post(CountryDTO model);
         public void Put(CountryDTO model);
-        void SoftDelete(int id);
+        void SoftDelete(long id);
     }
 }

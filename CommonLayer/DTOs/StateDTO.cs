@@ -8,7 +8,8 @@ namespace CommonLayer.DTOs
     {
         public long StateID { get; set; }
         public String StateName { get; set; }
-        
+        public long CountryID { get; set; }
+
 
     }
 }

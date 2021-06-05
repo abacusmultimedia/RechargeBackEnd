@@ -112,6 +112,209 @@ namespace Casolve.Secure.Api.Controllers
          {
              return constructResponse(await _unitOfWork.ExtendedUsersRepository.Register());
          }*/
+        #region State
+        [HttpGet]
+        [Route("GetStateAsLookup")]
+        public async Task<BaseResponse> GetStateAsLookup()
+        {
+            return constructResponse(_unitOfWork.StateRepo.GetAll());
+        }
 
+        [HttpPost]
+        [Route("StatePost")]
+        public async Task<BaseResponse> StatePost([FromBody] StateDTO model)
+        {
+            await _unitOfWork.StateRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("StateUpdate")]
+        public async Task<BaseResponse> StateUpdate([FromBody] StateDTO model)
+        {
+            _unitOfWork.StateRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("StateDelete/{id}")]
+        public async Task<BaseResponse> StateDelete(long id)
+        {
+            _unitOfWork.StateRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpPost]
+        [Route("StateIdPost/{id}")]
+        public BaseResponse StatebyId(int id)
+        {
+            return constructResponse(_unitOfWork.StateRepo.GetbyId(id));
+        }
+        [HttpPost]
+        [Route("GetStatesByCountryId/{id}")]
+        public BaseResponse GetStatebyId(long id)
+        {
+            return constructResponse(_unitOfWork.StateRepo.GetByCountryID(id));
+        }
+        #endregion
+
+        #region Country
+        [HttpGet]
+        [Route("GetCountryAsLookup")]
+        public async Task<BaseResponse> GetCountryAsLookup()
+        {
+            return constructResponse(_unitOfWork.CountryRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("CountryPost")]
+        public async Task<BaseResponse> CountryPost([FromBody] CountryDTO model)
+        {
+            await _unitOfWork.CountryRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("CountryUpdate")]
+        public async Task<BaseResponse> CountryUpdate([FromBody] CountryDTO model)
+        {
+            _unitOfWork.CountryRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("CountryDelete/{id}")]
+        public async Task<BaseResponse> CountryDelete(long id)
+        {
+            _unitOfWork.CountryRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpPost]
+        [Route("CountryIdPost/{id}")]
+        public BaseResponse CountrybyId(int id)
+        {
+            return constructResponse(_unitOfWork.CountryRepo.GetbyId(id));
+        }
+
+        #endregion
+
+        #region City
+        [HttpGet]
+        [Route("GetCityAsLookup")]
+        public async Task<BaseResponse> GetCityAsLookup()
+        {
+            return constructResponse(_unitOfWork.CityRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("CityPost")]
+        public async Task<BaseResponse> CityPost([FromBody] CityDTO model)
+        {
+            await _unitOfWork.CityRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("CityUpdate")]
+        public async Task<BaseResponse> CityUpdate([FromBody] CityDTO model)
+        {
+            _unitOfWork.CityRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("CityDelete/{id}")]
+        public async Task<BaseResponse> CityDelete(long id)
+        {
+            _unitOfWork.CityRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpPost]
+        [Route("CityIdPost/{id}")]
+        public BaseResponse CitybyId(int id)
+        {
+            return constructResponse(_unitOfWork.CityRepo.GetbyId(id));
+        }
+        [HttpPost]
+        [Route("GetCityByStateID/{id}")]
+        public BaseResponse GetCityByStateID(long id)
+        {
+            return constructResponse(_unitOfWork.CityRepo.GetCityByState(id));
+        }
+        #endregion
+        #region SecurityQuestion
+        [HttpGet]
+        [Route("GetSecurityQuestionAsLookup")]
+        public async Task<BaseResponse> GetSecurityQuestionAsLookup()
+        {
+            return constructResponse(_unitOfWork.Security_QuestionRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("SecurityQuestionPost")]
+        public async Task<BaseResponse> SecurityQuestionPost([FromBody] SecurityQuestionDTO model)
+        {
+            await _unitOfWork.Security_QuestionRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("SecurityQuestionUpdate")]
+        public async Task<BaseResponse> SecurityQuestionUpdate([FromBody] SecurityQuestionDTO model)
+        {
+            _unitOfWork.Security_QuestionRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("SecurityQuestionDelete/{id}")]
+        public async Task<BaseResponse> SecurityQuestion(int id)
+        {
+            _unitOfWork.Security_QuestionRepo.Delete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpPost]
+        [Route("SecurityQuestionIdPost/{id}")]
+        public BaseResponse SecurityQuestionbyId(int id)
+        {
+            return constructResponse(_unitOfWork.Security_QuestionRepo.GetbyId(id));
+        }
+
+        #endregion
+
+        
+        #region TypeGovtID
+        [HttpGet]
+        [Route("GetTypeOfGovtIDAsLookup")]
+        public async Task<BaseResponse> GetTypeOfGovtIDAsLookup()
+        {
+            return constructResponse(_unitOfWork.Type_Govt_IDRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("TypeOfGovtIDPost")]
+        public async Task<BaseResponse> TypeOfGovtIDPost([FromBody] Type_Of_Govt_IdDTO model)
+        {
+            await _unitOfWork.Type_Govt_IDRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("TypeOfGovtIDUpdate")]
+        public async Task<BaseResponse> TypeOfGovtIDUpdate([FromBody] Type_Of_Govt_IdDTO model)
+        {
+            _unitOfWork.Type_Govt_IDRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("TypeOfGovtIDDelete/{id}")]
+        public async Task<BaseResponse> TypeOfGovtID(int id)
+        {
+            _unitOfWork.Type_Govt_IDRepo.Delete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpPost]
+        [Route("TypeOfGovtIDbyIdPost/{id}")]
+        public BaseResponse TypeOfGovtIDbyId(int id)
+        {
+            return constructResponse(_unitOfWork.Type_Govt_IDRepo.GetbyId(id));
+        }
+
+        #endregion
     }
 }

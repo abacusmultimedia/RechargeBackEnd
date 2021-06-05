@@ -9,5 +9,6 @@ namespace CommonLayer.DTOs
     {
         public long CityID { get; set; }
         public String CityName { get; set; }
+        public long StateID { get; set; }
     }
 }

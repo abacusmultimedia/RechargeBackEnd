@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RepositoryLayer.Infrastructures;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,11 +23,12 @@ namespace RepositoryLayer.Repos
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
-        /* public IEnumerable<LookupDTO> GetAll()
+         public IEnumerable<SecurityQuestionDTO> GetAll()
          {
 
-             return Get().Select(x => new LookupDTO { Key = (int)x.ID, Value = x.Name });
+             return Get().Select(x => new SecurityQuestionDTO { Question_ID = (int)x.Question_ID, Question_Title = x.Question_Title });
          }
+        /*
          public IEnumerable<LookupDTO> GetAllasLookup()
          {
 

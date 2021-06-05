@@ -1,17 +1,19 @@
 ﻿using AutoMapper;
 using CommonLayer.DTOs;
+using CommonLayer.Helpers;
 using EntityLayer;
 using EntityLayer.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using RepositoryLayer.Infrastructures;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RepositoryLayer.Repos
 {
-   public class CityRepo : RepositoryBase<City>, ICityRepo
+   public class CityRepo : RepositoryBase<LookUp_City>, ICityRepo
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMapper _mapper;
@@ -22,17 +24,17 @@ namespace RepositoryLayer.Repos
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
-        /* public IEnumerable<StateDTO> GetAll()
+         public IEnumerable<CityDTO> GetAll()
          {
 
-             return Get().Select(x => new StateDTO { Key = (int)x.ID, Value = x.Name });
-         }
+             return Get().Where(x=>!x.IsDeleted).Select(x => new CityDTO { CityID = (int)x.CityID, CityName = x.CityName, StateID =x.StateID });
+         }/*
          public IEnumerable<LookupDTO> GetAllasLookup()
          {
 
              return Get().Select(x => new LookupDTO { Key = (int)x.ID, Value = x.Name });
          }*/
-        public CityDTO GetbyId(int id)
+        public CityDTO GetbyId(long id)
         {
             var cat = GetById(id);
             return new CityDTO
@@ -41,15 +43,26 @@ namespace RepositoryLayer.Repos
                 CityID = (int)cat.CityID
             };
         }
+        public List<CityDTO> GetCityByState(long id)
+        {
+            var cat = GetWithCondition(x=>x.StateID==id).Select(x => new CityDTO 
+            {
+                CityName = x.CityName,
+                CityID = (long)x.CityID,
+                StateID=(long)x.StateID
+            });
+            return cat.ToList();
+        }
         public async Task Post(CityDTO model)
         {
-            var entity = new CityDTO()
+            var entity = new LookUp_City()
             {
                 CityName = model.CityName,
-                //IsDeleted = false,
-                //OrderBy = 0,
-                //CreatedBy = Utils.GetUserId(_serviceProvider),
-                //CreatedDate = DateTime.Now,
+                IsDeleted = false,
+                StateID=model.StateID,
+                //OrderBy = 1,
+                CreatedBy = Utils.GetUserId(_serviceProvider),
+                CreatedDate = DateTime.Now,
             };
             await Post(entity);
         }
@@ -63,7 +76,7 @@ namespace RepositoryLayer.Repos
                 Put(entity);
             }
         }
-        public void SoftDelete(int id)
+        public void SoftDelete(long id)
         {
             GetById(id).IsDeleted = true;
         }
