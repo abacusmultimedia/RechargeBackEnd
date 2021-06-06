@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EntityLayer.Migrations
 {
-    public partial class StateCityAndEverything : Migration
+    public partial class BusinessInfoUpdted : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -651,6 +651,8 @@ namespace EntityLayer.Migrations
                     Logo = table.Column<string>(nullable: true),
                     Description = table.Column<string>(type: "nvarchar(5000)", nullable: true),
                     BusinessRegCertificateImg = table.Column<string>(nullable: true),
+                    BusinessEmail = table.Column<string>(nullable: true),
+                    BusinessRegNumber = table.Column<string>(nullable: true),
                     UserID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityLayer.Migrations
 {
     [DbContext(typeof(RechargeDbContext))]
-    [Migration("20210604190405_StateCityAndEverything")]
-    partial class StateCityAndEverything
+    [Migration("20210606121740_BusinessInfoUpdted")]
+    partial class BusinessInfoUpdted
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -666,10 +666,16 @@ namespace EntityLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
+                    b.Property<string>("BusinessEmail")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("BusinessName")
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("BusinessRegCertificateImg")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("BusinessRegNumber")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<long>("Category")

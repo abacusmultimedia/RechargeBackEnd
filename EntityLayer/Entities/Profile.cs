@@ -19,6 +19,9 @@ namespace EntityLayer.Entities
         [Column(TypeName = "nvarchar(5000)")]
         public string Description { get; set; }
         public string BusinessRegCertificateImg { get; set; }
+        public string BusinessEmail { get; set; }
+        public string BusinessRegNumber { get; set; }
+
 
         public string UserID { get; set; } 
         [ForeignKey("UserID")]

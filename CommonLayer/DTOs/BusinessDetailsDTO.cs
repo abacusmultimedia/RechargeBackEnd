@@ -10,9 +10,9 @@ namespace CommonLayer.DTOs
         public string businessName { get; set; }
 
         public string categoryName { get; set; }
-        public string categoryID { get; set; }
+        public int categoryID { get; set; }
         public string subCategory { get; set; }
-        public string subCategoryID { get; set; }
+        public int subCategoryID { get; set; }
         public string website { get; set; }
 
         public string contactNo { get; set; }

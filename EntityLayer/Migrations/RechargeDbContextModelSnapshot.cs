@@ -664,10 +664,16 @@ namespace EntityLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
+                    b.Property<string>("BusinessEmail")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("BusinessName")
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("BusinessRegCertificateImg")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("BusinessRegNumber")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<long>("Category")
