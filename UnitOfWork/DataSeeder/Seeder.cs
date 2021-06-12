@@ -176,6 +176,28 @@ namespace UnitOfWork.DataSeeder
             _context.SaveChanges();
 
 
+            LookUp_Country lookUp_Country = new LookUp_Country()
+            {
+                CountryName = "Pakistan",
+                IsDeleted = false
+            };
+            _context.Add(lookUp_Country);
+            _context.SaveChanges();
+            LookUp_State lookUp_State = new LookUp_State()
+            {
+                StateName = "Punjab",
+                CountryID = 1,
+            };
+            _context.Add(lookUp_State);
+            _context.SaveChanges();
+            LookUp_City lookUp_City = new LookUp_City()
+            {
+                CityName = "Rawalpindi",
+                IsDeleted = false,
+                StateID = 1,
+            };
+            _context.Add(lookUp_City);
+            _context.SaveChanges();
         }
 
 

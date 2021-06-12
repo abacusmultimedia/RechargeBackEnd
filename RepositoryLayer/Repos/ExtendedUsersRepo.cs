@@ -236,7 +236,8 @@ namespace RepositoryLayer.Repos
                     SecurityQuestion1 = 0,
                     SecurityQuestion2 = 0,
                     CreatedDate = DateTime.Now,
-                    CreatedBy = currentUser.Id
+                    CreatedBy = currentUser.Id,
+                    CountryPhotoIdIssuer = 1,
                 };
 
                 await _LegalRepo.PostInitial(Legal_entity);
@@ -256,6 +257,7 @@ namespace RepositoryLayer.Repos
                     SubCategory = 1,
                     Website = "",
                     LoyaltyMembership = "",
+                    AccountManagId = "",
                 };
                 await _BusinessInforRepo.PostInitial(BusinessInfo_entity);
                 var loginDto = new LoginDTO()
@@ -307,7 +309,154 @@ namespace RepositoryLayer.Repos
             }
             return OtherConstants.isSuccessful;
         }
+        #region BusinessInfoUpdate
+        public async Task<ProfileBusinessInfoDTO> Stage1ProfileBusinessInfoGet()
+        {
+            var userId = Utils.GetUserId(_serviceProvider);
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var userToUpdate = await _userManager.FindByIdAsync(userId);
+            var objBusiness = _BusinessInforRepo.GetWithCondition(s => s.UserID == userId).FirstOrDefault();
+            var obj = new ProfileBusinessInfoDTO()
+            {
+                BusinessDescription = objBusiness.Description,
+                BusinessGst = objBusiness.GSTNo,
+                BusinessName = objBusiness.BusinessName,
+                BusinessRegisterationNumber = objBusiness.BusinessRegNumber,
+                BusinessLogo = objBusiness.Logo,
+                BusinessEmail = objBusiness.BusinessEmail,
+                ContactNo = userToUpdate.PhoneNumber,
+                AlternativeNumber = userToUpdate.SecondaryPhoneNumber,
+                JobTitle = userToUpdate.JobTitleId,
+                FamilyName = userToUpdate.LastName,
+                FirstName = userToUpdate.FirstName,
+                PersonalGreetingAll = userToUpdate.PeronalGreeting,
+                CategoryID = objBusiness.Category,
+                subCategoryID = objBusiness.SubCategory,
+            };
+            return obj;
+        }
+        public async Task Stage1ProfileBusinessInfoUpdate(ProfileBusinessInfoDTO model)
+        {
+            var userId = Utils.GetUserId(_serviceProvider);
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var userToUpdate = await _userManager.FindByIdAsync(userId);
+            var objBusiness = _BusinessInforRepo.GetWithCondition(s => s.UserID == userId).FirstOrDefault();
 
+            objBusiness.Description = model.BusinessDescription;
+            objBusiness.GSTNo = model.BusinessGst;
+            objBusiness.BusinessName = model.BusinessName;
+            objBusiness.BusinessRegNumber = model.BusinessRegisterationNumber;
+            objBusiness.Logo = model.BusinessLogo;
+            objBusiness.BusinessEmail = model.BusinessEmail;
+            userToUpdate.PhoneNumber = model.ContactNo;
+            userToUpdate.SecondaryPhoneNumber = model.AlternativeNumber;
+            userToUpdate.JobTitleId = model.JobTitle;
+            userToUpdate.LastName = model.FamilyName;
+            userToUpdate.FirstName = model.FirstName;
+            userToUpdate.PeronalGreeting = model.PersonalGreetingAll;
+            objBusiness.Category = model.CategoryID;
+            objBusiness.SubCategory = model.subCategoryID;
+            if (model.JobTitle != null && model.JobTitle != 0)
+            {
+                /// we are managing 2 calls in one method 
+                /// Job title is missing in some cases 
+                userToUpdate.JobTitleId = model.JobTitle;
+            }
+            _BusinessInforRepo.Put(objBusiness, true);
+            await _userManager.UpdateAsync(userToUpdate);
+        }
+        #endregion
+        #region PhysicalAddress
+        public async Task<ProfilePhysicalAddressDTO> Stage2ProfilePhysicalAddressGet()
+        {
+            var userId = Utils.GetUserId(_serviceProvider);
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var userToUpdate = await _userManager.FindByIdAsync(userId);
+
+            var obj = new ProfilePhysicalAddressDTO()
+            {
+                Address1 = userToUpdate.Address,
+                Address2 = userToUpdate.Address2,
+                City = userToUpdate.CityId,
+                ZipCode = userToUpdate.ZiPcode
+            };
+
+            return obj;
+        }
+        public async Task Stage2ProfilePhysicalAddressUpdate(ProfilePhysicalAddressDTO model)
+        {
+            var userId = Utils.GetUserId(_serviceProvider);
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var userToUpdate = await _userManager.FindByIdAsync(userId);
+            userToUpdate.Address = model.Address1;
+            userToUpdate.Address2 = model.Address2;
+            userToUpdate.CityId = model.City;
+            userToUpdate.ZiPcode = model.ZipCode;
+            await _userManager.UpdateAsync(userToUpdate);
+        }
+        #endregion
+        #region SecurityInfo
+        public async Task<ProfileSecurityInfoDTO> Stage4ProfileSecurityInfoGet()
+        {
+            var userId = Utils.GetUserId(_serviceProvider);
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var userToUpdate = await _userManager.FindByIdAsync(userId);
+            var objSecurity = _LegalRepo.GetWithCondition(s => s.User.Id == userId).FirstOrDefault();
+            var businessdata = _BusinessInforRepo.GetWithCondition(x => x.UserID == userId).FirstOrDefault();
+
+
+            var obj = new ProfileSecurityInfoDTO()
+            {
+
+                GovtIssuedPhotoId = objSecurity.PhotoId,
+                CountryIssuePhotoId = objSecurity.CountryPhotoIdIssuer,
+                GovtPhotoIdNumber = objSecurity.PhotIDNumber,
+                AttachPhotoId = objSecurity.ImageURL,
+                SecurityQuestion1 = objSecurity.SecurityQuestion1,
+                SecurityQuestion2 = objSecurity.SecurityQuestion2,
+                Answer1 = objSecurity.Answer1,
+                Answer2 = objSecurity.Answer2,
+                Authentication = userToUpdate.TwoFactorEnabled,
+                GovtIssuedBusinessRegId = businessdata.BusinessRegNumber,
+                AccountMangId = businessdata.AccountManagId,
+                AttachBusinessRegId = businessdata.BusinessRegCertificateImg
+
+            };
+            return obj;
+        }
+        public async Task Stage4ProfileSecurityInfoUpdate(ProfileSecurityInfoDTO model)
+        {
+            var userId = Utils.GetUserId(_serviceProvider);
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var userToUpdate = await _userManager.FindByIdAsync(userId);
+            var objSecurity = _LegalRepo.GetWithCondition(s => s.User.Id == userId).FirstOrDefault();
+            var businessdata = _BusinessInforRepo.GetWithCondition(x => x.UserID == userId).FirstOrDefault();
+
+            objSecurity.PhotoId = model.GovtIssuedPhotoId;
+            objSecurity.CountryPhotoIdIssuer = model.CountryIssuePhotoId;
+            objSecurity.PhotIDNumber = model.GovtPhotoIdNumber;
+            objSecurity.ImageURL = model.AttachPhotoId;
+            objSecurity.SecurityQuestion1 = model.SecurityQuestion1;
+            objSecurity.SecurityQuestion2 = model.SecurityQuestion2;
+            objSecurity.Answer1 = model.Answer1;
+            objSecurity.Answer2 = model.Answer2;
+            //  userToUpdate.TwoFactorEnabled = model.Authentication;
+            businessdata.BusinessRegNumber = model.GovtIssuedBusinessRegId;
+            businessdata.AccountManagId = model.AccountMangId;
+            businessdata.BusinessRegCertificateImg = model.AttachBusinessRegId;
+            if (model.Password != null && model.Password != "")
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(userToUpdate);
+                await _userManager.ResetPasswordAsync(userToUpdate, token, model.Password);
+            }
+
+            _LegalRepo.Put(objSecurity);
+            _BusinessInforRepo.Put(businessdata);
+            await _userManager.UpdateAsync(userToUpdate);
+
+
+        }
+        #endregion
         private UserDTO CreateUserModel(ExtendedUser user, string role)
         {
             return new UserDTO()
@@ -534,7 +683,7 @@ namespace RepositoryLayer.Repos
                 authorizedPerson = model.authorizedPerson
             };
             _BusinessInforRepo.PostPartnerBusinessinfo(partnerInfor);
-    }
+        }
         #endregion
 
 

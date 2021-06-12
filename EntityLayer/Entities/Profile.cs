@@ -21,7 +21,7 @@ namespace EntityLayer.Entities
         public string BusinessRegCertificateImg { get; set; }
         public string BusinessEmail { get; set; }
         public string BusinessRegNumber { get; set; }
-
+        public string AccountManagId { get; set; }
 
         public string UserID { get; set; } 
         [ForeignKey("UserID")]
@@ -48,7 +48,7 @@ namespace EntityLayer.Entities
     public class RC_Profile_CardDetails : BaseEntity
     {
         public long ID { get; set; } 
-        public int Type { get; set; }
+        public long Type { get; set; }
         [Column(TypeName = "nvarchar(200)")]
         public string CardHoldername { get; set; }
         public string CardNumber { get; set; }
@@ -79,7 +79,9 @@ namespace EntityLayer.Entities
         //public string UserID { get; set; }
         //[ForeignKey("UserID")]
         public virtual ExtendedUser User { get; set; }
-
+        public long CountryPhotoIdIssuer { get; set; }
+        [ForeignKey("CountryPhotoIdIssuer")]
+        public virtual LookUp_Country CountryPhotoIssuer { get; set; }
     }
     [Table("rc_profile_category")]
     public class Category  : BaseEntity

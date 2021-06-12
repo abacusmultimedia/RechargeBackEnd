@@ -34,15 +34,15 @@ namespace RepositoryLayer.Repos
 
             var entity = new RC_Profile_BusinessInfor()
             {
-                Description = model.description,
+                Description = model.Description,
                 CreatedDate = DateTime.Now,
                 CreatedBy = Utils.GetUserId(_serviceProvider),
                 IsDeleted = false,
                 UserID = Utils.GetUserId(_serviceProvider),
-                GSTNo = model.gst,
-                BusinessName = model.businessName,
-                Website = model.website,
-                LoyaltyMembership = model.loyaltyMembership,
+                GSTNo = model.Gst,
+                BusinessName = model.BusinessName,
+                Website = model.Website,
+                LoyaltyMembership = model.LoyaltyMembership,
             };
             await Post(entity);
         }
@@ -57,15 +57,15 @@ namespace RepositoryLayer.Repos
             var entity = GetById(model.Id);
             if (entity != null)
             {
-                entity.BusinessName = model.businessName;
-                entity.Description = model.description;
+                entity.BusinessName = model.BusinessName;
+                entity.Description = model.Description;
                 entity.ModifiedDate = DateTime.Now;
                 entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
                 entity.IsDeleted = false;
-                entity.GSTNo = model.gst;
-                entity.BusinessName = model.businessName;
-                entity.Website = model.website;
-                entity.LoyaltyMembership = model.loyaltyMembership;
+                entity.GSTNo = model.Gst;
+                entity.BusinessName = model.BusinessName;
+                entity.Website = model.Website;
+                entity.LoyaltyMembership = model.LoyaltyMembership;
                 Put(entity);
             }
         }

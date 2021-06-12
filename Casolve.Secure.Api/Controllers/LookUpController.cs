@@ -41,7 +41,7 @@ namespace Casolve.Secure.Api.Controllers
         [HttpDelete("CategoryDelete/{id}")]
         public async Task<BaseResponse> CategoryDelete(int id)
         {
-            _unitOfWork.CategoryRepo.Delete(id);
+            _unitOfWork.CategoryRepo.SoftDelete(id);
             return constructResponse(await _unitOfWork.Save());
         }
 

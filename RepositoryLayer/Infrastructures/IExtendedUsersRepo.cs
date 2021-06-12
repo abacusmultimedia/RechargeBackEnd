@@ -24,5 +24,12 @@ namespace RepositoryLayer.Infrastructures
         Task Stage5BusinessPost(SignUPStage5BusinessDTO model);
         void Stage5PersonalPost(SignUPStage5PersonalDTO model);
         void Stage5PartnerPost(SignUPStage5PartnerDTO model);
+        /// Update Stages
+        Task<ProfileBusinessInfoDTO> Stage1ProfileBusinessInfoGet();
+        Task Stage1ProfileBusinessInfoUpdate(ProfileBusinessInfoDTO model);
+        Task<ProfilePhysicalAddressDTO> Stage2ProfilePhysicalAddressGet();
+        Task Stage2ProfilePhysicalAddressUpdate(ProfilePhysicalAddressDTO model);
+        Task<ProfileSecurityInfoDTO> Stage4ProfileSecurityInfoGet();
+        Task Stage4ProfileSecurityInfoUpdate(ProfileSecurityInfoDTO model);
     }
 }
