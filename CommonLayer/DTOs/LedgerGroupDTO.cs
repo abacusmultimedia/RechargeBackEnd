@@ -6,7 +6,7 @@ namespace CommonLayer.DTOs
 {
    public class LedgerGroupDTO
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string UnderGroup { get; set; }
     }
 }

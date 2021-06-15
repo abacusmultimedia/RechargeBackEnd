@@ -24,10 +24,10 @@ namespace RepositoryLayer.Repos
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
-         public IEnumerable<CityDTO> GetAll()
+         public IEnumerable<LookupDTO> GetAll()
          {
 
-             return Get().Where(x=>!x.IsDeleted).Select(x => new CityDTO { CityID = (int)x.CityID, CityName = x.CityName, StateID =x.StateID });
+             return Get().Where(x=>!x.IsDeleted).Select(x => new LookupDTO { Key = (int)x.CityID, Value = x.CityName });
          }/*
          public IEnumerable<LookupDTO> GetAllasLookup()
          {

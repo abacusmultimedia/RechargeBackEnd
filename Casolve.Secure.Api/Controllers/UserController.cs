@@ -35,7 +35,6 @@ namespace Secure.Api.Controllers
         {
             await _unitOfWork.ExtendedUsersRepository.Stage1ProfileBusinessInfoUpdate(model);
             return constructResponse(await _unitOfWork.Save());
-         
         }
 
         [HttpGet]
@@ -44,6 +43,7 @@ namespace Secure.Api.Controllers
         {
             return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage2ProfilePhysicalAddressGet());
         }
+
         [HttpPost]
         [Route("UpdatePhysicalAddress")]
         public async Task<BaseResponse> UpdatePhysicalAddress([FromBody] ProfilePhysicalAddressDTO model)

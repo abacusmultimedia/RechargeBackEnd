@@ -9,7 +9,7 @@ namespace RepositoryLayer.Infrastructures
 {
     public interface ISubCategoryRepo : IRepositoryBase<SubCategory>
     { 
-        IEnumerable<SubCategory> GetAll();
+        IEnumerable<LookupDTO> GetAll();
         Task Post(SubCategoryDTO model);
         void Put(SubCategoryDTO model);
         void SoftDelete(int id);

@@ -10,9 +10,9 @@ namespace RepositoryLayer.Infrastructures
    public interface IStateRepo : IRepositoryBase<LookUp_State>
     {
         //IEnumerable<LookupDTO> GetAllasLookup();
-        IEnumerable<StateDTO> GetAll();
+        IEnumerable<LookupDTO> GetAll();
         StateDTO GetbyId(long id);
-        List<StateDTO> GetByCountryID(long id);
+        List<LookupDTO> GetByCountryID(long id);
         Task Post(StateDTO model);
         public void Put(StateDTO model);
         void SoftDelete(long id);

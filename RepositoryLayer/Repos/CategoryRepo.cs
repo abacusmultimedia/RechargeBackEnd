@@ -27,7 +27,7 @@ namespace RepositoryLayer.Repos
         public  IEnumerable<LookupDTO> GetAll()
         {
 
-            return Get().Select(x => new LookupDTO { Key =   (int) x.ID ,  Value = x.Name }) ;
+            return Get().Where(x=>!x.IsDeleted).Select(x => new LookupDTO { Key =   (int) x.ID ,  Value = x.Name }) ;
         }
         public IEnumerable<LookupDTO> GetAllasLookup()
         {
@@ -61,14 +61,13 @@ namespace RepositoryLayer.Repos
             if (entity != null)
             {
                 entity.Name = model.CategoryName;
-                
-
                 Put(entity);
             }
+            
         }
 
 
-        public void SoftDelete(int id)
+        public void SoftDelete(long id)
         {
             GetById(id).IsDeleted = true;
         }

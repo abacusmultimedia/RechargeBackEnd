@@ -10,7 +10,7 @@ namespace RepositoryLayer.Infrastructures
    public interface IType_Govt_IDRepo : IRepositoryBase<LookUp_Type_Of_Govt_ID>
     {
         //IEnumerable<LookupDTO> GetAllasLookup();
-        IEnumerable<Type_Of_Govt_IdDTO> GetAll();
+        IEnumerable<LookupDTO> GetAll();
         Type_Of_Govt_IdDTO GetbyId(int id);
         Task Post(Type_Of_Govt_IdDTO model);
         public void Put(Type_Of_Govt_IdDTO model);

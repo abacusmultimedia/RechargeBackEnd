@@ -14,7 +14,7 @@ namespace RepositoryLayer.Infrastructures
         CategoryDTO GetbyId(int id);
         Task Post(CategoryDTO model);
         public void Put(CategoryDTO model);
-        void SoftDelete(int id);
+        void SoftDelete(long id);
 
     }
 }

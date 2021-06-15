@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RepositoryLayer.Infrastructures;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,9 +24,9 @@ namespace RepositoryLayer.Repos
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
-        public IEnumerable<SubCategory> GetAll()
+        public IEnumerable<LookupDTO> GetAll()
         {
-            return Get();
+            return Get().Select(x=> new LookupDTO { Key = (int)  x.ID, Value = x.Name });
         }
 
         public async Task Post(SubCategoryDTO model)

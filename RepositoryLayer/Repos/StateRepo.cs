@@ -24,10 +24,11 @@ namespace RepositoryLayer.Repos
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
-       public IEnumerable<StateDTO> GetAll()
+       public IEnumerable<LookupDTO> GetAll()
         {
 
-            return Get().Where(x=> !x.IsDeleted).Select(x => new StateDTO { StateID = (int)x.StateID, StateName = x.StateName, CountryID = x.CountryID });
+            return Get().Where(x=> !x.IsDeleted).Select(x => 
+            new LookupDTO { Key = (int)x.StateID,  Value = x.StateName });
         }/*
         public IEnumerable<LookupDTO> GetAllasLookup()
         {
@@ -44,13 +45,12 @@ namespace RepositoryLayer.Repos
                 
             };
         }
-        public List<StateDTO> GetByCountryID(long id)
+        public List<LookupDTO> GetByCountryID(long id)
         {
-            var cat = GetWithCondition(x=>x.CountryID==id).Select(x=> new StateDTO
+            var cat = GetWithCondition(x=>x.CountryID==id).Select(x=> new LookupDTO
             {
-                StateName = x.StateName,
-                StateID = (int)x.StateID,
-                CountryID=x.CountryID 
+                Value = x.StateName,
+                Key = (int)x.StateID 
                 
             });
             return cat.ToList();

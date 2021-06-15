@@ -10,7 +10,7 @@ namespace RepositoryLayer.Infrastructures
    public interface ICityRepo : IRepositoryBase<LookUp_City>
     {
         //IEnumerable<LookupDTO> GetAllasLookup();
-        IEnumerable<CityDTO> GetAll();
+        IEnumerable<LookupDTO> GetAll();
         CityDTO GetbyId(long id);
         List<CityDTO> GetCityByState(long id);
         Task Post(CityDTO model);

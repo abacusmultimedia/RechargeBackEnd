@@ -14,7 +14,7 @@ namespace UnitOfWork
         IExtendedUsersRepo ExtendedUsersRepository { get; }
         IExtendedRolesRepo ExtendedRolesRepository { get; }
         IProjectsRepo ProjectsRepository { get; }
-        IProfile_BankingDetailsRepo profile_BankingDetailsRepo { get; } 
+        IProfile_BankingDetailsRepo profile_BankingDetailsRepo { get; }
         IProfile_BusinessInforRepo Profile_BusinessInforRepo { get; }
         IProfile_LegalRepo profile_LegalRepo { get; }
         IProfile_CardDetailsRepo cardDetailsRepo { get; }
@@ -25,9 +25,10 @@ namespace UnitOfWork
         IStateRepo StateRepo { get; }
         ICountryRepo CountryRepo { get; }
         ICityRepo CityRepo { get; }
-        ISecurity_QuestionRepo Security_QuestionRepo{ get; }
-        IType_Govt_IDRepo Type_Govt_IDRepo{ get; }
-
+        ISecurity_QuestionRepo Security_QuestionRepo { get; }
+        IType_Govt_IDRepo Type_Govt_IDRepo { get; }
+        ILedgerRepo LedgerRepo { get; }
+        ILedgerGroupRepo LedgerGroupRepo { get;}
         //ISecurity_QuestionRepo Security_Question{ get; }
         //IType_Govt_IDRepo Type_Govt_ID{ get; }
         

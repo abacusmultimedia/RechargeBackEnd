@@ -9,9 +9,10 @@ namespace RepositoryLayer.Infrastructures
 {
     public interface ILedgerGroupRepo : IRepositoryBase<Accounts_LedgerGroup>
     {
-        IEnumerable<Accounts_LedgerGroup> GetAll();
-        Task Post(LedgerDTO model);
-        void Put(LedgerDTO model);
+        IEnumerable<LookupDTO> GetAll();
+        Task Post(LedgerGroupDTO model);
+        void Put(LedgerGroupDTO model);
+        LedgerGroupDTO GetbyId(long id);
         void SoftDelete(int id);
     }
 }

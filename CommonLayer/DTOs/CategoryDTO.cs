@@ -6,7 +6,7 @@ namespace CommonLayer.DTOs
 {
    public class CategoryDTO
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public String CategoryName { get; set; }
     }
 }

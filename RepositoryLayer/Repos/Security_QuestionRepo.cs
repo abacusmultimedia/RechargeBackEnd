@@ -23,10 +23,10 @@ namespace RepositoryLayer.Repos
             _serviceProvider = serviceProvider;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
         }
-         public IEnumerable<SecurityQuestionDTO> GetAll()
+         public IEnumerable<LookupDTO> GetAll()
          {
 
-             return Get().Select(x => new SecurityQuestionDTO { Question_ID = (int)x.Question_ID, Question_Title = x.Question_Title });
+             return Get().Select(x => new LookupDTO { Key = (int)x.Question_ID, Value = x.Question_Title });
          }
         /*
          public IEnumerable<LookupDTO> GetAllasLookup()

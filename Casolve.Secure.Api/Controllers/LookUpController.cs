@@ -316,5 +316,79 @@ namespace Casolve.Secure.Api.Controllers
         }
 
         #endregion
+        #region Ledger
+        [HttpGet]
+        [Route("GetLedgerAsLookup")]
+        public async Task<BaseResponse> GetLedgerAsLookup()
+        {
+            return constructResponse(_unitOfWork.LedgerRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("LedgerPost")]
+        public async Task<BaseResponse> LedgerPost([FromBody] LedgerDTO model)
+        {
+            await _unitOfWork.LedgerRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("LedgerUpdate")]
+        public async Task<BaseResponse> LedgerUpdate([FromBody] LedgerDTO model)
+        {
+            _unitOfWork.LedgerRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("LedgerDelete/{id}")]
+        public async Task<BaseResponse> LedgerDelete(int id)
+        {
+            _unitOfWork.LedgerRepo.Delete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpPost]
+        [Route("LedgerbyId/{id}")]
+        public BaseResponse LedgerbyId(int id)
+        {
+            return constructResponse(_unitOfWork.LedgerRepo.GetbyId(id));
+        }
+        #endregion
+        #region LedgerGroup
+        [HttpGet]
+        [Route("GetLedgerGroupAsLookup")]
+        public async Task<BaseResponse> GetLedgerGroupAsLookup()
+        {
+            return constructResponse(_unitOfWork.LedgerGroupRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("LedgerGroupPost")]
+        public async Task<BaseResponse> LedgerGroupPost([FromBody] LedgerGroupDTO model)
+        {
+            await _unitOfWork.LedgerGroupRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("LedgerGroupUpdate")]
+        public async Task<BaseResponse> LedgerGroupUpdate([FromBody] LedgerGroupDTO model)
+        {
+            _unitOfWork.LedgerGroupRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("LedgerGroupDelete/{id}")]
+        public async Task<BaseResponse> LedgerGroupDelete(int id)
+        {
+            _unitOfWork.LedgerGroupRepo.Delete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpPost]
+        [Route("LedgerGroupbyId/{id}")]
+        public BaseResponse LedgerGroupbyId(int id)
+        {
+            return constructResponse(_unitOfWork.LedgerGroupRepo.GetbyId(id));
+        }
+        #endregion
     }
 }
