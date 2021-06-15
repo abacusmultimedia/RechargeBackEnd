@@ -14,6 +14,8 @@ namespace RepositoryLayer.Infrastructures
         CountryDTO GetbyId(long id);
         Task Post(CountryDTO model);
         public void Put(CountryDTO model);
+        IEnumerable<LookupDTO> GetAllasLookup();
         void SoftDelete(long id);
+
     }
 }

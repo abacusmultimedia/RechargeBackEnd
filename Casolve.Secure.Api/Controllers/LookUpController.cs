@@ -148,7 +148,7 @@ namespace Casolve.Secure.Api.Controllers
         {
             return constructResponse(_unitOfWork.StateRepo.GetbyId(id));
         }
-        [HttpPost]
+        [HttpGet]
         [Route("GetStatesByCountryId/{id}")]
         public BaseResponse GetStatebyId(long id)
         {
@@ -159,9 +159,9 @@ namespace Casolve.Secure.Api.Controllers
         #region Country
         [HttpGet]
         [Route("GetCountryAsLookup")]
-        public async Task<BaseResponse> GetCountryAsLookup()
+        public  BaseResponse GetCountryAsLookup()
         {
-            return constructResponse(_unitOfWork.CountryRepo.GetAll());
+            return constructResponse( _unitOfWork.CountryRepo.GetAllasLookup());
         }
 
         [HttpPost]

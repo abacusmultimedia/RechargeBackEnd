@@ -29,6 +29,12 @@ namespace RepositoryLayer.Repos
 
              return Get().Where(x=>!x.IsDeleted).Select(x => new CountryDTO { CountryID = (int)x.CountryID, CountryName = x.CountryName });
          }
+        public IEnumerable<LookupDTO> GetAllasLookup()
+        {
+
+            return Get().Where(x => !x.IsDeleted).Select(x => new LookupDTO { Key = (int)x.CountryID, Value = x.CountryName });
+        }
+
         /*
          public IEnumerable<LookupDTO> GetAllasLookup()
          {
