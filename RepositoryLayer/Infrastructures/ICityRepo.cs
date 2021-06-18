@@ -12,7 +12,7 @@ namespace RepositoryLayer.Infrastructures
         //IEnumerable<LookupDTO> GetAllasLookup();
         IEnumerable<LookupDTO> GetAll();
         CityDTO GetbyId(long id);
-        List<CityDTO> GetCityByState(long id);
+        List<LookupDTO> GetCityByState(long id);
         Task Post(CityDTO model);
         public void Put(CityDTO model);
         void SoftDelete(long id);

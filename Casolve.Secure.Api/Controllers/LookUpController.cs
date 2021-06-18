@@ -231,7 +231,7 @@ namespace Casolve.Secure.Api.Controllers
         {
             return constructResponse(_unitOfWork.CityRepo.GetbyId(id));
         }
-        [HttpPost]
+        [HttpGet]
         [Route("GetCityByStateID/{id}")]
         public BaseResponse GetCityByStateID(long id)
         {
