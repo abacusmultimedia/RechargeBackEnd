@@ -33,6 +33,9 @@ namespace UnitOfWork
         public IType_Govt_IDRepo Type_Govt_IDRepo => _serviceProvider.GetRequiredService<IType_Govt_IDRepo>();
         public ILedgerRepo LedgerRepo => _serviceProvider.GetRequiredService<ILedgerRepo>();
         public ILedgerGroupRepo LedgerGroupRepo => _serviceProvider.GetRequiredService<ILedgerGroupRepo>();
+        public IPartners_EmployeesRepo Partners_EmployeesRepo => _serviceProvider.GetRequiredService<IPartners_EmployeesRepo>();
+
+        
         public UnitOfWork(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;

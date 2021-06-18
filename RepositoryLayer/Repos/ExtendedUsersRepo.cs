@@ -28,7 +28,9 @@ namespace RepositoryLayer.Repos
         private readonly IProfile_BusinessInforRepo _BusinessInforRepo;
         private readonly IProfile_CardDetailsRepo _CardDetailsRepo;
         private readonly IProfile_LegalRepo _LegalRepo;
+        //private readonly IPartners_EmployeesRepo _PartnersEmployeesRepo;
         public ExtendedUsersRepo(IServiceProvider serviceProvider,
+            //IPartners_EmployeesRepo partnersEmployeesRepo,
             IProfile_BusinessInforRepo businessInforRepo,
             IProfile_LegalRepo legalRepo,
             IProfile_CardDetailsRepo cardDetailsRepo,
@@ -39,6 +41,7 @@ namespace RepositoryLayer.Repos
             _BusinessInforRepo = businessInforRepo;
             _CardDetailsRepo = cardDetailsRepo;
             _LegalRepo = legalRepo;
+            //_PartnersEmployeesRepo = partnersEmployeesRepo;
 
             _serviceProvider = serviceProvider;
             //  _mapper = _serviceProvider.GetRequiredService<IMapper>();
@@ -366,6 +369,7 @@ namespace RepositoryLayer.Repos
             await _userManager.UpdateAsync(userToUpdate);
         }
         #endregion
+
         #region PhysicalAddress
         public async Task<ProfilePhysicalAddressDTO> Stage2ProfilePhysicalAddressGet()
         {
@@ -395,6 +399,7 @@ namespace RepositoryLayer.Repos
             await _userManager.UpdateAsync(userToUpdate);
         }
         #endregion
+
         #region SecurityInfo
         public async Task<ProfileSecurityInfoDTO> Stage4ProfileSecurityInfoGet()
         {
@@ -457,6 +462,7 @@ namespace RepositoryLayer.Repos
 
         }
         #endregion
+
         private UserDTO CreateUserModel(ExtendedUser user, string role)
         {
             return new UserDTO()

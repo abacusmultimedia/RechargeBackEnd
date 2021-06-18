@@ -13,4 +13,11 @@ namespace EntityLayer.Entities
         [Column(TypeName = "nvarchar(200)")]
         public String Question_Title { get; set; }
     }
+    public class Lookup_Job_Title
+    {
+        [Key]
+        public int key { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string  Title { get; set; }
+    }
 } 
