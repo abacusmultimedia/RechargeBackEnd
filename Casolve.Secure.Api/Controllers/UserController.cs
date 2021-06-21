@@ -65,5 +65,20 @@ namespace Secure.Api.Controllers
             await _unitOfWork.ExtendedUsersRepository.Stage4ProfileSecurityInfoUpdate(model);
             return constructResponse(await _unitOfWork.Save());
         }
+
+        [HttpGet]
+        [Route("GetBankingDetails")]
+        public async Task<BaseResponse> GetBankingDetails()
+        {
+            return constructResponse(_unitOfWork.profile_BankingDetailsRepo.GetAll());
+        }
+    
+        [HttpPut]
+        [Route("UpdateBankingDetails")]
+        public async Task<BaseResponse> UpdateBankingDetails([FromBody] BankDetailsDTO model)
+        {
+            _unitOfWork.profile_BankingDetailsRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
     }
 }
