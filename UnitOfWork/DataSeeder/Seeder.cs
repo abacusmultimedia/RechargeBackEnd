@@ -55,8 +55,8 @@ namespace UnitOfWork.DataSeeder
 
                 foreach (var item in roles)
                     await _roleManager.CreateAsync(item);
+                AddLookups();
             }
-            AddLookups();
         }
         //private async Task AddFeatures()
         //{

@@ -17,7 +17,7 @@ namespace UnitOfWork
         IProfile_BankingDetailsRepo profile_BankingDetailsRepo { get; }
         IProfile_BusinessInforRepo Profile_BusinessInforRepo { get; }
         IProfile_LegalRepo profile_LegalRepo { get; }
-        IProfile_CardDetailsRepo cardDetailsRepo { get; }
+        IProfile_CardDetailsRepo CardDetailsRepo { get; }
         ICategoryRepo CategoryRepo { get; }
         ISubCategoryRepo SubCategoryRepo { get; }
         ITransactionRepo TransactionRepo { get; }
@@ -29,9 +29,10 @@ namespace UnitOfWork
         IType_Govt_IDRepo Type_Govt_IDRepo { get; }
         ILedgerRepo LedgerRepo { get; }
         ILedgerGroupRepo LedgerGroupRepo { get;}
+        ILoyalityMembership LoyalityMembership { get; }
         //ISecurity_QuestionRepo Security_Question{ get; }
         //IType_Govt_IDRepo Type_Govt_ID{ get; }
-        
+
 
         Task<bool> SaveChanges();
         Task<bool> Save();

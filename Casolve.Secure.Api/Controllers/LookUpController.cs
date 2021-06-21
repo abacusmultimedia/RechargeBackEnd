@@ -15,6 +15,45 @@ namespace Casolve.Secure.Api.Controllers
         {
 
         }
+        #region Membership
+        [HttpGet]
+        [Route("GetMembershipAsLookup")]
+        public async Task<BaseResponse> GetMembershipAsLookup()
+        {
+            return constructResponse(_unitOfWork.LoyalityMembership.GetAllasLookup());
+        }
+
+        [HttpPost]
+        [Route("MembershipPost")]
+        public async Task<BaseResponse> MembershipPost([FromBody] LoyalityMembershipDTO model)
+        {
+            await _unitOfWork.LoyalityMembership.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("MembershipUpdate")]
+        public async Task<BaseResponse> MembershipUpdate([FromBody] LoyalityMembershipDTO model)
+        {
+            _unitOfWork.LoyalityMembership.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("MembershipDelete/{id}")]
+        public async Task<BaseResponse> MembershipDelete(int id)
+        {
+            _unitOfWork.LoyalityMembership.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpGet]
+        [Route("GetMembershipbyId/{id}")]
+        public BaseResponse MembershipbyId(int id)
+        {
+            return constructResponse(_unitOfWork.LoyalityMembership.GetbyId(id));
+        }
+
+
+        #endregion
         #region Category
         [HttpGet]
         [Route("GetCategoryAsLookup")]

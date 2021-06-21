@@ -10,8 +10,8 @@ namespace RepositoryLayer.Infrastructures
     public interface IProfile_BankingDetailsRepo : IRepositoryBase<RC_Profile_BankingDetails>
     {
         IEnumerable<RC_Profile_BankingDetails> GetAll();
-        Task Post(BankDetails model);
-        void Put(BankDetails model);
+        Task Post(BankDetailsDTO model);
+        void Put(BankDetailsDTO model);
         void SoftDelete(int id);
         Task PostInitial(RC_Profile_BankingDetails entity);
         void PutInitial(signUpstage4DTO model);

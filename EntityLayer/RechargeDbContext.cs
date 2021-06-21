@@ -34,6 +34,7 @@ namespace EntityLayer
         public DbSet<LookUp_State> LookUp_State { get; set; }
         public DbSet<LookUp_Security_Question> LookUp_Security_Questions { get; set; }
         public DbSet<LookUp_Type_Of_Govt_ID> LookUp_Type_Of_Govt_IDs { get; set; }
+        public DbSet<RC_Profile_LoyalityMembership> RC_Profile_LoyalityMembership { get; set; }
 
 
 

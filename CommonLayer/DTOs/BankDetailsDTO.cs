@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CommonLayer.DTOs
 {
-    public class BankDetails
+    public class BankDetailsDTO
     {
         public int Id { get; set; }
         public string bank { get; set; }

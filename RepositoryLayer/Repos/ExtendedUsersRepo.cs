@@ -260,6 +260,60 @@ namespace RepositoryLayer.Repos
                     AccountManagId = "",
                 };
                 await _BusinessInforRepo.PostInitial(BusinessInfo_entity);
+                var Card_entity_unionpay = new RC_Profile_CardDetails()
+                {
+                     BillingAddress = "",
+                     Type=1,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = currentUser.Id,
+                    IsDeleted = false,
+                    UserID = currentUser.Id,
+                };
+
+                var Card_entity_alipay = new RC_Profile_CardDetails()
+                {
+                    BillingAddress = "",
+                    Type=4,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = currentUser.Id,
+                    IsDeleted = false,
+                    UserID = currentUser.Id,
+                };
+                var Card_entity_PayDome = new RC_Profile_CardDetails()
+                {
+                    BillingAddress = "",
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = currentUser.Id,
+                    IsDeleted = false,
+                    UserID = currentUser.Id,
+
+                };
+                var Card_entity_Visa = new RC_Profile_CardDetails()
+                {
+                    BillingAddress = "",
+                    Type=2,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = currentUser.Id,
+                    IsDeleted = false,
+                    UserID = currentUser.Id,
+
+                };
+                var Card_entity_PayPal = new RC_Profile_CardDetails()
+                {
+                    BillingAddress = "",
+                    Type=3,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = currentUser.Id,
+                    IsDeleted = false,
+                    UserID = currentUser.Id,
+
+                };
+                await _CardDetailsRepo.PostInitial(Card_entity_PayDome);
+                await _CardDetailsRepo.PostInitial(Card_entity_alipay);
+                await _CardDetailsRepo.PostInitial(Card_entity_unionpay);
+                await _CardDetailsRepo.PostInitial(Card_entity_PayPal);
+                await _CardDetailsRepo.PostInitial(Card_entity_Visa);
+
                 var loginDto = new LoginDTO()
                 {
                     Email = model.Email,

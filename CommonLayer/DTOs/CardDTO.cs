@@ -7,8 +7,8 @@ namespace CommonLayer.DTOs
 {
         public class CardDTO
     {
-        public int Id { get; set; }
-        public int Type { get; set; }
+        public long Id { get; set; }
+        public long Type { get; set; }
         public string CardHoldername { get; set; }
         public string CardNumber { get; set; }
         public string ExpirationDate { get; set; }

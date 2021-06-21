@@ -19,7 +19,7 @@ namespace UnitOfWork
         public IProfile_BankingDetailsRepo profile_BankingDetailsRepo => _serviceProvider.GetRequiredService<IProfile_BankingDetailsRepo>();
         public IProfile_BusinessInforRepo Profile_BusinessInforRepo => _serviceProvider.GetRequiredService<IProfile_BusinessInforRepo>();
         public IProfile_LegalRepo profile_LegalRepo => _serviceProvider.GetRequiredService<IProfile_LegalRepo>();
-        public IProfile_CardDetailsRepo cardDetailsRepo => _serviceProvider.GetRequiredService<IProfile_CardDetailsRepo>();
+        public IProfile_CardDetailsRepo CardDetailsRepo => _serviceProvider.GetRequiredService<IProfile_CardDetailsRepo>();
         public ICategoryRepo CategoryRepo => _serviceProvider.GetRequiredService<ICategoryRepo>();
         public ISubCategoryRepo SubCategoryRepo => _serviceProvider.GetRequiredService<ISubCategoryRepo>();
         public ITransactionRepo TransactionRepo => _serviceProvider.GetRequiredService<ITransactionRepo>();
@@ -33,6 +33,7 @@ namespace UnitOfWork
         public IType_Govt_IDRepo Type_Govt_IDRepo => _serviceProvider.GetRequiredService<IType_Govt_IDRepo>();
         public ILedgerRepo LedgerRepo => _serviceProvider.GetRequiredService<ILedgerRepo>();
         public ILedgerGroupRepo LedgerGroupRepo => _serviceProvider.GetRequiredService<ILedgerGroupRepo>();
+        public ILoyalityMembership LoyalityMembership => _serviceProvider.GetRequiredService<ILoyalityMembership>();
         public UnitOfWork(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;

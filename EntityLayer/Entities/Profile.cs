@@ -83,6 +83,14 @@ namespace EntityLayer.Entities
         [ForeignKey("CountryPhotoIdIssuer")]
         public virtual LookUp_Country CountryPhotoIssuer { get; set; }
     }
+
+    [Table("rc_profile_loyalityMembership")]
+    public class RC_Profile_LoyalityMembership : BaseEntity
+    {
+        public long Id { get; set; }
+        [Column(TypeName = "nvarchar(500)")]
+        public string MembershipName { get; set; }
+    }
     [Table("rc_profile_category")]
     public class Category  : BaseEntity
     {

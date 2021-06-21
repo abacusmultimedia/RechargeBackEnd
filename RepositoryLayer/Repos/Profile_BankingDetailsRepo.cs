@@ -29,7 +29,7 @@ namespace RepositoryLayer.Repos
             return Get();
         }
 
-        public async Task Post(BankDetails model)
+        public async Task Post(BankDetailsDTO model)
         {
 
             var entity = new RC_Profile_BankingDetails()
@@ -67,7 +67,7 @@ namespace RepositoryLayer.Repos
             }
         }
 
-            public void Put(BankDetails model)
+            public void Put(BankDetailsDTO model)
             {
                 var entity = GetById(model.Id);
                 if (entity != null)
@@ -84,8 +84,6 @@ namespace RepositoryLayer.Repos
                     Put(entity);
                 }
             }
-
-
             public void SoftDelete(int id)
             {
                 GetById(id).IsDeleted = true;
