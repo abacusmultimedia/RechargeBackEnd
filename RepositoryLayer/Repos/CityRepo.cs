@@ -43,13 +43,12 @@ namespace RepositoryLayer.Repos
                 CityID = (int)cat.CityID
             };
         }
-        public List<CityDTO> GetCityByState(long id)
+        public List<LookupDTO> GetCityByState(long id)
         {
-            var cat = GetWithCondition(x=>x.StateID==id).Select(x => new CityDTO 
+            var cat = GetWithCondition(x=>x.StateID==id).Select(x => new LookupDTO
             {
-                CityName = x.CityName,
-                CityID = (long)x.CityID,
-                StateID=(long)x.StateID
+                Value = x.CityName,
+                Key = (int)x.CityID
             });
             return cat.ToList();
         }

@@ -32,6 +32,7 @@ namespace UnitOfWork
         ILoyalityMembership LoyalityMembership { get; }
         //ISecurity_QuestionRepo Security_Question{ get; }
         //IType_Govt_IDRepo Type_Govt_ID{ get; }
+        IPartners_EmployeesRepo Partners_EmployeesRepo { get; } 
 
 
         Task<bool> SaveChanges();

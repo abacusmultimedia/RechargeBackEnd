@@ -29,7 +29,7 @@ namespace Secure.Api.Controllers
         /// <summary>
         /// //  two forms with same name Business information to update // put data 
         /// </summary> 
-        [HttpPost]
+        [HttpPut]
         [Route("UpdateBusinessProfile")]
         public async Task<BaseResponse> BusinessProfile([FromBody] ProfileBusinessInfoDTO model)
         {
@@ -58,7 +58,7 @@ namespace Secure.Api.Controllers
         {
             return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage4ProfileSecurityInfoGet());
         }
-        [HttpPost]
+        [HttpPut]
         [Route("UpdateProfileSecurityInfoUpdate")]
         public async Task<BaseResponse> UpdateProfileSecurityInfoUpdate([FromBody] ProfileSecurityInfoDTO model)
         {

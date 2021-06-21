@@ -84,7 +84,7 @@ namespace Casolve.Secure.Api.Controllers
             return constructResponse(await _unitOfWork.Save());
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("CategoryIdPost/{id}")]
         public BaseResponse CategorybyId(int id)
         {
@@ -122,7 +122,7 @@ namespace Casolve.Secure.Api.Controllers
             return constructResponse(await _unitOfWork.Save());
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("SubCategoryIdPost/{id}")]
         public BaseResponse SubCategorybyId(int id)
         {
@@ -181,7 +181,7 @@ namespace Casolve.Secure.Api.Controllers
             return constructResponse(await _unitOfWork.Save());
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("StateIdPost/{id}")]
         public BaseResponse StatebyId(int id)
         {
@@ -225,7 +225,7 @@ namespace Casolve.Secure.Api.Controllers
             return constructResponse(await _unitOfWork.Save());
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("CountryIdPost/{id}")]
         public BaseResponse CountrybyId(int id)
         {
@@ -270,7 +270,7 @@ namespace Casolve.Secure.Api.Controllers
         {
             return constructResponse(_unitOfWork.CityRepo.GetbyId(id));
         }
-        [HttpPost]
+        [HttpGet]
         [Route("GetCityByStateID/{id}")]
         public BaseResponse GetCityByStateID(long id)
         {
@@ -307,7 +307,7 @@ namespace Casolve.Secure.Api.Controllers
             return constructResponse(await _unitOfWork.Save());
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("SecurityQuestionIdPost/{id}")]
         public BaseResponse SecurityQuestionbyId(int id)
         {
@@ -347,7 +347,7 @@ namespace Casolve.Secure.Api.Controllers
             return constructResponse(await _unitOfWork.Save());
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("TypeOfGovtIDbyIdPost/{id}")]
         public BaseResponse TypeOfGovtIDbyId(int id)
         {

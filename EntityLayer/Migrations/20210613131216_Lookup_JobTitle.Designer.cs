@@ -3,14 +3,16 @@ using System;
 using EntityLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityLayer.Migrations
 {
     [DbContext(typeof(RechargeDbContext))]
-    partial class RechargeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210613131216_Lookup_JobTitle")]
+    partial class Lookup_JobTitle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -896,35 +898,6 @@ namespace EntityLayer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("RC_Profile_Legal");
-                });
-
-            modelBuilder.Entity("EntityLayer.Entities.RC_Profile_LoyalityMembership", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("MembershipName")
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("rc_profile_loyalityMembership");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.SBI_Features", b =>

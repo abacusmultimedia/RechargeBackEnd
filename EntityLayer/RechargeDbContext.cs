@@ -28,8 +28,9 @@ namespace EntityLayer
         public DbSet<Accounts_LedgerGroup> Accounts_LedgerGroup { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
-
+        public DbSet<RC_Partners_Employees> RC_Partners_Employees { get; set; }
         public DbSet<LookUp_City> LookUp_City { get; set; }
+        public DbSet<Lookup_Job_Title> Lookup_Job_Title { get; set; }
         public DbSet<LookUp_Country> LookUp_Country { get; set; }
         public DbSet<LookUp_State> LookUp_State { get; set; }
         public DbSet<LookUp_Security_Question> LookUp_Security_Questions { get; set; }

@@ -3,14 +3,16 @@ using System;
 using EntityLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityLayer.Migrations
 {
     [DbContext(typeof(RechargeDbContext))]
-    partial class RechargeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210613125951_PartnerEmployees")]
+    partial class PartnerEmployees
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -422,6 +424,20 @@ namespace EntityLayer.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("EntityLayer.Entities.Job_Title", b =>
+                {
+                    b.Property<int>("key")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("key");
+
+                    b.ToTable("Job_Title");
+                });
+
             modelBuilder.Entity("EntityLayer.Entities.Login", b =>
                 {
                     b.Property<int>("Id")
@@ -613,20 +629,6 @@ namespace EntityLayer.Migrations
                     b.HasKey("Type_Govt_ID");
 
                     b.ToTable("LookUp_Type_Of_Govt_IDs");
-                });
-
-            modelBuilder.Entity("EntityLayer.Entities.Lookup_Job_Title", b =>
-                {
-                    b.Property<int>("key")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("key");
-
-                    b.ToTable("Lookup_Job_Title");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.RC_Partners_Employees", b =>
@@ -896,35 +898,6 @@ namespace EntityLayer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("RC_Profile_Legal");
-                });
-
-            modelBuilder.Entity("EntityLayer.Entities.RC_Profile_LoyalityMembership", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("MembershipName")
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("rc_profile_loyalityMembership");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.SBI_Features", b =>
@@ -1233,7 +1206,7 @@ namespace EntityLayer.Migrations
                         .WithMany()
                         .HasForeignKey("EmployerId");
 
-                    b.HasOne("EntityLayer.Entities.Lookup_Job_Title", "Job_Title")
+                    b.HasOne("EntityLayer.Entities.Job_Title", "Job_Title")
                         .WithMany()
                         .HasForeignKey("JobTitle")
                         .OnDelete(DeleteBehavior.Cascade)
