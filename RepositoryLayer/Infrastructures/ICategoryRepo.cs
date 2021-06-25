@@ -11,7 +11,7 @@ namespace RepositoryLayer.Infrastructures
     {
         IEnumerable<LookupDTO> GetAllasLookup();
         IEnumerable<LookupDTO> GetAll();
-        CategoryDTO GetbyId(int id);
+        CategoryDTO GetbyId(long id);
         Task Post(CategoryDTO model);
         public void Put(CategoryDTO model);
         void SoftDelete(long id);

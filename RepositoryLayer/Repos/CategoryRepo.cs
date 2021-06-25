@@ -34,7 +34,7 @@ namespace RepositoryLayer.Repos
 
             return Get().Select(x => new LookupDTO { Key = (int)x.ID, Value = x.Name });
         }
-        public CategoryDTO GetbyId(int id)
+        public CategoryDTO GetbyId(long id)
         {
             var cat = GetById(id);
             return new CategoryDTO { 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UnitOfWork;
 
-namespace Casolve.Secure.Api.Controllers
+namespace Secure.Api.Controllers
 {
     public class LookUpController : BaseController
     {
@@ -85,7 +85,7 @@ namespace Casolve.Secure.Api.Controllers
         }
 
         [HttpGet]
-        [Route("CategoryIdPost/{id}")]
+        [Route("GetCategoryId/{id}")]
         public BaseResponse CategorybyId(int id)
         {
             return constructResponse(_unitOfWork.CategoryRepo.GetbyId(id));
@@ -118,12 +118,12 @@ namespace Casolve.Secure.Api.Controllers
         [HttpDelete("SubCategoryDelete/{id}")]
         public async Task<BaseResponse> SubCategoryDelete(int id)
         {
-            _unitOfWork.SubCategoryRepo.Delete(id);
+            _unitOfWork.SubCategoryRepo.SoftDelete(id);
             return constructResponse(await _unitOfWork.Save());
         }
 
         [HttpGet]
-        [Route("SubCategoryIdPost/{id}")]
+        [Route("GetSubCategoryId/{id}")]
         public BaseResponse SubCategorybyId(int id)
         {
             return constructResponse(_unitOfWork.SubCategoryRepo.GetbyId(id));
@@ -182,7 +182,7 @@ namespace Casolve.Secure.Api.Controllers
         }
 
         [HttpGet]
-        [Route("StateIdPost/{id}")]
+        [Route("GetStateId/{id}")]
         public BaseResponse StatebyId(int id)
         {
             return constructResponse(_unitOfWork.StateRepo.GetbyId(id));
@@ -226,7 +226,7 @@ namespace Casolve.Secure.Api.Controllers
         }
 
         [HttpGet]
-        [Route("CountryIdPost/{id}")]
+        [Route("GetCountryId/{id}")]
         public BaseResponse CountrybyId(int id)
         {
             return constructResponse(_unitOfWork.CountryRepo.GetbyId(id));
@@ -264,8 +264,8 @@ namespace Casolve.Secure.Api.Controllers
             return constructResponse(await _unitOfWork.Save());
         }
 
-        [HttpPost]
-        [Route("CityIdPost/{id}")]
+        [HttpGet]
+        [Route("GetCityId/{id}")]
         public BaseResponse CitybyId(int id)
         {
             return constructResponse(_unitOfWork.CityRepo.GetbyId(id));
@@ -308,7 +308,7 @@ namespace Casolve.Secure.Api.Controllers
         }
 
         [HttpGet]
-        [Route("SecurityQuestionIdPost/{id}")]
+        [Route("GetSecurityQuestionId/{id}")]
         public BaseResponse SecurityQuestionbyId(int id)
         {
             return constructResponse(_unitOfWork.Security_QuestionRepo.GetbyId(id));
@@ -348,8 +348,8 @@ namespace Casolve.Secure.Api.Controllers
         }
 
         [HttpGet]
-        [Route("TypeOfGovtIDbyIdPost/{id}")]
-        public BaseResponse TypeOfGovtIDbyId(int id)
+        [Route("GetTypeOfGovtIDbyId/{id}")]
+        public BaseResponse TypeOfGovtIDbyId(long id)
         {
             return constructResponse(_unitOfWork.Type_Govt_IDRepo.GetbyId(id));
         }
@@ -381,12 +381,12 @@ namespace Casolve.Secure.Api.Controllers
         [HttpDelete("LedgerDelete/{id}")]
         public async Task<BaseResponse> LedgerDelete(int id)
         {
-            _unitOfWork.LedgerRepo.Delete(id);
+            _unitOfWork.LedgerRepo.SoftDelete(id);
             return constructResponse(await _unitOfWork.Save());
         }
 
-        [HttpPost]
-        [Route("LedgerbyId/{id}")]
+        [HttpGet]
+        [Route("GetLedgerbyId/{id}")]
         public BaseResponse LedgerbyId(int id)
         {
             return constructResponse(_unitOfWork.LedgerRepo.GetbyId(id));
@@ -416,14 +416,14 @@ namespace Casolve.Secure.Api.Controllers
         }
 
         [HttpDelete("LedgerGroupDelete/{id}")]
-        public async Task<BaseResponse> LedgerGroupDelete(int id)
+        public async Task<BaseResponse> LedgerGroupDelete(long id)
         {
-            _unitOfWork.LedgerGroupRepo.Delete(id);
+            _unitOfWork.LedgerGroupRepo.SoftDelete(id);
             return constructResponse(await _unitOfWork.Save());
         }
 
-        [HttpPost]
-        [Route("LedgerGroupbyId/{id}")]
+        [HttpGet]
+        [Route("GetLedgerGroupbyId/{id}")]
         public BaseResponse LedgerGroupbyId(int id)
         {
             return constructResponse(_unitOfWork.LedgerGroupRepo.GetbyId(id));

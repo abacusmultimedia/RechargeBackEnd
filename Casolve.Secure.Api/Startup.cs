@@ -1,5 +1,5 @@
 using AutoMapper;
-using Casolve.Secure.Api.Utilities;
+using Secure.Api.Utilities;
 using CommonLayer.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -17,7 +17,7 @@ using UnitOfWork.DIHelper;
 using static CommonLayer.Constants;
 using static EntityLayer.Helpers.ConnectionStringHelper;
 
-namespace SerajBI.Secure.Api
+namespace Secure.Api
 {
     public class Startup
     {

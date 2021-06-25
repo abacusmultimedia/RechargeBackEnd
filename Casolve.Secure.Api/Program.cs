@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace SerajBI.Secure.Api
+namespace  Secure.Api
 {
     public class Program
     {

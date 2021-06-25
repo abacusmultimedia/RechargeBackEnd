@@ -11,7 +11,7 @@ namespace RepositoryLayer.Infrastructures
     {
         //IEnumerable<LookupDTO> GetAllasLookup();
         IEnumerable<LookupDTO> GetAll();
-        Type_Of_Govt_IdDTO GetbyId(int id);
+        Type_Of_Govt_IdDTO GetbyId(long id);
         Task Post(Type_Of_Govt_IdDTO model);
         public void Put(Type_Of_Govt_IdDTO model);
         void SoftDelete(int id);

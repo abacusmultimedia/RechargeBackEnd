@@ -701,10 +701,10 @@ namespace RepositoryLayer.Repos
             {
                 SecurityAnswer1 = model.SecurityAnswer1,
                 SecurityAnswer2 = model.SecurityAnswer2,
-                SecurityAnswer3 = model.SecurityAnswer3,
+                //SecurityAnswer3 = model.SecurityAnswer3,
                 SecurityQuestion1 = model.SecurityQuestion1,
                 SecurityQuestion2 = model.SecurityQuestion2,
-                SecurityQuestion3 = model.SecurityQuestion3,
+             ///   SecurityQuestion3 = model.SecurityQuestion3,
                 countryIssueId = model.countryIssuingPhotoID,
                 GovtissuedID = model.govtPhotoIDNo,
                 GovtPhotoIDNo = model.uploadScannedCopyID

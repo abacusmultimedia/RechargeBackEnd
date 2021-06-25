@@ -25,7 +25,7 @@ namespace RepositoryLayer.Repos
         }
         public IEnumerable<LookupDTO> GetAll()
         {
-            return Get().Select(x => new LookupDTO { Key =(int) x.ID,  Value = x.UnderGroup });
+            return Get().Where(x=>!x.IsDeleted).Select(x => new LookupDTO { Key =(int) x.ID,  Value = x.UnderGroup });
         }
 
         public async Task Post(LedgerGroupDTO model)
@@ -59,7 +59,7 @@ namespace RepositoryLayer.Repos
 
             };
         }
-        public void SoftDelete(int id)
+        public void SoftDelete(long id)
         {
             GetById(id).IsDeleted = true;
         }

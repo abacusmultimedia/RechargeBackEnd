@@ -1,4 +1,4 @@
-﻿using Casolve.Secure.Api.Controllers;
+﻿using Secure.Api.Controllers;
 using CommonLayer.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -44,7 +44,7 @@ namespace Secure.Api.Controllers
             return constructResponse(await _unitOfWork.ExtendedUsersRepository.Stage2ProfilePhysicalAddressGet());
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("UpdatePhysicalAddress")]
         public async Task<BaseResponse> UpdatePhysicalAddress([FromBody] ProfilePhysicalAddressDTO model)
         {

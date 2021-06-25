@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using UnitOfWork;
 using static CommonLayer.Constants;
 
-namespace Casolve.Secure.Api.Controllers
+namespace Secure.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -33,7 +33,7 @@ namespace RepositoryLayer.Repos
 
             return Get().Select(x => new LookupDTO { Key = (int)x.ID, Value = x.Name });
         }*/
-        public Type_Of_Govt_IdDTO GetbyId(int id)
+        public Type_Of_Govt_IdDTO GetbyId(long id)
         {
             var cat = GetById(id);
             return new Type_Of_Govt_IdDTO

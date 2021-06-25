@@ -14,6 +14,7 @@ namespace CommonLayer.DTOs
         public string loyaltyMembership { get; set; }
         public string businessRegistrationNo { get; set; }
         public string businessDescription { get; set; }
+        public string URLIf { get; set; }
     }
     public class SignUPStage2PersonalDTO
     {
@@ -60,10 +61,10 @@ namespace CommonLayer.DTOs
         public string IdScannedCopy { get; set; }
         public int SecurityQuestion1 { get; set; }
         public int SecurityQuestion2 { get; set; }
-        public int SecurityQuestion3 { get; set; }
+      
         public string SecurityAnswer1 { get; set; }
         public string SecurityAnswer2 { get; set; }
-        public string SecurityAnswer3 { get; set; }
+     
         public string URLIf { get; set; }
 
     }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UnitOfWork;
 
-namespace Casolve.Secure.Api.Controllers
+namespace  Secure.Api.Controllers
 {
     public class ProjectsController : BaseController
     {

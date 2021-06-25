@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Casolve.Secure.Api.Utilities
+namespace Secure.Api.Utilities
 {
     public class ExceptionMiddleware
     {

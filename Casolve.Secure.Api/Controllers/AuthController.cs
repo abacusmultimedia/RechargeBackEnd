@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Infrastructures;
 using UnitOfWork;
 
-namespace Casolve.Secure.Api.Controllers
+namespace Secure.Api.Controllers
 {
     public class AuthController : BaseController
     {

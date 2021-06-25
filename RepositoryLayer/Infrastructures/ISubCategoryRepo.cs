@@ -12,7 +12,7 @@ namespace RepositoryLayer.Infrastructures
         IEnumerable<LookupDTO> GetAll();
         Task Post(SubCategoryDTO model);
         void Put(SubCategoryDTO model);
-        void SoftDelete(int id);
+        void SoftDelete(long id);
         SubCategoryDTO GetbyId(int id);
 }
 }

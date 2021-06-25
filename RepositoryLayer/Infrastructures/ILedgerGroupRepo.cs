@@ -13,6 +13,6 @@ namespace RepositoryLayer.Infrastructures
         Task Post(LedgerGroupDTO model);
         void Put(LedgerGroupDTO model);
         LedgerGroupDTO GetbyId(long id);
-        void SoftDelete(int id);
+        void SoftDelete(long id);
     }
 }
