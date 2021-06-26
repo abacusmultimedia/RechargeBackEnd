@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using static EntityLayer.Entities.Payroll;
 
 namespace EntityLayer.Entities
 {
@@ -20,6 +21,8 @@ namespace EntityLayer.Entities
         public string EmployerId { get; set; }
         [ForeignKey("EmployerId")]
         public virtual ExtendedUser Employeer { get; set; }
+
+        public virtual ICollection<EmployeeServices> EmployeeServices { get; set; }
 
     }
 }

@@ -429,5 +429,80 @@ namespace Secure.Api.Controllers
             return constructResponse(_unitOfWork.LedgerGroupRepo.GetbyId(id));
         }
         #endregion
+        #region Service
+        [HttpGet]
+        [Route("GetServiceAsLookup")]
+        public async Task<BaseResponse> GetServicesAsLookup()
+        {
+            return constructResponse(_unitOfWork.ServicesRepo.GetAllAsLookUp());
+        }
+
+        [HttpPost]
+        [Route("ServicesPost")]
+        public async Task<BaseResponse> ServicesPost([FromBody] ServicesDTO model)
+        {
+            await _unitOfWork.ServicesRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("ServicesUpdate")]
+        public async Task<BaseResponse> ServicesUpdate([FromBody] ServicesDTO model)
+        {
+            _unitOfWork.ServicesRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("ServicesDelete/{id}")]
+        public async Task<BaseResponse> ServicesDelete(long id)
+        {
+            _unitOfWork.ServicesRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpGet]
+        [Route("ServicesbyId/{id}")]
+        public BaseResponse ServicesbyId(int id)
+        {
+            return constructResponse(_unitOfWork.ServicesRepo.GetbyId(id));
+        }
+        #endregion
+        #region ServiceProvider
+        [HttpGet]
+        [Route("GetServiceProviderAsLookup")]
+        public async Task<BaseResponse> GetServiceProviderAsLookup()
+        {
+            return constructResponse(_unitOfWork.Service_ProviderRepo.GetAllAsLookUp());
+        }
+
+        [HttpPost]
+        [Route("ServiceProviderPost")]
+        public async Task<BaseResponse> ServiceProviderPost([FromBody] ServicesProviderDTO model)
+        {
+            await _unitOfWork.Service_ProviderRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("ServiceProviderbyIdUpdate")]
+        public async Task<BaseResponse> ServiceProviderbyIdUpdate([FromBody] ServicesProviderDTO model)
+        {
+            _unitOfWork.Service_ProviderRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("ServiceProviderDelete/{id}")]
+        public async Task<BaseResponse> ServiceProviderDelete(long id)
+        {
+            _unitOfWork.Service_ProviderRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpGet]
+        [Route("ServiceProviderbyId/{id}")]
+        public BaseResponse ServiceProviderbyId(long id)
+        {
+            return constructResponse(_unitOfWork.Service_ProviderRepo.GetbyId(id));
+        }
+        #endregion
+
     }
 }

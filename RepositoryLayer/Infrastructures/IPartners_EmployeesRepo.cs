@@ -13,7 +13,8 @@ namespace RepositoryLayer.Infrastructures
         PartnersEmployeesDTO GetbyId(long id);
         Task Post(PartnersEmployeesDTO model);
         void Put(PartnersEmployeesDTO model);
-        public void SoftDelete(long id);
+        void SoftDelete(long id);
+        bool IsExist(long id);
 
     }
 }

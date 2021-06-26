@@ -76,5 +76,13 @@ namespace RepositoryLayer.Repos
         {
             GetById(id).IsDeleted = true;
         }
+
+        public bool IsExist(long id)
+        {
+            var userExist = Get().Where(s => s.ID == id).Count();
+            if (userExist == 0)
+                return false;
+            return true;
+        }
     }
 }

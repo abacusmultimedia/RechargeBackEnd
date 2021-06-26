@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
+using static EntityLayer.Entities.Payroll;
 using static EntityLayer.Helpers.ConnectionStringHelper;
 
 namespace EntityLayer
@@ -36,6 +37,11 @@ namespace EntityLayer
         public DbSet<LookUp_Security_Question> LookUp_Security_Questions { get; set; }
         public DbSet<LookUp_Type_Of_Govt_ID> LookUp_Type_Of_Govt_IDs { get; set; }
         public DbSet<RC_Profile_LoyalityMembership> RC_Profile_LoyalityMembership { get; set; }
+        public DbSet<RC_Payroll_ServiceProvider> RC_Payroll_ServiceProvider { get; set; }
+        public DbSet<RC_Payroll_Service> RC_Payroll_Service { get; set; }
+        public DbSet<EmployeeServices> EmployeeServices { get; set; }
+        
+
 
 
 

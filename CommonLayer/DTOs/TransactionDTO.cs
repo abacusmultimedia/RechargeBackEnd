@@ -21,6 +21,7 @@ namespace CommonLayer.DTOs
         public long ParentTransacatoinID { get; set; }
         public long DrLedger { get; set; }
         public long CrLedger { get; set; }
+        public string ConsumerNumber { get; set; }
     }
 
     public class ParentTransactionDTO

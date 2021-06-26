@@ -44,5 +44,12 @@ namespace Secure.Api.Controllers
             _unitOfWork.Partners_EmployeesRepo.SoftDelete(id);
             return constructResponse(await _unitOfWork.Save());
         }
+
+        [HttpGet]
+        [Route("GetEmployeeExist")]
+        public async Task<BaseResponse> GetEmployeeExist(long id)
+        {
+            return constructResponse(_unitOfWork.Partners_EmployeesRepo.IsExist(id));
+        }
     }
 }

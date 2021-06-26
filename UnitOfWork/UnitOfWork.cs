@@ -35,8 +35,10 @@ namespace UnitOfWork
         public ILedgerGroupRepo LedgerGroupRepo => _serviceProvider.GetRequiredService<ILedgerGroupRepo>();
         public ILoyalityMembership LoyalityMembership => _serviceProvider.GetRequiredService<ILoyalityMembership>();
         public IPartners_EmployeesRepo Partners_EmployeesRepo => _serviceProvider.GetRequiredService<IPartners_EmployeesRepo>();
-
+        public IServicesRepo ServicesRepo => _serviceProvider.GetRequiredService<IServicesRepo>();
+       public IService_ProviderRepo Service_ProviderRepo => _serviceProvider.GetRequiredService<IService_ProviderRepo>();
         
+
         public UnitOfWork(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
