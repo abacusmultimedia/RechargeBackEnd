@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
@@ -9,6 +10,7 @@ namespace EntityLayer.Entities
     {
         public class EmployeeServices : BaseEntity
         {
+            [Key]
             public long EmployeeServiceId { get; set; }
             public long EmployeeId { get; set; }
             public long ServiveId { get; set; }

@@ -51,7 +51,8 @@ namespace UnitOfWork.DIHelper
             services.AddScoped<ISecurity_QuestionRepo, Security_QuestionRepo>();
             services.AddScoped<IType_Govt_IDRepo, Type_Of_Govt_IDRepo>();
             services.AddScoped<IPartners_EmployeesRepo, PartnersEmployeesRepo>();
-       
+            services.AddScoped<IService_ProviderRepo, Service_ProviderRepo>();
+            services.AddScoped<IServicesRepo, ServicesRepo>();
             services.AddScoped<ILoyalityMembership, LoyalityMembershipRepo>();
             //services.AddScoped<ICityRepo, CityRepo>();
 
