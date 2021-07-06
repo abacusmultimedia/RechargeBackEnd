@@ -40,7 +40,9 @@ namespace EntityLayer
         public DbSet<RC_Payroll_ServiceProvider> RC_Payroll_ServiceProvider { get; set; }
         public DbSet<RC_Payroll_Service> RC_Payroll_Service { get; set; }
         public DbSet<EmployeeServices> EmployeeServices { get; set; }
-        
+        public DbSet<Form> Forms { get; set; }
+        public DbSet<Fields> Fields { get; set; }
+        public DbSet<Options> Options { get; set; }
 
 
 

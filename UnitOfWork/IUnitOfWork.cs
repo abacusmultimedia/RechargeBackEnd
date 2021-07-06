@@ -35,8 +35,10 @@ namespace UnitOfWork
         IPartners_EmployeesRepo Partners_EmployeesRepo { get; }
         IServicesRepo ServicesRepo { get; }
         IService_ProviderRepo Service_ProviderRepo { get; }
-
-
+        IConfigurationRepo ConfigurationRepo { get; }
+        IFormRepo FormRepo { get; }
+        IFieldsRepo FieldsRepo { get; }
+        IOptionRepo OptionRepo { get; }
         Task<bool> SaveChanges();
         Task<bool> Save();
     }

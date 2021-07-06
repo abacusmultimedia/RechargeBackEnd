@@ -54,11 +54,10 @@ namespace UnitOfWork.DIHelper
             services.AddScoped<IService_ProviderRepo, Service_ProviderRepo>();
             services.AddScoped<IServicesRepo, ServicesRepo>();
             services.AddScoped<ILoyalityMembership, LoyalityMembershipRepo>();
-            //services.AddScoped<ICityRepo, CityRepo>();
-
-
-
-
+            services.AddScoped<IConfigurationRepo, ConfigurationRepo>();
+            services.AddScoped<IFormRepo, FormRepo>();
+            services.AddScoped<IFieldsRepo, FieldsRepo>();
+            services.AddScoped<IOptionRepo, OptionRepo>();
             //services.AddScoped<>
             //Unit Of Work
             services.AddTransient<Seeder>();
