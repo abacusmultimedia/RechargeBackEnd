@@ -58,6 +58,7 @@ namespace UnitOfWork.DIHelper
             services.AddScoped<IFormRepo, FormRepo>();
             services.AddScoped<IFieldsRepo, FieldsRepo>();
             services.AddScoped<IOptionRepo, OptionRepo>();
+            services.AddScoped<IPaymentRepo, PaymentRepo>();
             //services.AddScoped<>
             //Unit Of Work
             services.AddTransient<Seeder>();

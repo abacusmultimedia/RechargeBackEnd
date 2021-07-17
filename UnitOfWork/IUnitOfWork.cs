@@ -39,6 +39,7 @@ namespace UnitOfWork
         IFormRepo FormRepo { get; }
         IFieldsRepo FieldsRepo { get; }
         IOptionRepo OptionRepo { get; }
+        IPaymentRepo PaymentRepo { get; }
         Task<bool> SaveChanges();
         Task<bool> Save();
     }
