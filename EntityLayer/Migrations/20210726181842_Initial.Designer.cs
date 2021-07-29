@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityLayer.Migrations
 {
     [DbContext(typeof(RechargeDbContext))]
-    [Migration("20210706142620_AdvertisementData")]
-    partial class AdvertisementData
+    [Migration("20210726181842_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -766,6 +766,9 @@ namespace EntityLayer.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("EmployeeConsumerNo")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<long>("EmployeeId")
                         .HasColumnType("bigint");

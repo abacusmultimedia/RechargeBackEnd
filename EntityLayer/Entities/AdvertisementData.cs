@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EntityLayer.Entities
 {
-   public class AdvertisementData : BaseEntity
+   public class AdvertisementData : BaseEntity 
     {
         public long Id { get; set; }
         public long OptionID { get; set; }

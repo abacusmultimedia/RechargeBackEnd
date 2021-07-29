@@ -39,15 +39,21 @@ namespace RepositoryLayer.Repos
             var entity = GetById(id);
             return new FieldsDTO
             {
-                FieldsName = entity.FieldsName,
+                Id = entity.Id,
                 Order = entity.Order,
-                PlaceHolder = entity.PlaceHolder,
-                isRequired = entity.isRequired,
-                ColSpan = entity.ColSpan,
-                isDisabled = entity.isDisabled,
                 TypeID = entity.TypeID,
                 FormID = entity.FormID,
-                Id = entity.Id
+                ColSpan = entity.ColSpan,
+                isDisabled = entity.isDisabled,
+                FieldsName = entity.FieldsName,
+                isRequired = entity.isRequired,
+                PlaceHolder = entity.PlaceHolder,
+                Options = entity.Options.Select(x => new OptionsDTO {
+                    Title = x.Title,
+                    FieldID = x.FieldID,
+                    isDisabled = x.isDisabled,
+                    Order = x.Order
+                }).OrderBy(e => e.Order).ToList(),
             };
         }
 

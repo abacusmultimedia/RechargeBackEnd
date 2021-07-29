@@ -41,6 +41,7 @@ namespace UnitOfWork
         public IFormRepo FormRepo => _serviceProvider.GetRequiredService<IFormRepo>();
         public IFieldsRepo FieldsRepo => _serviceProvider.GetRequiredService<IFieldsRepo>();
         public IOptionRepo OptionRepo => _serviceProvider.GetRequiredService<IOptionRepo>();
+        public IEmployeeServiceRepo EmployeeService => _serviceProvider.GetRequiredService<IEmployeeServiceRepo>();
         public UnitOfWork(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;

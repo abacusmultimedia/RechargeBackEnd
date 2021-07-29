@@ -11,6 +11,7 @@ namespace RepositoryLayer.Infrastructures
     {
         IEnumerable<OptionsDTO> GetAll();
         OptionsDTO GetbyId(long id);
+        List<OptionsDTO> GetOptionsByFieldId(long Id);
         Task Post(OptionsDTO model);
         void Put(OptionsDTO model);
         void SoftDelete(long id);

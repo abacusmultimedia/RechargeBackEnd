@@ -117,6 +117,12 @@ namespace Secure.Api.Controllers
         {
             return constructResponse(_unitOfWork.OptionRepo.GetbyId(id));
         }
+        [HttpGet]
+        [Route("GetOptionsbyFieldId/{id}")]
+        public BaseResponse GetOptionsbyFieldId(long id)
+        {
+            return constructResponse(_unitOfWork.OptionRepo.GetOptionsByFieldId(id));
+        }
         #endregion
     }
 }

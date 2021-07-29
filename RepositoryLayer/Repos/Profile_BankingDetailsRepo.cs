@@ -35,12 +35,12 @@ namespace RepositoryLayer.Repos
             var entity = new RC_Profile_BankingDetails()
             {
                 BnakName = model.Bank,
+                CreatedDate = DateTime.Now,
                 BranchCode = model.BranchCode,
                 AccountNumber = model.AccountNo,
-                AccountHolderName = model.AccountHolderName,
                 UserID = Utils.GetUserId(_serviceProvider),
+                AccountHolderName = model.AccountHolderName,
                 CreatedBy = Utils.GetUserId(_serviceProvider),
-                CreatedDate = DateTime.Now
 
             };
             await Post(entity);
@@ -55,40 +55,40 @@ namespace RepositoryLayer.Repos
             var entity = GetWithCondition(e => e.UserID == Utils.GetUserId(_serviceProvider)).FirstOrDefault();
             if (entity != null)
             {
+                entity.IsDeleted = false;
                 entity.BnakName = model.Bank;
+                entity.ModifiedDate = DateTime.Now;
                 entity.BranchCode = model.BranchCode;
                 entity.AccountNumber = model.AccountNumber;
                 entity.AccountHolderName = model.AccountHolderName;
                 entity.UserID = Utils.GetUserId(_serviceProvider);
                 entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
-                entity.ModifiedDate = DateTime.Now;
-                entity.IsDeleted = false;
                 Put(entity);
             }
         }
 
-            public void Put(BankDetailsDTO model)
+        public void Put(BankDetailsDTO model)
+        {
+            var entity = GetById(model.Id);
+            if (entity != null)
             {
-                var entity = GetById(model.Id);
-                if (entity != null)
-                {
-                    entity.BnakName = model.Bank;
-                    entity.BranchCode = model.BranchCode;
-                    entity.AccountNumber = model.AccountNo;
-                    entity.AccountHolderName = model.AccountHolderName;
-                    entity.UserID = Utils.GetUserId(_serviceProvider);
-                    entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
-                    entity.ModifiedDate = DateTime.Now;
-                    entity.IsDeleted = false;
+                entity.IsDeleted = false;
+                entity.BnakName = model.Bank;
+                entity.ModifiedDate = DateTime.Now;
+                entity.BranchCode = model.BranchCode;
+                entity.AccountNumber = model.AccountNo;
+                entity.AccountHolderName = model.AccountHolderName;
+                entity.UserID = Utils.GetUserId(_serviceProvider);
+                entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
 
-                    Put(entity);
-                }
+                Put(entity);
             }
-            public void SoftDelete(int id)
-            {
-                GetById(id).IsDeleted = true;
-            }
-
-
         }
+        public void SoftDelete(int id)
+        {
+            GetById(id).IsDeleted = true;
+        }
+
+
     }
+}

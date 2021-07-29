@@ -765,6 +765,9 @@ namespace EntityLayer.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("EmployeeConsumerNo")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<long>("EmployeeId")
                         .HasColumnType("bigint");
 

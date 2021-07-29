@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.Repos
 {
-   public class FormRepo : RepositoryBase<Form>, IFormRepo
+    public class FormRepo : RepositoryBase<Form>, IFormRepo
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMapper _mapper;
@@ -34,7 +34,7 @@ namespace RepositoryLayer.Repos
 
                  return Get().Select(x => new LookupDTO { Key = (int)x.ID, Value = x.Name });
              }*/
-        
+
         public FormDTO GetbyId(long id)
         {
             var cat = GetById(id);
@@ -53,11 +53,54 @@ namespace RepositoryLayer.Repos
                 Title = model.Title,
                 IsDeleted = false,
                 Order = model.Order,
+                Fields = mapFilds(model.Fields),
                 CreatedBy = Utils.GetUserId(_serviceProvider),
                 CreatedDate = DateTime.Now,
             };
             await Post(entity);
         }
+        private List<Fields> mapFilds(List<FieldsDTO> listofFileds)
+        {
+            List<Fields> mappedResponse = new List<Fields>();
+            foreach (var item in listofFileds)
+            {
+                Fields temp = new Fields()
+                {
+                    FieldsName = item.FieldsName,
+                    ColSpan = item.ColSpan,
+                    isDisabled = item.isDisabled,
+                    IsDeleted = false,
+                    TypeID = item.TypeID,
+                    isRequired = item.isRequired,
+                    CreatedDate = DateTime.UtcNow,
+                    PlaceHolder = item.PlaceHolder,
+                    Options = mapOptons(item.Options),
+                    CreatedBy = Utils.GetUserId(_serviceProvider),
+                };
+                mappedResponse.Add(temp);
+            }
+
+            return mappedResponse;
+        }
+        private List<Options> mapOptons(List<OptionsDTO> listOfOptions)
+        {
+            var responseList = new List<Options>();
+            foreach (var item in listOfOptions)
+            {
+                var temp = new Options()
+                {
+                    Order = item.Order,
+                    Title = item.Title,
+                    IsDeleted = item.isDisabled,
+                    isDisabled = item.isDisabled,
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedBy = Utils.GetUserId(_serviceProvider),
+                };
+                responseList.Add(temp);
+            }
+            return responseList;
+        }
+
         public void Put(FormDTO model)
         {
             var entity = GetById(model.Id);

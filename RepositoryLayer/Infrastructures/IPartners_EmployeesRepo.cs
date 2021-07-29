@@ -12,6 +12,7 @@ namespace RepositoryLayer.Infrastructures
         IEnumerable<PartnersEmployeesDTO> GetAll();
         PartnersEmployeesDTO GetbyId(long id);
         Task Post(PartnersEmployeesDTO model);
+        Task PostWithService(EmployeewithServicesDTO employeewithServicesDTO);
         void Put(PartnersEmployeesDTO model);
         void SoftDelete(long id);
         bool IsExist(long id);

@@ -43,6 +43,17 @@ namespace RepositoryLayer.Repos
                 Id = entity.Id
             };
         }
+        public List<OptionsDTO> GetOptionsByFieldId(long Id)
+        {
+            var entity = GetWithCondition(x => x.FieldID == Id).Select(x => new OptionsDTO
+            {
+                FieldID = x.FieldID,
+                Order = x.Order,
+                isDisabled = x.isDisabled
+
+            });
+            return entity.ToList();
+        }
         public async Task Post(OptionsDTO model)
         {
 
@@ -50,6 +61,7 @@ namespace RepositoryLayer.Repos
             {
                 Title = model.Title,
                 Order = model.Order,
+             
                 CreatedBy = Utils.GetUserId(_serviceProvider),
                 CreatedDate = DateTime.Now,
             };

@@ -52,6 +52,7 @@ namespace Secure.Api
                         ValidIssuer = JWTConfiguration.JWTIssuer,
                         ValidAudience = JWTConfiguration.JWTAudience,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JWTConfiguration.JWTKey))
+                        
                     };
                 });
 

@@ -16,7 +16,6 @@ namespace CommonLayer.DTOs
             errorMessage = string.Empty;
             errorStackTrace = string.Empty;
         }
-
         public int statusCode { get; set; }
         public string message { get; set; }
         public bool isSuccessfull { get; set; }

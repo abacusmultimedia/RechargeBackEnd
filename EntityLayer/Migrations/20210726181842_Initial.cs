@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EntityLayer.Migrations
 {
-    public partial class BusinessInfoUpdted : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -124,6 +124,25 @@ namespace EntityLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Forms",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    Order = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Forms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Login",
                 columns: table => new
                 {
@@ -163,6 +182,19 @@ namespace EntityLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Lookup_Job_Title",
+                columns: table => new
+                {
+                    key = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(type: "nvarchar(200)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lookup_Job_Title", x => x.key);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LookUp_Security_Questions",
                 columns: table => new
                 {
@@ -199,6 +231,45 @@ namespace EntityLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RC_Payroll_Service",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Type = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RC_Payroll_Service", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RC_Payroll_ServiceProvider",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    Type = table.Column<long>(nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Discription = table.Column<string>(type: "nvarchar(200)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RC_Payroll_ServiceProvider", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "rc_profile_category",
                 columns: table => new
                 {
@@ -215,6 +286,24 @@ namespace EntityLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_rc_profile_category", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "rc_profile_loyalityMembership",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    MembershipName = table.Column<string>(type: "nvarchar(500)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_rc_profile_loyalityMembership", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -429,7 +518,7 @@ namespace EntityLayer.Migrations
                     ModifiedBy = table.Column<string>(nullable: true),
                     ModifiedDate = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    Type = table.Column<int>(nullable: false),
+                    Type = table.Column<long>(nullable: false),
                     CardHoldername = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     CardNumber = table.Column<string>(nullable: true),
                     ExpirationDate = table.Column<string>(nullable: true),
@@ -444,38 +533,6 @@ namespace EntityLayer.Migrations
                     table.ForeignKey(
                         name: "FK_RC_Profile_CardDetails_AspNetUsers_UserID",
                         column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RC_Profile_Legal",
-                columns: table => new
-                {
-                    ID = table.Column<long>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    ModifiedBy = table.Column<string>(nullable: true),
-                    ModifiedDate = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    PhotoId = table.Column<string>(nullable: true),
-                    Country = table.Column<int>(nullable: false),
-                    PhotIDNumber = table.Column<string>(nullable: true),
-                    ImageURL = table.Column<string>(nullable: true),
-                    SecurityQuestion1 = table.Column<int>(nullable: false),
-                    SecurityQuestion2 = table.Column<int>(nullable: false),
-                    Answer1 = table.Column<string>(type: "nvarchar(200)", nullable: true),
-                    Answer2 = table.Column<string>(type: "nvarchar(200)", nullable: true),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RC_Profile_Legal", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_RC_Profile_Legal_AspNetUsers_UserId",
-                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -512,6 +569,37 @@ namespace EntityLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Fields",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    FieldsName = table.Column<string>(nullable: true),
+                    PlaceHolder = table.Column<string>(nullable: true),
+                    Order = table.Column<int>(nullable: false),
+                    isDisabled = table.Column<bool>(nullable: false),
+                    ColSpan = table.Column<int>(nullable: false),
+                    isRequired = table.Column<bool>(nullable: false),
+                    TypeID = table.Column<int>(nullable: false),
+                    FormID = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fields", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Fields_Forms_FormID",
+                        column: x => x.FormID,
+                        principalTable: "Forms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LookUp_State",
                 columns: table => new
                 {
@@ -533,6 +621,79 @@ namespace EntityLayer.Migrations
                         column: x => x.CountryID,
                         principalTable: "LookUp_Country",
                         principalColumn: "CountryID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RC_Profile_Legal",
+                columns: table => new
+                {
+                    ID = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    PhotoId = table.Column<string>(nullable: true),
+                    Country = table.Column<int>(nullable: false),
+                    PhotIDNumber = table.Column<string>(nullable: true),
+                    ImageURL = table.Column<string>(nullable: true),
+                    SecurityQuestion1 = table.Column<int>(nullable: false),
+                    SecurityQuestion2 = table.Column<int>(nullable: false),
+                    Answer1 = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Answer2 = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    CountryPhotoIdIssuer = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RC_Profile_Legal", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_RC_Profile_Legal_LookUp_Country_CountryPhotoIdIssuer",
+                        column: x => x.CountryPhotoIdIssuer,
+                        principalTable: "LookUp_Country",
+                        principalColumn: "CountryID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RC_Profile_Legal_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RC_Partners_Employees",
+                columns: table => new
+                {
+                    ID = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    F_Name = table.Column<string>(nullable: true),
+                    L_Name = table.Column<string>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    JobTitle = table.Column<int>(nullable: false),
+                    EmployerId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RC_Partners_Employees", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_RC_Partners_Employees_AspNetUsers_EmployerId",
+                        column: x => x.EmployerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RC_Partners_Employees_Lookup_Job_Title_JobTitle",
+                        column: x => x.JobTitle,
+                        principalTable: "Lookup_Job_Title",
+                        principalColumn: "key",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -607,6 +768,33 @@ namespace EntityLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Options",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    FieldID = table.Column<long>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Order = table.Column<int>(nullable: false),
+                    isDisabled = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Options", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Options_Fields_FieldID",
+                        column: x => x.FieldID,
+                        principalTable: "Fields",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LookUp_City",
                 columns: table => new
                 {
@@ -632,6 +820,48 @@ namespace EntityLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmployeeServices",
+                columns: table => new
+                {
+                    EmployeeServiceId = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    EmployeeId = table.Column<long>(nullable: false),
+                    ServiveId = table.Column<long>(nullable: false),
+                    ServiveProviderId = table.Column<long>(nullable: false),
+                    EmployeeConsumerNo = table.Column<string>(nullable: true),
+                    PaymentOption = table.Column<long>(nullable: false),
+                    ServiceAmount = table.Column<double>(nullable: false),
+                    PaymentDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeeServices", x => x.EmployeeServiceId);
+                    table.ForeignKey(
+                        name: "FK_EmployeeServices_RC_Partners_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "RC_Partners_Employees",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeeServices_RC_Payroll_Service_ServiveId",
+                        column: x => x.ServiveId,
+                        principalTable: "RC_Payroll_Service",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeeServices_RC_Payroll_ServiceProvider_ServiveProviderId",
+                        column: x => x.ServiveProviderId,
+                        principalTable: "RC_Payroll_ServiceProvider",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RC_Profile_BusinessInfor",
                 columns: table => new
                 {
@@ -653,6 +883,7 @@ namespace EntityLayer.Migrations
                     BusinessRegCertificateImg = table.Column<string>(nullable: true),
                     BusinessEmail = table.Column<string>(nullable: true),
                     BusinessRegNumber = table.Column<string>(nullable: true),
+                    AccountManagId = table.Column<string>(nullable: true),
                     UserID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -730,6 +961,26 @@ namespace EntityLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_EmployeeServices_EmployeeId",
+                table: "EmployeeServices",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeServices_ServiveId",
+                table: "EmployeeServices",
+                column: "ServiveId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeServices_ServiveProviderId",
+                table: "EmployeeServices",
+                column: "ServiveProviderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fields_FormID",
+                table: "Fields",
+                column: "FormID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LookUp_City_StateID",
                 table: "LookUp_City",
                 column: "StateID");
@@ -738,6 +989,21 @@ namespace EntityLayer.Migrations
                 name: "IX_LookUp_State_CountryID",
                 table: "LookUp_State",
                 column: "CountryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Options_FieldID",
+                table: "Options",
+                column: "FieldID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RC_Partners_Employees_EmployerId",
+                table: "RC_Partners_Employees",
+                column: "EmployerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RC_Partners_Employees_JobTitle",
+                table: "RC_Partners_Employees",
+                column: "JobTitle");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RC_Profile_BankingDetails_UserID",
@@ -758,6 +1024,11 @@ namespace EntityLayer.Migrations
                 name: "IX_RC_Profile_CardDetails_UserID",
                 table: "RC_Profile_CardDetails",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RC_Profile_Legal_CountryPhotoIdIssuer",
+                table: "RC_Profile_Legal",
+                column: "CountryPhotoIdIssuer");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RC_Profile_Legal_UserId",
@@ -796,6 +1067,9 @@ namespace EntityLayer.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "EmployeeServices");
+
+            migrationBuilder.DropTable(
                 name: "Login");
 
             migrationBuilder.DropTable(
@@ -808,6 +1082,9 @@ namespace EntityLayer.Migrations
                 name: "LookUp_Type_Of_Govt_IDs");
 
             migrationBuilder.DropTable(
+                name: "Options");
+
+            migrationBuilder.DropTable(
                 name: "RC_Profile_BankingDetails");
 
             migrationBuilder.DropTable(
@@ -818,6 +1095,9 @@ namespace EntityLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "RC_Profile_Legal");
+
+            migrationBuilder.DropTable(
+                name: "rc_profile_loyalityMembership");
 
             migrationBuilder.DropTable(
                 name: "SBI_Features");
@@ -838,19 +1118,37 @@ namespace EntityLayer.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "RC_Partners_Employees");
+
+            migrationBuilder.DropTable(
+                name: "RC_Payroll_Service");
+
+            migrationBuilder.DropTable(
+                name: "RC_Payroll_ServiceProvider");
+
+            migrationBuilder.DropTable(
                 name: "LookUp_State");
+
+            migrationBuilder.DropTable(
+                name: "Fields");
 
             migrationBuilder.DropTable(
                 name: "rc_profile_subcategory");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Accounts_LedgerGroup");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Lookup_Job_Title");
+
+            migrationBuilder.DropTable(
                 name: "LookUp_Country");
+
+            migrationBuilder.DropTable(
+                name: "Forms");
 
             migrationBuilder.DropTable(
                 name: "rc_profile_category");

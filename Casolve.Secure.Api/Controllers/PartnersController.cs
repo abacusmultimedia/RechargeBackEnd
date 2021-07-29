@@ -30,6 +30,13 @@ namespace Secure.Api.Controllers
             await _unitOfWork.Partners_EmployeesRepo.Post(model);
             return constructResponse(await _unitOfWork.Save());
         }
+        [HttpPost]
+        [Route("EmployeeServicesPost")]
+        public async Task<BaseResponse> EmployeeServicesPost([FromBody] EmployeewithServicesDTO model)
+        {
+            await _unitOfWork.Partners_EmployeesRepo.PostWithService(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
         [HttpPut]
         [Route("PartnersEmployeesUpdate")]
         public async Task<BaseResponse> PartnersEmployeesUpdate([FromBody] PartnersEmployeesDTO model)
@@ -51,5 +58,6 @@ namespace Secure.Api.Controllers
         {
             return constructResponse(_unitOfWork.Partners_EmployeesRepo.IsExist(id));
         }
+        
     }
 }

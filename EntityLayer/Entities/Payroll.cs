@@ -22,7 +22,7 @@ namespace EntityLayer.Entities
             public virtual RC_Payroll_ServiceProvider ServiceProvider { get; set; }
             [ForeignKey("ServiveId")]
             public virtual RC_Payroll_Service Service { get; set; }
-
+            public string EmployeeConsumerNo { get; set; }
             public long PaymentOption { get; set; }
             public double ServiceAmount { get; set; }
             public DateTime PaymentDate { get; set; }
