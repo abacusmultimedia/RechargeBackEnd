@@ -34,8 +34,8 @@ namespace RepositoryLayer.Repos
             new PartnersEmployeesDTO
             {
                 ID = x.ID,
-                F_Name = x.F_Name,
-                L_Name = x.L_Name,
+                FullName = x.F_Name,
+                //L_Name = x.L_Name,
                 ImageUrl = x.ImageUrl,
                 JobTitle = x.JobTitle
             });
@@ -45,8 +45,8 @@ namespace RepositoryLayer.Repos
             var partnersEmp = GetById(id);
             return new PartnersEmployeesDTO
             {
-                F_Name = partnersEmp.F_Name,
-                L_Name = partnersEmp.L_Name,
+                FullName = partnersEmp.F_Name,
+                //L_Name = partnersEmp.L_Name,
                 ImageUrl = partnersEmp.ImageUrl,
             };
         }
@@ -54,8 +54,8 @@ namespace RepositoryLayer.Repos
         {
             var entity = new RC_Partners_Employees()
             {
-                F_Name = model.F_Name,
-                L_Name = model.L_Name,
+                F_Name = model.FullName,
+                //L_Name = model.L_Name,
                 ImageUrl = model.ImageUrl,
                 JobTitle = model.JobTitle,
                 IsDeleted = false,
@@ -71,8 +71,8 @@ namespace RepositoryLayer.Repos
             var entity = new RC_Partners_Employees()
             {
                 IsDeleted = false,
-                F_Name = model.F_Name,
-                L_Name = model.L_Name,
+                F_Name = model.FullName,
+                //L_Name = model.L_Name,
                 ImageUrl = model.ImageUrl,
                 JobTitle = model.JobTitle,
                 CreatedDate = DateTime.Now,
@@ -111,8 +111,8 @@ namespace RepositoryLayer.Repos
             var entity = GetById(model.ID);
             if (entity != null)
             {
-                entity.F_Name = model.F_Name;
-                entity.L_Name = model.L_Name;
+                entity.F_Name = model.FullName;
+                //entity.L_Name = model.L_Name;
                 entity.ImageUrl = model.ImageUrl;
                 entity.ModifiedDate = DateTime.Now;
                 entity.ModifiedBy = Utils.GetUserId(_serviceProvider);

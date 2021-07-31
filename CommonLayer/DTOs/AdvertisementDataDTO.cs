@@ -4,6 +4,12 @@ using System.Text;
 
 namespace CommonLayer.DTOs
 {
+    public class AdvertisementDTO
+    {
+        public long Id { get; set; }
+        public string ImageUrl { get; set; }
+        public string Title { get; set; }
+    }
     public class AdvertisementDataDTO
     {
         public long Id { get; set; }

@@ -44,10 +44,7 @@ namespace EntityLayer
         public DbSet<Fields> Fields { get; set; }
         public DbSet<Options> Options { get; set; }
         public DbSet<RC_Payment> RC_Payment { get; set; }
-
-
-
-
+        public DbSet<Advertisement> Advertisements { get; set; }
 
         ////     public DbSet<SBI_Project> SBI_Project { get; set; }
 

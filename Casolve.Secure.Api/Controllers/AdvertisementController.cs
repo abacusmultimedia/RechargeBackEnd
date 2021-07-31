@@ -14,6 +14,40 @@ namespace Secure.Api.Controllers
         {
 
         }
+        #region Advertisement
+        [HttpGet]
+        [Route("GetAdvertisement")]
+        public async Task<BaseResponse> GetAdvertisement()
+        {
+            return constructResponse(_unitOfWork.AdvertisementRepo.GetAll());
+        }
+        [HttpPost]
+        [Route("AdvertisementPost")]
+        public async Task<BaseResponse> AdvertisementPost([FromBody] AdvertisementDTO model)
+        {
+            await _unitOfWork.AdvertisementRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("AdvertisementUpdate")]
+        public async Task<BaseResponse> AdvertisementUpdate([FromBody] AdvertisementDTO model)
+        {
+            _unitOfWork.AdvertisementRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpDelete("AdvertisementDelete/{id}")]
+        public async Task<BaseResponse> AdvertisementDelete(long id)
+        {
+            _unitOfWork.AdvertisementRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpGet]
+        [Route("AdvertisementbyId/{id}")]
+        public BaseResponse FormbyId(long id)
+        {
+            return constructResponse(_unitOfWork.AdvertisementRepo.GetbyId(id));
+        }
+        #endregion
         #region Form
         [HttpGet]
         [Route("GetForm")]

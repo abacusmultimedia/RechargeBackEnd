@@ -49,4 +49,14 @@ namespace EntityLayer.Entities
         public virtual Fields Field { get; set; }
 
     }
+
+    public class Advertisement : BaseEntity
+    {
+        public long Id { get; set; }
+        public string  ImageUrl { get; set; }
+        public string  Title { get; set; }
+
+    }
+
+
 }
