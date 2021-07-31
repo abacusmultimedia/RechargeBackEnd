@@ -40,6 +40,7 @@ namespace UnitOfWork
         IFieldsRepo FieldsRepo { get; }
         IOptionRepo OptionRepo { get; }
         IEmployeeServiceRepo EmployeeService { get; }
+        IPaymentRepo PaymentRepo { get; }
         Task<bool> SaveChanges();
         Task<bool> Save();
     }
