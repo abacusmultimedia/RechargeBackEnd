@@ -61,6 +61,7 @@ namespace UnitOfWork.DIHelper
             services.AddScoped<IEmployeeServiceRepo, EmployeeServiceRepo>();
             services.AddScoped<IPaymentRepo, PaymentRepo>();
             services.AddScoped<IAdvertisementRepo, AdvertisementRepo >();
+            services.AddScoped<IJobTitleRepo, JobTitleRepo>();
             //services.AddScoped<>
             //Unit Of Work
             services.AddTransient<Seeder>();

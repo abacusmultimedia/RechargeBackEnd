@@ -503,6 +503,42 @@ namespace Secure.Api.Controllers
             return constructResponse(_unitOfWork.Service_ProviderRepo.GetbyId(id));
         }
         #endregion
+        #region JobTitle
+        [HttpGet]
+        [Route("GetJobTitleAsLookup")]
+        public async Task<BaseResponse> GetJobTitleAsLookup()
+        {
+            return constructResponse(_unitOfWork.JobTitleRepo.GetAll());
+        }
 
+        [HttpPost]
+        [Route("JobTitlePost")]
+        public async Task<BaseResponse> JobTitlePost([FromBody] LookupDTO model)
+        {
+            await _unitOfWork.JobTitleRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("JobTitleUpdate")]
+        public async Task<BaseResponse> JobTitleUpdate([FromBody] LookupDTO model)
+        {
+            _unitOfWork.JobTitleRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("JobTitleDelete/{id}")]
+        public async Task<BaseResponse> JobTitleDelete(int id)
+        {
+            _unitOfWork.JobTitleRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpGet]
+        [Route("JobTitlebyId/{id}")]
+        public BaseResponse JobTitlebyId(int id)
+        {
+            return constructResponse(_unitOfWork.JobTitleRepo.GetbyId(id));
+        }
+        #endregion
     }
 }

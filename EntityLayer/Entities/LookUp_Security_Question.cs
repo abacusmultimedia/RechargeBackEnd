@@ -13,7 +13,7 @@ namespace EntityLayer.Entities
         [Column(TypeName = "nvarchar(200)")]
         public String Question_Title { get; set; }
     }
-    public class Lookup_Job_Title
+    public class Lookup_Job_Title : BaseEntity
     {
         [Key]
         public int key { get; set; }

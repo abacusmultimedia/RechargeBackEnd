@@ -44,6 +44,7 @@ namespace UnitOfWork
         public IEmployeeServiceRepo EmployeeService => _serviceProvider.GetRequiredService<IEmployeeServiceRepo>();
         public IPaymentRepo PaymentRepo => _serviceProvider.GetRequiredService<IPaymentRepo>();
         public IAdvertisementRepo AdvertisementRepo => _serviceProvider.GetRequiredService<IAdvertisementRepo>();
+        public IJobTitleRepo JobTitleRepo => _serviceProvider.GetRequiredService<IJobTitleRepo>();
         public UnitOfWork(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
