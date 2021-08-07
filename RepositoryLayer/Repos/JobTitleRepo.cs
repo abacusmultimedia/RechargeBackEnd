@@ -49,7 +49,7 @@ namespace RepositoryLayer.Repos
                 IsDeleted = false,
                 CreatedBy = Utils.GetUserId(_serviceProvider),
                 CreatedDate = DateTime.Now,
-
+               
             };
             await Post(entity);
         }

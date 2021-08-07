@@ -19,13 +19,15 @@ namespace RepositoryLayer.Repos
         private readonly IEmployeeServiceRepo _employeeServiceRepo;
         private readonly IServiceProvider _serviceProvider;
         private readonly IMapper _mapper;
+        private readonly IRewardRepo _RewardRepo;
         public PartnersEmployeesRepo(IServiceProvider serviceProvider,
             IEmployeeServiceRepo employeeServiceRepo, IExtendedUsersRepo extendedUsersRepo,
-            RechargeDbContext context) : base(context)
+            RechargeDbContext context,IRewardRepo rewardRepo) : base(context)
         {
             _serviceProvider = serviceProvider;
             _employeeServiceRepo = employeeServiceRepo;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
+            _RewardRepo = rewardRepo;
 
         }
         public IEnumerable<PartnersEmployeesDTO> GetAll()
@@ -79,8 +81,17 @@ namespace RepositoryLayer.Repos
                 CreatedBy = Utils.GetUserId(_serviceProvider),
                 EmployerId = Utils.GetUserId(_serviceProvider),
                 EmployeeServices = MappServices(employeewithServicesDTO.Services)
+               
             };
-            await Post(entity, true); 
+            var modell = employeewithServicesDTO.Reward;
+            await Post(entity, true);
+            var Rewards = new RewardDTO()
+            {
+                EmployeeId = entity.ID,
+                Membership=modell.Membership,
+                MembershipNumber=modell.MembershipNumber
+            };
+            await _RewardRepo.PostReward(Rewards);
         }
         private   List<EmployeeServices>  MappServices(List<EmployeeServicesDTO> model)
         {

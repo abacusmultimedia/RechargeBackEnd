@@ -43,6 +43,7 @@ namespace UnitOfWork
         IPaymentRepo PaymentRepo { get; }
         IAdvertisementRepo AdvertisementRepo { get; }
         IJobTitleRepo JobTitleRepo { get; }
+        IRewardRepo RewardRepo { get; }
         Task<bool> SaveChanges();
         Task<bool> Save();
     }
