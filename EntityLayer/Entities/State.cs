@@ -28,7 +28,7 @@ namespace EntityLayer.Entities
         public long StateID { get; set; }
         [ForeignKey("StateID")]
         public virtual LookUp_State States { get; set; }
-
+        
     }
     public class LookUp_Country : BaseEntity
     {

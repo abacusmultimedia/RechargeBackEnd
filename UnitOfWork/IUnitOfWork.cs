@@ -44,6 +44,8 @@ namespace UnitOfWork
         IAdvertisementRepo AdvertisementRepo { get; }
         IJobTitleRepo JobTitleRepo { get; }
         IRewardRepo RewardRepo { get; }
+        IServiceTypeRepo ServiceTypeRepo { get; }
+        IServiceProviderTypeRepo ServiceProviderTypeRepo { get; }
         Task<bool> SaveChanges();
         Task<bool> Save();
     }

@@ -46,6 +46,8 @@ namespace EntityLayer
         public DbSet<RC_Payment> RC_Payment { get; set; }
         public DbSet<Advertisement> Advertisements { get; set; }
         public DbSet<Reward> Rewards { get; set; }
+        public DbSet<RC_Payroll_Service_Type> Service_Type { get; set; }
+        public DbSet<RC_Payroll_ServiceProvider_Type> Service_Provider_Type { get; set; }
 
         ////     public DbSet<SBI_Project> SBI_Project { get; set; }
 

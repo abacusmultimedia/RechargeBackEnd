@@ -3,14 +3,16 @@ using System;
 using EntityLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityLayer.Migrations
 {
     [DbContext(typeof(RechargeDbContext))]
-    partial class RechargeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210814075612_ServicesTypes")]
+    partial class ServicesTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -950,7 +952,7 @@ namespace EntityLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Service_Provider_Type");
+                    b.ToTable("ServiceProvider");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.Payroll+RC_Payroll_Service_Type", b =>

@@ -34,6 +34,9 @@ namespace EntityLayer.Entities
             [Column(TypeName = "nvarchar(200)")]
             public string Title { get; set; }
             public long Type { get; set; }
+            [ForeignKey("Type")]
+            public virtual RC_Payroll_Service_Type Payroll_Service_Type { get; set; }
+
         }
         public class RC_Payroll_ServiceProvider : BaseEntity
         {
@@ -43,7 +46,21 @@ namespace EntityLayer.Entities
             public string Title { get; set; }
             [Column(TypeName = "nvarchar(200)")]
             public string Discription { get; set; }
-        }
+            [ForeignKey("Type")]
+            public virtual RC_Payroll_ServiceProvider_Type Payroll_ServiceProvider_Type { get; set; }
 
+        }
+        public class RC_Payroll_Service_Type : BaseEntity
+        {
+            public long Id { get; set; }
+            public string Name { get; set; }
+            public virtual ICollection<RC_Payroll_Service> RC_Payroll_Services { get; set; }
+        }
+        public class RC_Payroll_ServiceProvider_Type : BaseEntity
+        {
+            public long Id { get; set; }
+            public string Name { get; set; }
+            public virtual ICollection<RC_Payroll_ServiceProvider> RC_Payroll_ServiceProviders { get; set; }
+        }
     }
 }

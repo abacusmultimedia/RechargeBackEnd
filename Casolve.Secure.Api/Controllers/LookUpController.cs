@@ -540,5 +540,79 @@ namespace Secure.Api.Controllers
             return constructResponse(_unitOfWork.JobTitleRepo.GetbyId(id));
         }
         #endregion
+        #region ServiceType
+        [HttpGet]
+        [Route("GetServiceTypeAsLookup")]
+        public async Task<BaseResponse> GetServiceTypeAsLookup()
+        {
+            return constructResponse(_unitOfWork.ServiceTypeRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("ServiceTypePost")]
+        public async Task<BaseResponse> ServiceTypePost([FromBody] ServiceTypeDTO model)
+        {
+            await _unitOfWork.ServiceTypeRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("ServiceTypeUpdate")]
+        public async Task<BaseResponse> ServiceTypeUpdate([FromBody] ServiceTypeDTO model)
+        {
+            _unitOfWork.ServiceTypeRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("ServiceTypeDelete/{id}")]
+        public async Task<BaseResponse> ServiceTypeDelete(long id)
+        {
+            _unitOfWork.ServiceTypeRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpGet]
+        [Route("ServiceTypebyId/{id}")]
+        public BaseResponse ServiceTypebyId(long id)
+        {
+            return constructResponse(_unitOfWork.ServiceTypeRepo.GetbyId(id));
+        }
+        #endregion
+        #region ServiceProviderType
+        [HttpGet]
+        [Route("GetServiceProviderTypeAsLookup")]
+        public async Task<BaseResponse> GetServiceProviderTypeAsLookup()
+        {
+            return constructResponse(_unitOfWork.ServiceProviderTypeRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("ServiceProviderTypePost")]
+        public async Task<BaseResponse> ServiceProviderTypePost([FromBody] ServiceProviderTypeDTO model)
+        {
+            await _unitOfWork.ServiceProviderTypeRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("ServiceProviderTypeUpdate")]
+        public async Task<BaseResponse> ServiceProviderTypeUpdate([FromBody] ServiceProviderTypeDTO model)
+        {
+            _unitOfWork.ServiceProviderTypeRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("ServiceProviderTypeDelete/{id}")]
+        public async Task<BaseResponse> ServiceProviderTypeDelete(long id)
+        {
+            _unitOfWork.ServiceProviderTypeRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpGet]
+        [Route("ServiceProviderTypebyId/{id}")]
+        public BaseResponse ServiceProviderTypebyId(long id)
+        {
+            return constructResponse(_unitOfWork.ServiceProviderTypeRepo.GetbyId(id));
+        }
+        #endregion
     }
 }
