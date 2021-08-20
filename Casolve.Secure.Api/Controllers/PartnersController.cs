@@ -22,7 +22,6 @@ namespace Secure.Api.Controllers
         {
             return constructResponse(_unitOfWork.Partners_EmployeesRepo.GetAll());
         }
-
         [HttpPost]
         [Route("PartnersEmployeesPost")]
         public async Task<BaseResponse> PartnersEmployeesPost([FromBody] PartnersEmployeesDTO model)
@@ -58,43 +57,6 @@ namespace Secure.Api.Controllers
         {
             return constructResponse(_unitOfWork.Partners_EmployeesRepo.IsExist(id));
         }
-        #region Reward
-        [HttpGet]
-        [Route("GetReward")]
-        public async Task<BaseResponse> GetReward()
-        {
-            return constructResponse(_unitOfWork.RewardRepo.GetAllReward());
-        }
-
-        [HttpPost]
-        [Route("PostReward")]
-        public async Task<BaseResponse> RewardPost([FromBody] RewardDTO model)
-        {
-             await _unitOfWork.RewardRepo.PostReward(model);
-            return constructResponse(await _unitOfWork.Save());
-        }
-     
         
-        [HttpPut]
-        [Route("UpdateReward")]
-        public async Task<BaseResponse> UpdateReward([FromBody] RewardDTO model)
-        {
-            _unitOfWork.RewardRepo.Put(model);
-            return constructResponse(await _unitOfWork.Save());
-        }
-
-        [HttpDelete("DeleteReward/{id}")]
-        public async Task<BaseResponse> DeleteReward(long id)
-        {
-            _unitOfWork.RewardRepo.SoftDelete(id);
-            return constructResponse(await _unitOfWork.Save());
-        }
-        [HttpGet]
-        [Route("GetRewardById")]
-        public async Task<BaseResponse> GetRewardById(long id)
-        {
-            return constructResponse(_unitOfWork.RewardRepo.GetRewardbyId(id));
-        }
-        #endregion
     }
 }
