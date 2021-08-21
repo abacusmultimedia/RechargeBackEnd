@@ -9,7 +9,7 @@ namespace RepositoryLayer.Infrastructures
 {
    public interface IRewardRepo :IRepositoryBase<Reward>
     {
-        IEnumerable<RewardDTO> GetAllReward();
+        IEnumerable<LookupDTO> GetAllReward();
         RewardDTO GetRewardbyId(long id);
         Task PostReward(RewardDTO model);
         void Put(RewardDTO model);

@@ -22,18 +22,22 @@ namespace RepositoryLayer.Repos
             _serviceProvider = serviceProvider;
             
         }
-        public IEnumerable<RewardDTO> GetAllReward()
+        /*public IEnumerable<RewardDTO> GetAllReward()
         {
             return Get().Where(x => !x.IsDeleted).Select(x => new RewardDTO {Id=x.Id ,Membership = x.Membership, MembershipNumber = x.MembershipNumber });
+        }*/
+        public IEnumerable<LookupDTO> GetAllReward()
+        {
+
+            return Get().Where(x => !x.IsDeleted).Select(x =>
+             new LookupDTO { Key =(int)x.Id, Value = x.Membership });
         }
-        
         public RewardDTO GetRewardbyId(long id)
         {
             var cat = GetById(id);
             return new RewardDTO
             {
                 Id=cat.Id,
-                MembershipNumber = cat.MembershipNumber,
                 Membership=cat.Membership
             };
         }
