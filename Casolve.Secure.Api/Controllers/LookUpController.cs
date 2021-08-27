@@ -137,20 +137,7 @@ namespace Secure.Api.Controllers
         ///  Security Questions ID
 
         #endregion
-        //[HttpPost] 
-        //[Route("SubCategoryPost")]
-        //public async Task<BaseResponse> SubCategoryPost([FromBody] SubCategoryDTO model)
-        //{
-        //    return constructResponse(await _unitOfWork.ExtendedUsersRepository.SubCategoryPost(model));
-        //}
-
-        /* [HttpGet]
-         [AllowAnonymous]
-         [Route("ProjectType")]
-         public async Task<BaseResponse> GetRoleAsLookups()
-         {
-             return constructResponse(await _unitOfWork.ExtendedUsersRepository.Register());
-         }*/
+      
         #region State
         [HttpGet]
         [Route("GetStateAsLookup")]
@@ -314,9 +301,7 @@ namespace Secure.Api.Controllers
             return constructResponse(_unitOfWork.Security_QuestionRepo.GetbyId(id));
         }
 
-        #endregion
-
-        
+        #endregion 
         #region TypeGovtID
         [HttpGet]
         [Route("GetTypeOfGovtIDAsLookup")]
@@ -547,7 +532,6 @@ namespace Secure.Api.Controllers
         {
             return constructResponse(_unitOfWork.ServiceTypeRepo.GetAll());
         }
-
         [HttpPost]
         [Route("ServiceTypePost")]
         public async Task<BaseResponse> ServiceTypePost([FromBody] ServiceTypeDTO model)
@@ -615,13 +599,25 @@ namespace Secure.Api.Controllers
         }
         #endregion
         #region Reward
-        [HttpGet]
+        /*[HttpGet]
         [Route("GetReward")]
         public async Task<BaseResponse> GetReward()
         {
             return constructResponse(_unitOfWork.RewardRepo.GetAllReward());
+        }*/
+        [HttpGet]
+        [Route("GetReward")]
+        public async Task<BaseResponse> GetReward()
+        {
+            return constructResponse(_unitOfWork.RewardRepo.GetAll());
         }
 
+        [HttpGet]
+        [Route("GetRewardAsLookUp")]
+        public async Task<BaseResponse> GetRewardAsLookUp()
+        {
+            return constructResponse(_unitOfWork.RewardRepo.GetRewardAsLookUp());
+        }
         [HttpPost]
         [Route("PostReward")]
         public async Task<BaseResponse> RewardPost([FromBody] RewardDTO model)
