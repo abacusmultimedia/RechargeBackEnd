@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EntityLayer.Entities.Rewards;
 
 namespace RepositoryLayer.Repos
 {
@@ -51,6 +52,7 @@ namespace RepositoryLayer.Repos
                 RewardCheckBoxValue=model.RewardCheckBoxValue,
                 Membership = model.Membership,
                 MembershipNumber=model.MembershipNumber,
+                RewardId = model.RewardId,
                 IsDeleted = false,
                 CreatedBy = Utils.GetUserId(_serviceProvider),
                 CreatedDate = DateTime.Now,

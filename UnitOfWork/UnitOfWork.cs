@@ -49,6 +49,8 @@ namespace UnitOfWork
         public IServiceTypeRepo ServiceTypeRepo => _serviceProvider.GetRequiredService<IServiceTypeRepo>();
         public IServiceProviderTypeRepo ServiceProviderTypeRepo => _serviceProvider.GetRequiredService<IServiceProviderTypeRepo>();
 
+        public ILookupRewardRepo LookupRewardRepo => _serviceProvider.GetRequiredService<ILookupRewardRepo>();
+
         public UnitOfWork(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;

@@ -46,6 +46,7 @@ namespace UnitOfWork
         IRewardRepo RewardRepo { get; }
         IServiceTypeRepo ServiceTypeRepo { get; }
         IServiceProviderTypeRepo ServiceProviderTypeRepo { get; }
+        ILookupRewardRepo LookupRewardRepo { get; }
         Task<bool> SaveChanges();
         Task<bool> Save();
     }

@@ -1,4 +1,5 @@
-﻿using CommonLayer.Helpers;
+﻿using CommonLayer.DTOs;
+using CommonLayer.Helpers;
 using CommonLayer.Services.EmailService;
 using EntityLayer;
 using EntityLayer.Entities;
@@ -65,6 +66,8 @@ namespace UnitOfWork.DIHelper
             services.AddScoped<IRewardRepo, RewardRepo>();
             services.AddScoped<IServiceProviderTypeRepo, ServiceProviderTypeRepo>();
             services.AddScoped<IServiceTypeRepo, ServiceTypeRepo>();
+            services.AddScoped<ILookupRewardRepo, LookupRewardRepo>();
+
             //services.AddScoped<>
             //Unit Of Work
             services.AddTransient<Seeder>();

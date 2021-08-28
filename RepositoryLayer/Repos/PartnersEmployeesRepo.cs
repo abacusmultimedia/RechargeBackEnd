@@ -88,6 +88,7 @@ namespace RepositoryLayer.Repos
             var Rewards = new RewardDTO()
             {
                 EmployeeId = entity.ID,
+                RewardId = modell.RewardId,
                 Membership=modell.Membership,
                 MembershipNumber=modell.MembershipNumber
             };
@@ -134,7 +135,6 @@ namespace RepositoryLayer.Repos
         {
             GetById(id).IsDeleted = true;
         }
-
         public bool IsExist(long id)
         {
             var userExist = Get().Where(s => s.ID == id).Count();

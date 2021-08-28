@@ -598,13 +598,8 @@ namespace Secure.Api.Controllers
             return constructResponse(_unitOfWork.ServiceProviderTypeRepo.GetbyId(id));
         }
         #endregion
+
         #region Reward
-        /*[HttpGet]
-        [Route("GetReward")]
-        public async Task<BaseResponse> GetReward()
-        {
-            return constructResponse(_unitOfWork.RewardRepo.GetAllReward());
-        }*/
         [HttpGet]
         [Route("GetReward")]
         public async Task<BaseResponse> GetReward()
@@ -646,6 +641,44 @@ namespace Secure.Api.Controllers
         public async Task<BaseResponse> GetRewardById(long id)
         {
             return constructResponse(_unitOfWork.RewardRepo.GetRewardbyId(id));
+        }
+        #endregion
+
+        #region Lookup_Reward
+        [HttpGet]
+        [Route("GetAllRewardAsLookUp")]
+        public async Task<BaseResponse> GetAllRewardAsLookUp()
+        {
+            return constructResponse(_unitOfWork.LookupRewardRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("LookupRewardPost")]
+        public async Task<BaseResponse> LookupRewardPost([FromBody] LookupRewardDTO model)
+        {
+            await _unitOfWork.LookupRewardRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpPut]
+        [Route("LookupRewardUpdate")]
+        public async Task<BaseResponse> LookupRewardUpdate([FromBody] LookupRewardDTO model)
+        {
+            _unitOfWork.LookupRewardRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("LookupRewardDelete/{id}")]
+        public async Task<BaseResponse> LookupRewardDelete(long id)
+        {
+            _unitOfWork.LookupRewardRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpGet]
+        [Route("GetAllRewardbyId/{id}")]
+        public BaseResponse GetAllRewardbyId(int id)
+        {
+            return constructResponse(_unitOfWork.LookupRewardRepo.GetbyId(id));
         }
         #endregion
     }

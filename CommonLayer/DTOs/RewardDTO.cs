@@ -11,5 +11,6 @@ namespace CommonLayer.DTOs
         public string MembershipNumber { get; set; }
         public int RewardCheckBoxValue { get; set; }
         public long EmployeeId { get; set; }
+        public long RewardId { get; set; }
     }
 }

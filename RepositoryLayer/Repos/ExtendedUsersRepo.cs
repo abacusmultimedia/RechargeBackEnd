@@ -1,5 +1,4 @@
-﻿
-using CommonLayer;
+﻿using CommonLayer;
 using CommonLayer.DTOs;
 using CommonLayer.Helpers;
 using CommonLayer.Services.EmailService;
