@@ -12,6 +12,7 @@ namespace EntityLayer.Entities
         public int Question_ID { get; set; }
         [Column(TypeName = "nvarchar(200)")]
         public String Question_Title { get; set; }
+        public int Group { get; set; }
     }
     public class Lookup_Job_Title : BaseEntity
     {

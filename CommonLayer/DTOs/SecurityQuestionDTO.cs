@@ -8,5 +8,6 @@ namespace CommonLayer.DTOs
     {
         public int Question_ID { get; set; }
         public String Question_Title { get; set; }
+        public int Group { get; set; }
     }
 }
