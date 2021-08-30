@@ -238,8 +238,8 @@ namespace RepositoryLayer.Repos
                     PhotIDNumber = "",
                     IsDeleted = false,
                     User = currentUser,
-                    SecurityQuestion1 = 0,
-                    SecurityQuestion2 = 0,
+                    SecurityQuestion1 = null,
+                    SecurityQuestion2 = null,
                     CreatedDate = DateTime.Now,
                     CreatedBy = currentUser.Id,
                     CountryPhotoIdIssuer = 1,
@@ -338,7 +338,6 @@ namespace RepositoryLayer.Repos
 
         public async Task<bool> RegisterOld(RegisterDTO model)
         {
-
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
             var usr = await _userManager.FindByEmailAsync(model.Email);
             ExtendedUser newUser = new ExtendedUser()
@@ -541,28 +540,26 @@ namespace RepositoryLayer.Repos
                 };
                     list.Add(obj);
                 }
-                 //var k   =  list.Select(s => new {    s.Question_Title,  s.Group }) ;
                 return list;
             }
             return null;
         }
 
-        //public async Task<LookUp_Security_Question> ValidateSecurityQuestion(ProfileSecurityInfoDTO objProfileSecurityInfo)
-        //{
-        //    var userId = Utils.GetUserId(_serviceProvider);
-        //    var objSecurityQuestion = _LegalRepo.GetWithCondition(s => s.User.Id == userId 
-        //    && s.SecurityQuestion1==objProfileSecurityInfo.SecurityQuestion1 && s.SecurityQuestion2
-        //    ==objProfileSecurityInfo.SecurityQuestion2 && s.Answer1==objProfileSecurityInfo.Answer1
-        //    && s.Answer2==objProfileSecurityInfo.Answer2).FirstOrDefault();
-        //    var objQuestion = _SecurityQuestionRepo.GetWithCondition(x => x.Question_ID == objSecurityQuestion.SecurityQuestion1).FirstOrDefault();
+        public async Task<bool> ValidateSecurityQuestion(SecurityQuestionsDTO objSecurityQuestions)
+        {
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var objUser = await _userManager.FindByEmailAsync(objSecurityQuestions.Email);
+            var objSecurityQuestion = _LegalRepo.GetWithCondition(s => s.User.Id == objUser.Id
+            && s.SecurityQuestion1 == objSecurityQuestions.SecurityQuestion1 && s.SecurityQuestion2
+            == objSecurityQuestions.SecurityQuestion2 && s.Answer1 == objSecurityQuestions.Answer1
+            && s.Answer2 == objSecurityQuestions.Answer2).Count();
 
-        //    var obj = new LookUp_Security_Question()
-        //    {
-        //        Question_Title = objQuestion.Question_Title,
-        //        Group = objQuestion.Group,
-        //    };
-        //    return obj;
-        //}
+            if(objSecurityQuestion==0)
+            {
+                return false;
+            }
+            return true;
+        }
         #endregion
 
         private UserDTO CreateUserModel(ExtendedUser user, string role)

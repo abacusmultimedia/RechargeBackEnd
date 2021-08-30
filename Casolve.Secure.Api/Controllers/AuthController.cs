@@ -74,6 +74,13 @@ namespace Secure.Api.Controllers
         {
             return constructResponse(await _unitOfWork.ExtendedUsersRepository.SecurityQuestionGet(email));
         }
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("SecurityQuestionsValidation")]
+        public async Task<BaseResponse> SecurityQuestionsValidation([FromBody]SecurityQuestionsDTO model)
+        {
+            return constructResponse(await _unitOfWork.ExtendedUsersRepository.ValidateSecurityQuestion(model));
+        }
         #region Stages
 
         [HttpPost]

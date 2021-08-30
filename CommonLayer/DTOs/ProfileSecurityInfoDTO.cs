@@ -10,8 +10,8 @@ namespace CommonLayer.DTOs
         public long CountryIssuePhotoId { get; set; }
         public string GovtPhotoIdNumber { get; set; }
         public string AttachPhotoId { get; set; }
-        public int SecurityQuestion1 { get; set; }
-        public int SecurityQuestion2 { get; set; }
+        public int ?SecurityQuestion1 { get; set; }
+        public int ?SecurityQuestion2 { get; set; }
         public string Answer1 { get; set; }
         public string Answer2 { get; set; }
         public string Password { get; set; }

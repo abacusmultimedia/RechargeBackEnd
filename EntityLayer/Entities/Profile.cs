@@ -79,8 +79,8 @@ namespace EntityLayer.Entities
         //[ForeignKey("UserID")]
         public virtual ExtendedUser User { get; set; }
         public long CountryPhotoIdIssuer { get; set; }
-        public int SecurityQuestion1 { get; set; }
-        public int SecurityQuestion2 { get; set; }
+        public int ? SecurityQuestion1 { get; set; }
+        public int ? SecurityQuestion2 { get; set; }
         [ForeignKey("CountryPhotoIdIssuer")]
         public virtual LookUp_Country CountryPhotoIssuer { get; set; }
         [ForeignKey("SecurityQuestion1")]
