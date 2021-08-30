@@ -31,5 +31,6 @@ namespace RepositoryLayer.Infrastructures
         Task Stage2ProfilePhysicalAddressUpdate(ProfilePhysicalAddressDTO model);
         Task<ProfileSecurityInfoDTO> Stage4ProfileSecurityInfoGet();
         Task Stage4ProfileSecurityInfoUpdate(ProfileSecurityInfoDTO model);
+        Task<List<LookupDTO>> SecurityQuestionGet(string email);
     }
 }

@@ -67,7 +67,14 @@ namespace Secure.Api.Controllers
         {
             return constructResponse( _unitOfWork.ExtendedRolesRepository.GetRoles());
         }
-#region Stages
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetSecurityQuestion")]
+        public async Task<BaseResponse> GetSecurityQuestion(string email)
+        {
+            return constructResponse(await _unitOfWork.ExtendedUsersRepository.SecurityQuestionGet(email));
+        }
+        #region Stages
 
         [HttpPost]
         [Route("Stage2BusinessDTOPost")]

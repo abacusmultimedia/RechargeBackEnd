@@ -27,12 +27,14 @@ namespace RepositoryLayer.Repos
         private readonly IProfile_BusinessInforRepo _BusinessInforRepo;
         private readonly IProfile_CardDetailsRepo _CardDetailsRepo;
         private readonly IProfile_LegalRepo _LegalRepo;
+        private readonly ISecurity_QuestionRepo _SecurityQuestionRepo;
         //private readonly IPartners_EmployeesRepo _PartnersEmployeesRepo;
         public ExtendedUsersRepo(IServiceProvider serviceProvider,
             //IPartners_EmployeesRepo partnersEmployeesRepo,
             IProfile_BusinessInforRepo businessInforRepo,
             IProfile_LegalRepo legalRepo,
             IProfile_CardDetailsRepo cardDetailsRepo,
+            ISecurity_QuestionRepo SecurityQuestionRepo,
             IProfile_BankingDetailsRepo bankingDetailsRepo, RechargeDbContext
             context) : base(context)
         {
@@ -40,6 +42,7 @@ namespace RepositoryLayer.Repos
             _BusinessInforRepo = businessInforRepo;
             _CardDetailsRepo = cardDetailsRepo;
             _LegalRepo = legalRepo;
+            _SecurityQuestionRepo = SecurityQuestionRepo;
             //_PartnersEmployeesRepo = partnersEmployeesRepo;
 
             _serviceProvider = serviceProvider;
@@ -514,6 +517,52 @@ namespace RepositoryLayer.Repos
 
 
         }
+        #endregion
+
+        #region ValidationSecurityQuestion
+        public async Task<List<LookupDTO>> SecurityQuestionGet(string email)
+        {
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var userExist = await _userManager.FindByEmailAsync(email);
+
+            if (userExist != null)
+            {
+                var objSecurityQuestion = _LegalRepo.GetWithCondition(s => s.User.Id == userExist.Id).FirstOrDefault();
+                var objQuestion = _SecurityQuestionRepo.GetWithCondition(x => x.Question_ID == objSecurityQuestion.SecurityQuestion1 || x.Question_ID == objSecurityQuestion.SecurityQuestion2).ToList();
+                
+                var list = new List<LookupDTO>();
+
+                foreach (var item in objQuestion)
+                {
+                var obj = new LookupDTO()
+                {
+                    Value= item.Question_Title,
+                    Key = item.Group,
+                };
+                    list.Add(obj);
+                }
+                 //var k   =  list.Select(s => new {    s.Question_Title,  s.Group }) ;
+                return list;
+            }
+            return null;
+        }
+
+        //public async Task<LookUp_Security_Question> ValidateSecurityQuestion(ProfileSecurityInfoDTO objProfileSecurityInfo)
+        //{
+        //    var userId = Utils.GetUserId(_serviceProvider);
+        //    var objSecurityQuestion = _LegalRepo.GetWithCondition(s => s.User.Id == userId 
+        //    && s.SecurityQuestion1==objProfileSecurityInfo.SecurityQuestion1 && s.SecurityQuestion2
+        //    ==objProfileSecurityInfo.SecurityQuestion2 && s.Answer1==objProfileSecurityInfo.Answer1
+        //    && s.Answer2==objProfileSecurityInfo.Answer2).FirstOrDefault();
+        //    var objQuestion = _SecurityQuestionRepo.GetWithCondition(x => x.Question_ID == objSecurityQuestion.SecurityQuestion1).FirstOrDefault();
+
+        //    var obj = new LookUp_Security_Question()
+        //    {
+        //        Question_Title = objQuestion.Question_Title,
+        //        Group = objQuestion.Group,
+        //    };
+        //    return obj;
+        //}
         #endregion
 
         private UserDTO CreateUserModel(ExtendedUser user, string role)

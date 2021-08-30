@@ -69,8 +69,7 @@ namespace EntityLayer.Entities
         public int Country { get; set; }
         public string PhotIDNumber { get; set; }
         public string ImageURL { get; set; } 
-        public int SecurityQuestion1 { get; set; } 
-        public int SecurityQuestion2 { get; set; }
+
         [Column(TypeName = "nvarchar(200)")]
         public string Answer1 { get; set; }
         [Column(TypeName = "nvarchar(200)")]
@@ -80,8 +79,14 @@ namespace EntityLayer.Entities
         //[ForeignKey("UserID")]
         public virtual ExtendedUser User { get; set; }
         public long CountryPhotoIdIssuer { get; set; }
+        public int SecurityQuestion1 { get; set; }
+        public int SecurityQuestion2 { get; set; }
         [ForeignKey("CountryPhotoIdIssuer")]
         public virtual LookUp_Country CountryPhotoIssuer { get; set; }
+        [ForeignKey("SecurityQuestion1")]
+        public virtual LookUp_Security_Question Security_Question_Id1 { get; set; }
+        [ForeignKey("SecurityQuestion2")]
+        public virtual LookUp_Security_Question Security_Question_Id2 { get; set; }
     }
 
     [Table("rc_profile_loyalityMembership")]
