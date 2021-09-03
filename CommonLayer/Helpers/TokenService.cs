@@ -19,7 +19,7 @@ namespace CommonLayer.Helpers
                 issuer: JWTConfiguration.JWTIssuer,
                 audience: JWTConfiguration.JWTAudience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(60),
+                expires: DateTime.Now.AddMinutes(1000),
                 signingCredentials: signinCredentials
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
