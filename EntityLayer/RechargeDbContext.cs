@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
+using static EntityLayer.Entities.Payment;
 using static EntityLayer.Entities.Payroll;
 using static EntityLayer.Entities.Rewards;
 using static EntityLayer.Helpers.ConnectionStringHelper;
@@ -50,6 +51,10 @@ namespace EntityLayer
         public DbSet<Lookup_Reward> Lookup_Reward { get; set; }
         public DbSet<RC_Payroll_Service_Type> Service_Type { get; set; }
         public DbSet<RC_Payroll_ServiceProvider_Type> Service_Provider_Type { get; set; }
+        public DbSet<LookUp_Bank> LookUp_Bank { get; set; }
+        public DbSet<LookUp_Frequency> LookUp_Frequency { get; set; }
+        public DbSet<LookUp_CardType> LookUp_CardType { get; set; }
+       
 
         ////     public DbSet<SBI_Project> SBI_Project { get; set; }
 

@@ -47,6 +47,9 @@ namespace UnitOfWork
         IServiceTypeRepo ServiceTypeRepo { get; }
         IServiceProviderTypeRepo ServiceProviderTypeRepo { get; }
         ILookupRewardRepo LookupRewardRepo { get; }
+        IFrequencyTypeRepo FrequencyTypeRepo { get; }
+        IBankTypeRepo BankTypeRepo { get; }
+        ICardTypeRepo CardTypeRepo { get; }
         Task<bool> SaveChanges();
         Task<bool> Save();
     }

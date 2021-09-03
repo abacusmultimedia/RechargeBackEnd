@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210831164913_LookUp_Bank_CardTypes_Frequency.cs" />
+    <Compile Remove="Migrations\20210831164913_LookUp_Bank_CardTypes_Frequency.Designer.cs" />
+    <Compile Remove="Migrations\20210901080332_LookUp_Bank_CardTypes_Frequency.cs" />
+    <Compile Remove="Migrations\20210901080332_LookUp_Bank_CardTypes_Frequency.Designer.cs" />
+    <Compile Remove="Migrations\20210901081821_LookUps_Bank_CardType_Frequency.cs" />
+    <Compile Remove="Migrations\20210901081821_LookUps_Bank_CardType_Frequency.Designer.cs" />
+    <Compile Remove="Migrations\20210901085606_LookUpBank_LookUpFrequency.cs" />
+    <Compile Remove="Migrations\20210901085606_LookUpBank_LookUpFrequency.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />

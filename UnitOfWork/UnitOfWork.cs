@@ -48,8 +48,11 @@ namespace UnitOfWork
         public IRewardRepo RewardRepo => _serviceProvider.GetRequiredService<IRewardRepo>();
         public IServiceTypeRepo ServiceTypeRepo => _serviceProvider.GetRequiredService<IServiceTypeRepo>();
         public IServiceProviderTypeRepo ServiceProviderTypeRepo => _serviceProvider.GetRequiredService<IServiceProviderTypeRepo>();
-
         public ILookupRewardRepo LookupRewardRepo => _serviceProvider.GetRequiredService<ILookupRewardRepo>();
+        public IFrequencyTypeRepo FrequencyTypeRepo => _serviceProvider.GetRequiredService<IFrequencyTypeRepo>();
+        public IBankTypeRepo BankTypeRepo => _serviceProvider.GetRequiredService<IBankTypeRepo>();
+        public ICardTypeRepo CardTypeRepo => _serviceProvider.GetRequiredService<ICardTypeRepo>();
+
 
         public UnitOfWork(IServiceProvider serviceProvider)
         {

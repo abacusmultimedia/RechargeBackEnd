@@ -6,7 +6,7 @@ namespace CommonLayer.DTOs
 {
     public class signUpstage4DTO
     {
-        public string Bank { get; set; }
+        public long ? BankID { get; set; }
         public string BranchCode { get; set; }
         public string AccountNumber { get; set; }
         public string AccountHolderName { get; set; }

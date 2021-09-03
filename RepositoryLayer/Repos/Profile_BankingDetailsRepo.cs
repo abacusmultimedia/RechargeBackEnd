@@ -31,23 +31,20 @@ namespace RepositoryLayer.Repos
 
         public async Task Post(BankDetailsDTO model)
         {
-
             var entity = new RC_Profile_BankingDetails()
             {
-                BnakName = model.Bank,
+                BankID = model.BankID,
                 CreatedDate = DateTime.Now,
                 BranchCode = model.BranchCode,
                 AccountNumber = model.AccountNo,
                 UserID = Utils.GetUserId(_serviceProvider),
                 AccountHolderName = model.AccountHolderName,
                 CreatedBy = Utils.GetUserId(_serviceProvider),
-
             };
             await Post(entity);
         }
         public async Task PostInitial(RC_Profile_BankingDetails entity)
         {
-
             await Post(entity, true);
         }
         public void PutInitial(signUpstage4DTO model)
@@ -56,7 +53,7 @@ namespace RepositoryLayer.Repos
             if (entity != null)
             {
                 entity.IsDeleted = false;
-                entity.BnakName = model.Bank;
+                entity.BankID = model.BankID;
                 entity.ModifiedDate = DateTime.Now;
                 entity.BranchCode = model.BranchCode;
                 entity.AccountNumber = model.AccountNumber;
@@ -73,7 +70,7 @@ namespace RepositoryLayer.Repos
             if (entity != null)
             {
                 entity.IsDeleted = false;
-                entity.BnakName = model.Bank;
+                entity.BankID = model.BankID;
                 entity.ModifiedDate = DateTime.Now;
                 entity.BranchCode = model.BranchCode;
                 entity.AccountNumber = model.AccountNo;
@@ -88,7 +85,5 @@ namespace RepositoryLayer.Repos
         {
             GetById(id).IsDeleted = true;
         }
-
-
     }
 }

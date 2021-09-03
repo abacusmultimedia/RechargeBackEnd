@@ -217,7 +217,7 @@ namespace RepositoryLayer.Repos
 
                 var entity = new RC_Profile_BankingDetails()
                 {
-                    BnakName = "",
+                    BankID = null,
                     BranchCode = "",
                     IsDeleted = false,
                     AccountNumber = "",
@@ -267,8 +267,8 @@ namespace RepositoryLayer.Repos
                 await _BusinessInforRepo.PostInitial(BusinessInfo_entity);
                 var Card_entity_unionpay = new RC_Profile_CardDetails()
                 {
-                     BillingAddress = "",
-                     Type=1,
+                    BillingAddress = "",
+                    CardTypeID =null,
                     CreatedDate = DateTime.Now,
                     CreatedBy = currentUser.Id,
                     IsDeleted = false,
@@ -278,7 +278,7 @@ namespace RepositoryLayer.Repos
                 var Card_entity_alipay = new RC_Profile_CardDetails()
                 {
                     BillingAddress = "",
-                    Type=4,
+                    CardTypeID=null,
                     CreatedDate = DateTime.Now,
                     CreatedBy = currentUser.Id,
                     IsDeleted = false,
@@ -287,6 +287,7 @@ namespace RepositoryLayer.Repos
                 var Card_entity_PayDome = new RC_Profile_CardDetails()
                 {
                     BillingAddress = "",
+                    CardTypeID = null,
                     CreatedDate = DateTime.Now,
                     CreatedBy = currentUser.Id,
                     IsDeleted = false,
@@ -296,7 +297,7 @@ namespace RepositoryLayer.Repos
                 var Card_entity_Visa = new RC_Profile_CardDetails()
                 {
                     BillingAddress = "",
-                    Type=2,
+                    CardTypeID = null,
                     CreatedDate = DateTime.Now,
                     CreatedBy = currentUser.Id,
                     IsDeleted = false,
@@ -306,7 +307,7 @@ namespace RepositoryLayer.Repos
                 var Card_entity_PayPal = new RC_Profile_CardDetails()
                 {
                     BillingAddress = "",
-                    Type=3,
+                    CardTypeID = null,
                     CreatedDate = DateTime.Now,
                     CreatedBy = currentUser.Id,
                     IsDeleted = false,
@@ -551,8 +552,9 @@ namespace RepositoryLayer.Repos
             var objUser = await _userManager.FindByEmailAsync(objSecurityQuestions.Email);
             var objSecurityQuestion = _LegalRepo.GetWithCondition(s => s.User.Id == objUser.Id
             && s.SecurityQuestion1 == objSecurityQuestions.SecurityQuestion1 && s.SecurityQuestion2
-            == objSecurityQuestions.SecurityQuestion2 && s.Answer1 == objSecurityQuestions.Answer1
-            && s.Answer2 == objSecurityQuestions.Answer2).Count();
+            == objSecurityQuestions.SecurityQuestion2 && (string.Equals(s.Answer1, objSecurityQuestions.Answer1, 
+            StringComparison.CurrentCultureIgnoreCase)) && (string.Equals(s.Answer2, objSecurityQuestions.Answer2, 
+            StringComparison.CurrentCultureIgnoreCase))).Count();
 
             if(objSecurityQuestion==0)
             {

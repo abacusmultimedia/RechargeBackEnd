@@ -31,10 +31,9 @@ namespace RepositoryLayer.Repos
 
         public async Task Post(CardDTO model)
         {
-
             var entity = new RC_Profile_CardDetails()
             {
-                Type = model.Type,
+                CardTypeID = model.CardTypeID,
                 CardNumber = model.CardNumber,
                 ExpirationDate = model.ExpirationDate,
                 CVVCode = model.CVVCode,
@@ -51,7 +50,7 @@ namespace RepositoryLayer.Repos
             var entity = GetById(model.Id);
             if (entity != null)
             {
-                entity.Type = model.Type;
+                entity.CardTypeID = model.CardTypeID;
                 entity.CardNumber = model.CardNumber;
                 entity.ExpirationDate = model.ExpirationDate;
                 entity.CVVCode = model.CVVCode;
@@ -60,7 +59,6 @@ namespace RepositoryLayer.Repos
                 entity.UserID = Utils.GetUserId(_serviceProvider);
                 entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
                 entity.ModifiedDate = DateTime.Now;
-
 
                 Put(entity);
             }
@@ -72,7 +70,7 @@ namespace RepositoryLayer.Repos
         public IEnumerable<CardDTO> GetByType(long type)
         {
             var userId = Utils.GetUserId(_serviceProvider);
-            var result = Get().Where(x => !x.IsDeleted && x.UserID == userId && x.Type == type).Select(x => new CardDTO { CardHoldername= x.CardHoldername, CardNumber = x.CardNumber });
+            var result = Get().Where(x => !x.IsDeleted && x.UserID == userId && x.CardTypeID == type).Select(x => new CardDTO { CardHoldername= x.CardHoldername, CardNumber = x.CardNumber });
             return result;
            
         }
@@ -81,7 +79,7 @@ namespace RepositoryLayer.Repos
             var entity = GetById(model.Id);
             if (entity != null)
             {
-                entity.Type = model.Type;
+                entity.CardTypeID = model.CardTypeID;
                 entity.CardNumber = model.CardNumber;
                 entity.CardHoldername = model.CardHoldername;
                 entity.ExpirationDate = model.ExpirationDate;
@@ -98,7 +96,5 @@ namespace RepositoryLayer.Repos
         {
             GetById(id).IsDeleted = true;
         }
-
-
     }
 }

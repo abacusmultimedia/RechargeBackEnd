@@ -681,5 +681,119 @@ namespace Secure.Api.Controllers
             return constructResponse(_unitOfWork.LookupRewardRepo.GetbyId(id));
         }
         #endregion
+
+        #region BankType
+        [HttpGet]
+        [Route("GetBankTypeAsLookup")]
+        public async Task<BaseResponse> GetBankTypeAsLookup()
+        {
+            return constructResponse(_unitOfWork.BankTypeRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("BankTypePost")]
+        public async Task<BaseResponse> BankTypePost([FromBody] BankTypeDTO model)
+        {
+            await _unitOfWork.BankTypeRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("BankTypeUpdate")]
+        public async Task<BaseResponse> BankTypeUpdate([FromBody] BankTypeDTO model)
+        {
+            _unitOfWork.BankTypeRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("BankTypeDelete/{id}")]
+        public async Task<BaseResponse> BankTypeDelete(long id)
+        {
+            _unitOfWork.BankTypeRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpGet]
+        [Route("BankTypebyId/{id}")]
+        public BaseResponse BankTypebyId(long id)
+        {
+            return constructResponse(_unitOfWork.BankTypeRepo.GetbyId(id));
+        }
+        #endregion
+
+        #region FrequencyType
+        [HttpGet]
+        [Route("GetFrequencyTypeAsLookup")]
+        public async Task<BaseResponse> GetFrequencyTypeAsLookup()
+        {
+            return constructResponse(_unitOfWork.FrequencyTypeRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("FrequencyTypePost")]
+        public async Task<BaseResponse> FrequencyTypePost([FromBody] FrequencyTypeDTO model)
+        {
+            await _unitOfWork.FrequencyTypeRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("FrequencyTypeUpdate")]
+        public async Task<BaseResponse> FrequencyTypeUpdate([FromBody] FrequencyTypeDTO model)
+        {
+            _unitOfWork.FrequencyTypeRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("FrequencyTypeDelete/{id}")]
+        public async Task<BaseResponse> FrequencyTypeDelete(long id)
+        {
+            _unitOfWork.FrequencyTypeRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpGet]
+        [Route("FrequencyTypebyId/{id}")]
+        public BaseResponse FrequencyTypebyId(long id)
+        {
+            return constructResponse(_unitOfWork.FrequencyTypeRepo.GetbyId(id));
+        }
+        #endregion
+
+        #region CardType
+        [HttpGet]
+        [Route("GetCardTypeAsLookup")]
+        public async Task<BaseResponse> GetCardTypeAsLookup()
+        {
+            return constructResponse(_unitOfWork.CardTypeRepo.GetAll());
+        }
+
+        [HttpPost]
+        [Route("CardTypePost")]
+        public async Task<BaseResponse> CardTypePost([FromBody] CardTypeDTO model)
+        {
+            await _unitOfWork.CardTypeRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("CardTypeUpdate")]
+        public async Task<BaseResponse> CardTypeUpdate([FromBody] CardTypeDTO model)
+        {
+            _unitOfWork.CardTypeRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("CardTypeDelete/{id}")]
+        public async Task<BaseResponse> CardTypeDelete(long id)
+        {
+            _unitOfWork.CardTypeRepo.SoftDelete(id);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpGet]
+        [Route("CardTypebyId/{id}")]
+        public BaseResponse CardTypebyId(long id)
+        {
+            return constructResponse(_unitOfWork.CardTypeRepo.GetbyId(id));
+        }
+        #endregion
     }
 }

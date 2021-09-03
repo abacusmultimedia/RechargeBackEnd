@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EntityLayer.Entities.Payment;
 
 namespace RepositoryLayer.Repos
 {
@@ -26,7 +27,7 @@ namespace RepositoryLayer.Repos
         }
         public IEnumerable<PaymentDTO> GetAll()
         {
-            return Get().Where(x => !x.IsDeleted).Select(x => new PaymentDTO { Id = x.Id, Frequency = x.Frequency,TransferEntireBalance=x.TransferEntireBalance,TransferAmount=x.TransferAmount,PayoutOptions=x.PayoutOptions,NextPaymentDate=x.NextPaymentDate });
+            return Get().Where(x => !x.IsDeleted).Select(x => new PaymentDTO { Id = x.Id, FrequencyId = x.FrequencyId,TransferEntireBalance=x.TransferEntireBalance,TransferAmount=x.TransferAmount,PayoutOptions=x.PayoutOptions,NextPaymentDate=x.NextPaymentDate });
         }
          
         public PaymentDTO GetbyId(long id)
@@ -35,7 +36,7 @@ namespace RepositoryLayer.Repos
             return new PaymentDTO
             {
                 Id = entity.Id,
-                Frequency = entity.Frequency, 
+                FrequencyId = entity.FrequencyId, 
                 PayoutOptions = entity.PayoutOptions,
                 TransferAmount = entity.TransferAmount,
                 NextPaymentDate = entity.NextPaymentDate, 
@@ -48,7 +49,7 @@ namespace RepositoryLayer.Repos
             {
                 IsDeleted = false,
                 CreatedDate = DateTime.Now,
-                Frequency = model.Frequency,
+                FrequencyId = model.FrequencyId,
                 PayoutOptions = model.PayoutOptions,
                 TransferAmount = model.TransferAmount,
                 NextPaymentDate = model.NextPaymentDate,
@@ -62,7 +63,7 @@ namespace RepositoryLayer.Repos
             var entity = GetById(model.Id);
             if (entity != null)
             {
-                entity.Frequency = model.Frequency;
+                entity.FrequencyId = model.FrequencyId;
                 entity.PayoutOptions = model.PayoutOptions;
                 entity.TransferAmount = model.TransferAmount;
                 entity.NextPaymentDate = model.NextPaymentDate;

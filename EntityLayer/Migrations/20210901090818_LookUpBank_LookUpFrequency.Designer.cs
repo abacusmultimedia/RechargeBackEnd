@@ -3,14 +3,16 @@ using System;
 using EntityLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityLayer.Migrations
 {
     [DbContext(typeof(RechargeDbContext))]
-    partial class RechargeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210901090818_LookUpBank_LookUpFrequency")]
+    partial class LookUpBank_LookUpFrequency
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -603,35 +605,6 @@ namespace EntityLayer.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("LookUp_Bank");
-                });
-
-            modelBuilder.Entity("EntityLayer.Entities.LookUp_CardType", b =>
-                {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("CardName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("LookUp_CardType");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.LookUp_City", b =>
@@ -1292,9 +1265,6 @@ namespace EntityLayer.Migrations
                     b.Property<string>("CardNumber")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<long?>("CardTypeID")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -1316,12 +1286,13 @@ namespace EntityLayer.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<long>("Type")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("UserID")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("CardTypeID");
 
                     b.HasIndex("UserID");
 
@@ -1900,10 +1871,6 @@ namespace EntityLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Entities.RC_Profile_CardDetails", b =>
                 {
-                    b.HasOne("EntityLayer.Entities.LookUp_CardType", "CardType")
-                        .WithMany()
-                        .HasForeignKey("CardTypeID");
-
                     b.HasOne("EntityLayer.Entities.ExtendedUser", "User")
                         .WithMany()
                         .HasForeignKey("UserID");

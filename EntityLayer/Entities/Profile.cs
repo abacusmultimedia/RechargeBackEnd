@@ -33,22 +33,27 @@ namespace EntityLayer.Entities
     public class RC_Profile_BankingDetails : BaseEntity
     {
         public long ID { get; set; }
-        [Column(TypeName = "nvarchar(200)")]
-        public string BnakName { get; set; }
         public string BranchCode { get; set; }
         public string AccountNumber { get; set; }
         [Column(TypeName = "nvarchar(200)")]
         public string AccountHolderName { get; set; }
-
+        public long ? BankID { get; set; }
         public string UserID { get; set; }
         [ForeignKey("UserID")]
         public virtual ExtendedUser User { get; set; }
-
+ 
+        [ForeignKey("BankID")]
+        public virtual LookUp_Bank Bank { get; set; }
+    }
+    public class LookUp_Bank : BaseEntity
+    {
+        public long ID { get; set; }
+        public string BankName { get; set; }
     }
     public class RC_Profile_CardDetails : BaseEntity
     {
-        public long ID { get; set; } 
-        public long Type { get; set; }
+        public long ID { get; set; }
+        public long ? CardTypeID { get; set; }
         [Column(TypeName = "nvarchar(200)")]
         public string CardHoldername { get; set; }
         public string CardNumber { get; set; }
@@ -60,7 +65,13 @@ namespace EntityLayer.Entities
         public string UserID { get; set; }
         [ForeignKey("UserID")]
         public virtual ExtendedUser User { get; set; }
-
+        [ForeignKey("CardTypeID")]
+        public virtual LookUp_CardType CardType { get; set; }
+    } 
+    public class LookUp_CardType : BaseEntity
+    {
+        public long ID { get; set; }
+        public string CardName { get; set; }
     }
     public class RC_Profile_Legal : BaseEntity
     {
@@ -103,7 +114,6 @@ namespace EntityLayer.Entities
         [Column(TypeName = "nvarchar(200)")]
         public string Name { get; set; }
         public int OrderBy { get; set; }
-
     }
     [Table("rc_profile_subcategory")]
     public class SubCategory : BaseEntity
@@ -116,7 +126,4 @@ namespace EntityLayer.Entities
         [ForeignKey("ParentID")]
         public virtual Category Category{ get; set; }
     }
-
-
-
 }

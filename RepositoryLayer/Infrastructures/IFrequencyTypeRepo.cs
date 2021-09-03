@@ -1,5 +1,4 @@
 ﻿using CommonLayer.DTOs;
-using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,12 +7,12 @@ using static EntityLayer.Entities.Payment;
 
 namespace RepositoryLayer.Infrastructures
 {
-    public interface IPaymentRepo: IRepositoryBase<RC_Payment>
+    public interface IFrequencyTypeRepo : IRepositoryBase<LookUp_Frequency>
     {
-        IEnumerable<PaymentDTO> GetAll();
-        PaymentDTO GetbyId(long id);
-        Task Post(PaymentDTO model);
-        void Put(PaymentDTO model);
+        IEnumerable<LookupDTO> GetAll();
+        FrequencyTypeDTO GetbyId(long id);
+        Task Post(FrequencyTypeDTO model);
+        void Put(FrequencyTypeDTO model);
         void SoftDelete(long id);
     }
 }

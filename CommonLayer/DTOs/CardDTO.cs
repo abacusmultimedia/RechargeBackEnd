@@ -5,10 +5,10 @@ using System.Text;
 
 namespace CommonLayer.DTOs
 {
-        public class CardDTO
+    public class CardDTO
     {
         public long Id { get; set; }
-        public long Type { get; set; }
+        public long ? CardTypeID { get; set; }
         public string CardHoldername { get; set; }
         public string CardNumber { get; set; }
         public string ExpirationDate { get; set; }
