@@ -302,6 +302,15 @@ namespace UnitOfWork.DataSeeder
             };
             _context.Add(lookUp_CardType);
             _context.SaveChanges();
+            Lookup_AccountType lookup_AccountType = new Lookup_AccountType()
+            {
+                Accountname = "Current",
+                IsDeleted = false,
+                CreatedBy = "Seeder",
+                CreatedDate = DateTime.Now,
+            };
+            _context.Add(lookup_AccountType);
+            _context.SaveChanges();
 
         }
     }
