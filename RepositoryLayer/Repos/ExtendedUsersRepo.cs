@@ -268,7 +268,7 @@ namespace RepositoryLayer.Repos
                 var Card_entity_unionpay = new RC_Profile_CardDetails()
                 {
                     BillingAddress = "",
-                    CardTypeID =null,
+                    CardTypeID = null,
                     CreatedDate = DateTime.Now,
                     CreatedBy = currentUser.Id,
                     IsDeleted = false,
@@ -278,7 +278,7 @@ namespace RepositoryLayer.Repos
                 var Card_entity_alipay = new RC_Profile_CardDetails()
                 {
                     BillingAddress = "",
-                    CardTypeID=null,
+                    CardTypeID = null,
                     CreatedDate = DateTime.Now,
                     CreatedBy = currentUser.Id,
                     IsDeleted = false,
@@ -529,16 +529,16 @@ namespace RepositoryLayer.Repos
             {
                 var objSecurityQuestion = _LegalRepo.GetWithCondition(s => s.User.Id == userExist.Id).FirstOrDefault();
                 var objQuestion = _SecurityQuestionRepo.GetWithCondition(x => x.Question_ID == objSecurityQuestion.SecurityQuestion1 || x.Question_ID == objSecurityQuestion.SecurityQuestion2).ToList();
-                
+
                 var list = new List<LookupDTO>();
 
                 foreach (var item in objQuestion)
                 {
-                var obj = new LookupDTO()
-                {
-                    Value= item.Question_Title,
-                    Key = item.Group,
-                };
+                    var obj = new LookupDTO()
+                    {
+                        Value = item.Question_Title,
+                        Key = item.Group,
+                    };
                     list.Add(obj);
                 }
                 return list;
@@ -552,11 +552,11 @@ namespace RepositoryLayer.Repos
             var objUser = await _userManager.FindByEmailAsync(objSecurityQuestions.Email);
             var objSecurityQuestion = _LegalRepo.GetWithCondition(s => s.User.Id == objUser.Id
             && s.SecurityQuestion1 == objSecurityQuestions.SecurityQuestion1 && s.SecurityQuestion2
-            == objSecurityQuestions.SecurityQuestion2 && (string.Equals(s.Answer1, objSecurityQuestions.Answer1, 
-            StringComparison.CurrentCultureIgnoreCase)) && (string.Equals(s.Answer2, objSecurityQuestions.Answer2, 
+            == objSecurityQuestions.SecurityQuestion2 && (string.Equals(s.Answer1, objSecurityQuestions.Answer1,
+            StringComparison.CurrentCultureIgnoreCase)) && (string.Equals(s.Answer2, objSecurityQuestions.Answer2,
             StringComparison.CurrentCultureIgnoreCase))).Count();
 
-            if(objSecurityQuestion==0)
+            if (objSecurityQuestion == 0)
             {
                 return false;
             }
@@ -716,7 +716,7 @@ namespace RepositoryLayer.Repos
         {
             /// wiating for design 
         }
-        public async Task Stage3Post(signUpstage3DTO model)
+        public async Task<bool> Stage3Post(signUpstage3DTO model)
         {
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
             var userToUpdate = await _userManager.FindByIdAsync(Utils.GetUserId(_serviceProvider));
@@ -725,7 +725,9 @@ namespace RepositoryLayer.Repos
             userToUpdate.Address = model.Address1;
             userToUpdate.Address2 = model.Address2;
             userToUpdate.ZiPcode = model.ZipCode;
-            await _userManager.UpdateAsync(userToUpdate);
+            var response = await _userManager.UpdateAsync(userToUpdate);
+            return response.Succeeded;
+
         }
         public void Stage4Post(signUpstage4DTO model)
         {
@@ -751,7 +753,7 @@ namespace RepositoryLayer.Repos
                 //SecurityAnswer3 = model.SecurityAnswer3,
                 SecurityQuestion1 = model.SecurityQuestion1,
                 SecurityQuestion2 = model.SecurityQuestion2,
-             ///   SecurityQuestion3 = model.SecurityQuestion3,
+                ///   SecurityQuestion3 = model.SecurityQuestion3,
                 countryIssueId = model.countryIssuingPhotoID,
                 GovtissuedID = model.govtPhotoIDNo,
                 GovtPhotoIDNo = model.uploadScannedCopyID

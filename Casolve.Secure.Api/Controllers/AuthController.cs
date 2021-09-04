@@ -110,8 +110,8 @@ namespace Secure.Api.Controllers
         [Route("Stage3Post")]
         public async Task<BaseResponse> Stage3Post([FromBody] signUpstage3DTO model)
         {
-            await _unitOfWork.ExtendedUsersRepository.Stage3Post(model);
-            return constructResponse(await _unitOfWork.Save());
+            return constructResponse( 
+                await _unitOfWork.ExtendedUsersRepository.Stage3Post(model));
         }
 
         [HttpPost]
