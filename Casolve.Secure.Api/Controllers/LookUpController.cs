@@ -795,5 +795,43 @@ namespace Secure.Api.Controllers
             return constructResponse(_unitOfWork.CardTypeRepo.GetbyId(id));
         }
         #endregion
+
+        #region AccountType
+        [HttpGet]
+        [Route("GetAccountTypeAsLookup")]
+        public async Task<BaseResponse> GetAccountTypeAsLookup()
+        {
+            return constructResponse(_unitOfWork.AccountTypeRepo.GetAll());
+        }
+        [HttpPost]
+        [Route("AccountTypePost")]
+        public async Task<BaseResponse> AccountTypePost([FromBody] AccountTypeDTO model)
+        {
+            await _unitOfWork.AccountTypeRepo.Post(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+        [HttpPut]
+        [Route("AccountTypeUpdate")]
+        public async Task<BaseResponse> AccountTypeUpdate([FromBody] AccountTypeDTO model)
+        {
+            _unitOfWork.AccountTypeRepo.Put(model);
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpDelete("AccountTypeDelete/{id}")]
+        public async Task<BaseResponse> AccountTypeDelete(long id)
+        {
+            _unitOfWork.AccountTypeRepo.SoftDelete(id)
+;
+            return constructResponse(await _unitOfWork.Save());
+        }
+
+        [HttpGet]
+        [Route("AccountTypebyId/{id}")]
+        public BaseResponse AccountTypebyId(long id)
+        {
+            return constructResponse(_unitOfWork.AccountTypeRepo.GetbyId(id));
+        }
+        #endregion
     }
 }

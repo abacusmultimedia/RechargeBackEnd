@@ -70,6 +70,7 @@ namespace UnitOfWork.DIHelper
             services.AddScoped<IFrequencyTypeRepo, FrequencyTypeRepo>();
             services.AddScoped<IBankTypeRepo, BankTypeRepo>();
             services.AddScoped<ICardTypeRepo, CardTypeRepo>();
+            services.AddScoped<IAccountTypeRepo, AccountTypeRepo>();
 
             //services.AddScoped<>
             //Unit Of Work

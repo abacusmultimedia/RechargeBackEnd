@@ -67,5 +67,9 @@ namespace EntityLayer.Entities
         public string UnderGroup { get; set; }
         public ICollection<Accounts_Ledger> Ledgers { get; set; }
     }
-
+    public class Lookup_AccountType : BaseEntity
+    {
+        public long ID { get; set; }
+        public string Accountname { get; set; }
+    }
 }

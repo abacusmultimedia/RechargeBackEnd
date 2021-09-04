@@ -52,6 +52,7 @@ namespace UnitOfWork
         public IFrequencyTypeRepo FrequencyTypeRepo => _serviceProvider.GetRequiredService<IFrequencyTypeRepo>();
         public IBankTypeRepo BankTypeRepo => _serviceProvider.GetRequiredService<IBankTypeRepo>();
         public ICardTypeRepo CardTypeRepo => _serviceProvider.GetRequiredService<ICardTypeRepo>();
+        public IAccountTypeRepo AccountTypeRepo => _serviceProvider.GetRequiredService<IAccountTypeRepo>();
 
 
         public UnitOfWork(IServiceProvider serviceProvider)

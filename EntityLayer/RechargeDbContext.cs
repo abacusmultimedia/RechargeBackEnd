@@ -54,7 +54,8 @@ namespace EntityLayer
         public DbSet<LookUp_Bank> LookUp_Bank { get; set; }
         public DbSet<LookUp_Frequency> LookUp_Frequency { get; set; }
         public DbSet<LookUp_CardType> LookUp_CardType { get; set; }
-       
+        public DbSet<Lookup_AccountType> Lookup_AccountType { get; set; }
+
 
         ////     public DbSet<SBI_Project> SBI_Project { get; set; }
 

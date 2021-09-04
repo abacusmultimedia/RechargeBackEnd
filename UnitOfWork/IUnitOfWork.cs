@@ -50,6 +50,7 @@ namespace UnitOfWork
         IFrequencyTypeRepo FrequencyTypeRepo { get; }
         IBankTypeRepo BankTypeRepo { get; }
         ICardTypeRepo CardTypeRepo { get; }
+        IAccountTypeRepo AccountTypeRepo { get; }
         Task<bool> SaveChanges();
         Task<bool> Save();
     }
