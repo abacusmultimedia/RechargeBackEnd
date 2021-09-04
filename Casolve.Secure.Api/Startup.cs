@@ -16,6 +16,8 @@ using UnitOfWork.DataSeeder;
 using UnitOfWork.DIHelper;
 using static CommonLayer.Constants;
 using static EntityLayer.Helpers.ConnectionStringHelper;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace Secure.Api
 {
@@ -55,6 +57,14 @@ namespace Secure.Api
                         
                     };
                 });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(24);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+            });
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
