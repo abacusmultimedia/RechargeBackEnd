@@ -12,11 +12,16 @@ namespace Secure.Api.Controllers
 {
     public class AuthController : BaseController
     {
-        public AuthController(IUnitOfWork portalUnitOfWork ) : base(portalUnitOfWork)
+        public AuthController(IUnitOfWork portalUnitOfWork) : base(portalUnitOfWork)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Login")]
         [AllowAnonymous]
@@ -33,7 +38,7 @@ namespace Secure.Api.Controllers
             return constructResponse(await _unitOfWork.Save());
         }
 
-       [HttpPost]
+        [HttpPost]
         [AllowAnonymous]
         [Route("Register")]
         public async Task<BaseResponse> Register([FromBody] RegisterDTO model)
@@ -65,19 +70,19 @@ namespace Secure.Api.Controllers
         [Route("GetRoles")]
         public async Task<BaseResponse> GetRoles()
         {
-            return constructResponse( _unitOfWork.ExtendedRolesRepository.GetRoles());
+            return constructResponse(_unitOfWork.ExtendedRolesRepository.GetRoles());
         }
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetSecurityQuestion")]
-        public async Task<BaseResponse> GetSecurityQuestion(string email)
+        [Route("GetSecurityQuestion/{id}")]
+        public async Task<BaseResponse> GetSecurityQuestion(string id)
         {
-            return constructResponse(await _unitOfWork.ExtendedUsersRepository.SecurityQuestionGet(email));
+            return constructResponse(await _unitOfWork.ExtendedUsersRepository.SecurityQuestionGet(id));
         }
         [HttpPost]
         [AllowAnonymous]
         [Route("SecurityQuestionsValidation")]
-        public async Task<BaseResponse> SecurityQuestionsValidation([FromBody]SecurityQuestionsDTO model)
+        public async Task<BaseResponse> SecurityQuestionsValidation([FromBody] SecurityQuestionsDTO model)
         {
             return constructResponse(await _unitOfWork.ExtendedUsersRepository.ValidateSecurityQuestion(model));
         }
@@ -87,12 +92,12 @@ namespace Secure.Api.Controllers
         [Route("Stage2BusinessDTOPost")]
         public async Task<BaseResponse> Stage2BusinessDTOPost([FromBody] SignUPStage2BusinessDTO model)
         {
-             _unitOfWork.ExtendedUsersRepository.Stage2BusinessPost(model);
+            _unitOfWork.ExtendedUsersRepository.Stage2BusinessPost(model);
             return constructResponse(await _unitOfWork.Save());
         }
         [HttpPost]
         [Route("Stage2PersonalPost")]
-        public async Task<BaseResponse> Stage2PersonalPost([FromBody]  SignUPStage2PersonalDTO model) 
+        public async Task<BaseResponse> Stage2PersonalPost([FromBody] SignUPStage2PersonalDTO model)
         {
             await _unitOfWork.ExtendedUsersRepository.Stage2PersonalPost(model);
             return constructResponse(await _unitOfWork.Save());
@@ -110,7 +115,7 @@ namespace Secure.Api.Controllers
         [Route("Stage3Post")]
         public async Task<BaseResponse> Stage3Post([FromBody] signUpstage3DTO model)
         {
-            return constructResponse( 
+            return constructResponse(
                 await _unitOfWork.ExtendedUsersRepository.Stage3Post(model));
         }
 
@@ -118,7 +123,7 @@ namespace Secure.Api.Controllers
         [Route("Stage4Post")]
         public async Task<BaseResponse> Stage4Post([FromBody] signUpstage4DTO model)
         {
-             _unitOfWork.ExtendedUsersRepository.Stage4Post(model);
+            _unitOfWork.ExtendedUsersRepository.Stage4Post(model);
             return constructResponse(await _unitOfWork.Save());
         }
 
@@ -133,7 +138,7 @@ namespace Secure.Api.Controllers
         [HttpPost]
         [Route("Stage5PersonalPost")]
         public async Task<BaseResponse> Stage5PersonalPost([FromBody] SignUPStage5PersonalDTO model)
-        {  
+        {
             _unitOfWork.ExtendedUsersRepository.Stage5PersonalPost(model);
             return constructResponse(await _unitOfWork.Save());
         }
@@ -141,11 +146,12 @@ namespace Secure.Api.Controllers
         [HttpPost]
         [Route("Stage5PartnerPost")]
         public async Task<BaseResponse> Stage5PartnerPost([FromBody] SignUPStage5PartnerDTO model)
-        {   _unitOfWork.ExtendedUsersRepository.Stage5PartnerPost(model);
+        {
+            _unitOfWork.ExtendedUsersRepository.Stage5PartnerPost(model);
             return constructResponse(await _unitOfWork.Save());
         }
-         
-#endregion
+
+        #endregion
         //[HttpPost]
         //[Route("Stage2BusinessDTOPost")]
         //public async Task<BaseResponse> ResetPassword([FromBody] SignUpStage2BusinessDTO model)
