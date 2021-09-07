@@ -541,7 +541,12 @@ namespace RepositoryLayer.Repos
                     };
                     list.Add(obj);
                 }
-                return list;
+                var result = list;
+                if(result!= null)
+                {
+                    OtherConstants.isSuccessful = true;
+                }
+                return result;
             }
             return null;
         }
