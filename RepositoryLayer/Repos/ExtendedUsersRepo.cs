@@ -561,11 +561,12 @@ namespace RepositoryLayer.Repos
             StringComparison.CurrentCultureIgnoreCase)) && (string.Equals(s.Answer2, objSecurityQuestions.Answer2,
             StringComparison.CurrentCultureIgnoreCase))).Count();
 
-            if (objSecurityQuestion == 0)
+            if (objSecurityQuestion != 0)
             {
-                return false;
+                OtherConstants.isSuccessful = true;
+                return true;
             }
-            return true;
+            return false;
         }
         #endregion
 
