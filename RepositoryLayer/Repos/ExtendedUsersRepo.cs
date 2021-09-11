@@ -551,7 +551,7 @@ namespace RepositoryLayer.Repos
             return null;
         }
 
-        public async Task<bool> ValidateSecurityQuestion(SecurityQuestionsDTO objSecurityQuestions)
+        public async Task<LoginResponseDTO> ValidateSecurityQuestion(SecurityQuestionsDTO objSecurityQuestions)
         {
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
             var objUser = await _userManager.FindByEmailAsync(objSecurityQuestions.Email);
@@ -563,10 +563,61 @@ namespace RepositoryLayer.Repos
 
             if (objSecurityQuestion != 0)
             {
-                OtherConstants.isSuccessful = true;
-                return true;
+                var userRoles = await _userManager.GetRolesAsync(objUser);
+                var _tokenService = _serviceProvider.GetRequiredService<ITokenService>();
+                var _loginRepo = _serviceProvider.GetRequiredService<ILoginsRepo>();
+                var _roleManager = _serviceProvider.GetRequiredService<RoleManager<ExtendedRole>>();
+
+
+                var claims = new List<Claim>()
+                    {
+                        new Claim("UserId", objUser.Id),
+                        new Claim("UserName",objUser.UserName),
+                      //  new Claim("TenantId", user.TenantId.ToString()),
+                        new Claim("Role", userRoles.FirstOrDefault())
+                    };
+
+                var role = await _roleManager.FindByNameAsync(userRoles.FirstOrDefault());
+                var claimsList = await _roleManager.GetClaimsAsync(role);
+                claims.AddRange(claimsList.ToList());
+
+                foreach (var item in userRoles)
+                    claims.Add(new Claim(ClaimTypes.Role, item));
+
+                var accessToken = _tokenService.GenerateAccessToken(claims);
+                var refreshToken = _tokenService.GenerateRefreshToken();
+
+                await _loginRepo.Post(new Login()
+                {
+                    RefreshToken = refreshToken,
+                    RefreshTokenExpiryTime = DateTime.Now.AddDays(10),
+                    UserId = objUser.Id,
+                    CreatedBy = objUser.Id,
+                    TenantId = objUser.TenantId
+                }, true);
+                int daysLeft = 0;
+                UserDTO userModel;
+
+                if (daysLeft >= 0)
+                {
+                    userModel = CreateUserModel(objUser, role.Name);
+                    OtherConstants.isSuccessful = true;
+                }
+                else
+                {
+                    userModel = CreateUserModel(objUser, role.Name);
+                    OtherConstants.messageType = MessageType.Error;
+                    OtherConstants.isSuccessful = true;
+                    OtherConstants.responseMsg = "Free trial time period expired!";
+                }
+                return new LoginResponseDTO()
+                {
+                    AccessToken = accessToken,
+                    RefreshToken = refreshToken,
+                    AccountDetails = userModel
+                };
             }
-            return false;
+            return null;
         }
         #endregion
 
@@ -678,7 +729,6 @@ namespace RepositoryLayer.Repos
 
             return OtherConstants.isSuccessful;
         }
-
         public async Task<bool> InvitationToJoinProject(string email)
         {
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
@@ -699,8 +749,6 @@ namespace RepositoryLayer.Repos
 
             return OtherConstants.isSuccessful;
         }
-
-
         #region stages
 
         public void Stage2BusinessPost(SignUPStage2BusinessDTO model)
@@ -1516,6 +1564,23 @@ namespace RepositoryLayer.Repos
         {
             var _env = _serviceProvider.GetRequiredService<IHostingEnvironment>();
             string path = Path.Combine(_env.ContentRootPath, "EmailTemplates\\EmailTemplateForInvitation.html");
+            if (System.IO.File.Exists(path))
+            {
+                string html = System.IO.File.ReadAllText(path);
+                html = html.Replace("{logoLink}", LogoConfigurations.PortalFrontEndLogo);
+                html = html.Replace("{description}", description);
+                html = html.Replace("{link}", link);
+                html = html.Replace("{buttonTitle}", buttonTitle);
+                html = html.Replace("{message}", message);
+                html = html.Replace("{address}", address);
+                return html;
+            }
+            return null;
+        }
+        private string CreateEmailTemplateForBlockedAccount(string link, string description, string buttonTitle, string message, string address)
+        {
+            var _env = _serviceProvider.GetRequiredService<IHostingEnvironment>();
+            string path = Path.Combine(_env.ContentRootPath, "EmailTemplates\\EmailTemplateForBlockedAccount.html");
             if (System.IO.File.Exists(path))
             {
                 string html = System.IO.File.ReadAllText(path);

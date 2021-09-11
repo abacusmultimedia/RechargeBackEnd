@@ -32,6 +32,6 @@ namespace RepositoryLayer.Infrastructures
         Task<ProfileSecurityInfoDTO> Stage4ProfileSecurityInfoGet();
         Task Stage4ProfileSecurityInfoUpdate(ProfileSecurityInfoDTO model);
         Task<List<LookupDTO>> SecurityQuestionGet(string email);
-        Task<bool> ValidateSecurityQuestion(SecurityQuestionsDTO objSecurityQuestions);
+        Task<LoginResponseDTO> ValidateSecurityQuestion(SecurityQuestionsDTO objSecurityQuestions);
     }
 }
