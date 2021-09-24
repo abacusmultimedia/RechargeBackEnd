@@ -10,5 +10,7 @@ namespace CommonLayer.DTOs
         public string FullName { get; set; }
         public string ImageUrl { get; set; }
         public int JobTitle { get; set; }
+        public string JobTitleName { get; set; }
+
     }
 }

@@ -28,18 +28,17 @@ namespace RepositoryLayer.Repos
             _employeeServiceRepo = employeeServiceRepo;
             _mapper = _serviceProvider.GetRequiredService<IMapper>();
             _RewardRepo = rewardRepo;
-
         }
         public IEnumerable<PartnersEmployeesDTO> GetAll()
-        {
-            return Get().Where(x => !x.IsDeleted).Select(x =>
+        {   
+             return Get().Where(x => !x.IsDeleted).Select(x =>
             new PartnersEmployeesDTO
             {
                 ID = x.ID,
                 FullName = x.F_Name,
-                //L_Name = x.L_Name,
                 ImageUrl = x.ImageUrl,
-                JobTitle = x.JobTitle
+                JobTitleName = x.Job_Title.Title
+                
             });
         }
         public PartnersEmployeesDTO GetbyId(long id)
