@@ -57,6 +57,13 @@ namespace Secure.Api.Controllers
         {
             return constructResponse(_unitOfWork.Partners_EmployeesRepo.IsExist(id));
         }
-        
+
+        [HttpGet]
+        [Route("GetEmployeesWithService")]
+        public async Task<BaseResponse> GetEmployeesWithService()
+        {
+            return constructResponse(_unitOfWork.Partners_EmployeesRepo.GetEmployeesWithService());
+        }
+
     }
 }

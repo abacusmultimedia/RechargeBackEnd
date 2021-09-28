@@ -13,14 +13,14 @@ namespace EntityLayer.Entities
             [Key]
             public long EmployeeServiceId { get; set; }
             public long EmployeeId { get; set; }
-            public long ServiveId { get; set; }
-            public long ServiveProviderId { get; set; }
+            public long ServiceId { get; set; }
+            public long ServiceProviderId { get; set; }
 
             [ForeignKey("EmployeeId")]
             public virtual RC_Partners_Employees Employee { get; set; }
-            [ForeignKey("ServiveProviderId")]
+            [ForeignKey("ServiceProviderId")]
             public virtual RC_Payroll_ServiceProvider ServiceProvider { get; set; }
-            [ForeignKey("ServiveId")]
+            [ForeignKey("ServiceId")]
             public virtual RC_Payroll_Service Service { get; set; }
             public string EmployeeConsumerNo { get; set; }
             public long PaymentOption { get; set; }

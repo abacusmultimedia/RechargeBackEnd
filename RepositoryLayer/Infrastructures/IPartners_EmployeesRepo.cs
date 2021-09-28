@@ -16,6 +16,6 @@ namespace RepositoryLayer.Infrastructures
         void Put(PartnersEmployeesDTO model);
         void SoftDelete(long id);
         bool IsExist(long id);
-
+        ICollection<EmployeeWithAllServicesDTO> GetEmployeesWithService();
     }
 }

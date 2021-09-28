@@ -3,6 +3,7 @@ using CommonLayer.DTOs;
 using CommonLayer.Helpers;
 using EntityLayer;
 using EntityLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RepositoryLayer.Infrastructures;
 using System;
@@ -22,7 +23,7 @@ namespace RepositoryLayer.Repos
         private readonly IRewardRepo _RewardRepo;
         public PartnersEmployeesRepo(IServiceProvider serviceProvider,
             IEmployeeServiceRepo employeeServiceRepo, IExtendedUsersRepo extendedUsersRepo,
-            RechargeDbContext context,IRewardRepo rewardRepo) : base(context)
+            RechargeDbContext context, IRewardRepo rewardRepo) : base(context)
         {
             _serviceProvider = serviceProvider;
             _employeeServiceRepo = employeeServiceRepo;
@@ -30,16 +31,16 @@ namespace RepositoryLayer.Repos
             _RewardRepo = rewardRepo;
         }
         public IEnumerable<PartnersEmployeesDTO> GetAll()
-        {   
-             return Get().Where(x => !x.IsDeleted).Select(x =>
-            new PartnersEmployeesDTO
-            {
-                ID = x.ID,
-                FullName = x.F_Name,
-                ImageUrl = x.ImageUrl,
-                JobTitleName = x.Job_Title.Title
-                
-            });
+        {
+            return Get().Where(x => !x.IsDeleted).Select(x =>
+           new PartnersEmployeesDTO
+           {
+               ID = x.ID,
+               FullName = x.F_Name,
+               ImageUrl = x.ImageUrl,
+               JobTitleName = x.Job_Title.Title
+
+           });
         }
         public PartnersEmployeesDTO GetbyId(long id)
         {
@@ -68,51 +69,57 @@ namespace RepositoryLayer.Repos
         }
         public async Task PostWithService(EmployeewithServicesDTO employeewithServicesDTO)
         {
-            var model = employeewithServicesDTO.Employee;
-            var entity = new RC_Partners_Employees()
+            try
             {
-                IsDeleted = false,
-                F_Name = model.FullName,
-                //L_Name = model.L_Name,
-                ImageUrl = model.ImageUrl,
-                JobTitle = model.JobTitle,
-                CreatedDate = DateTime.Now,
-                CreatedBy = Utils.GetUserId(_serviceProvider),
-                EmployerId = Utils.GetUserId(_serviceProvider),
-                EmployeeServices = MappServices(employeewithServicesDTO.Services)
-               
-            };
-            var modell = employeewithServicesDTO.Reward;
-            await Post(entity, true);
-            var Rewards = new RewardDTO()
+                var model = employeewithServicesDTO.Employee;
+                var entity = new RC_Partners_Employees()
+                {
+                    IsDeleted = false,
+                    F_Name = model.FullName,
+                    //L_Name = model.L_Name,
+                    ImageUrl = model.ImageUrl,
+                    JobTitle = model.JobTitle,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = Utils.GetUserId(_serviceProvider),
+                    EmployerId = Utils.GetUserId(_serviceProvider),
+                    EmployeeServices = MappServices(employeewithServicesDTO.Services)
+
+                };
+                var modell = employeewithServicesDTO.Reward;
+                await Post(entity, true);
+                var Rewards = new RewardDTO()
+                {
+                    EmployeeId = entity.ID,
+                    RewardId = modell.RewardId,
+                    Membership = modell.Membership,
+                    MembershipNumber = modell.MembershipNumber
+                };
+                await _RewardRepo.PostReward(Rewards);
+            }catch(Exception ex)
             {
-                EmployeeId = entity.ID,
-                RewardId = modell.RewardId,
-                Membership=modell.Membership,
-                MembershipNumber=modell.MembershipNumber
-            };
-            await _RewardRepo.PostReward(Rewards);
+                
+            }
         }
-        private   List<EmployeeServices>  MappServices(List<EmployeeServicesDTO> model)
+        private List<EmployeeServices> MappServices(List<EmployeeServicesDTO> model)
         {
             var ListofServices = new List<EmployeeServices>();
             foreach (var item in model)
             {
                 var temp = new EmployeeServices()
-                { 
+                {
                     IsDeleted = false,
-                    ServiveId = item.ServiceId,
+                    ServiceId = item.ServiceId,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.UtcNow,
                     PaymentDate = item.ExpirationDate,
                     ServiceAmount = item.ServiceAmmount,
                     PaymentOption = item.PaymentOptionId,
-                    ServiveProviderId = item.ServiceProviderId,
+                    ServiceProviderId = item.ServiceProviderId,
                     CreatedBy = Utils.GetUserId(_serviceProvider),
                     EmployeeConsumerNo = item.EmployeeConsumerNo,
                     ModifiedBy = Utils.GetUserId(_serviceProvider),
                 };
-                 
+
                 ListofServices.Add(temp);
             }
             return ListofServices;
@@ -129,6 +136,20 @@ namespace RepositoryLayer.Repos
                 entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
                 Put(entity);
             }
+        }
+        public ICollection<EmployeeWithAllServicesDTO> GetEmployeesWithService()
+        {
+            var c = Get().Include(x => x.EmployeeServices).ThenInclude(g => g.Service).Select(x => new
+            EmployeeWithAllServicesDTO
+            {
+                JobTitle = x.Job_Title.Title,
+                FullName = x.F_Name,
+                Services = x.EmployeeServices.Select(s => new ServicesDTO
+                {
+                    Title = s.Service.Title,
+                }).ToList()
+            }).ToList();
+            return c;
         }
         public void SoftDelete(long id)
         {

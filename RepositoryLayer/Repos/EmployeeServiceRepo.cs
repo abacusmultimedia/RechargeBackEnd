@@ -47,11 +47,11 @@ namespace RepositoryLayer.Repos
             {
                 EmployeeId = EmpID,
                 CreatedDate = DateTime.Now,
-                ServiveId = model.ServiceId,
+                ServiceId = model.ServiceId,
                 PaymentDate = DateTime.UtcNow,
                 ServiceAmount = model.ServiceAmmount,
                 PaymentOption = model.PaymentOptionId,
-                ServiveProviderId=model.ServiceProviderId,
+                ServiceProviderId=model.ServiceProviderId,
                 CreatedBy = Utils.GetUserId(_serviceProvider),
                 EmployeeConsumerNo = model.EmployeeConsumerNo,
             };
@@ -69,7 +69,7 @@ namespace RepositoryLayer.Repos
                 entity.PaymentDate = DateTime.UtcNow;
                 entity.ServiceAmount = model.ServiceAmmount;
                 entity.PaymentOption = model.PaymentOptionId;
-                entity.ServiveProviderId = model.ServiceProviderId;
+                entity.ServiceProviderId = model.ServiceProviderId;
                 entity.EmployeeConsumerNo = model.EmployeeConsumerNo;
                 Put(entity);
             }
