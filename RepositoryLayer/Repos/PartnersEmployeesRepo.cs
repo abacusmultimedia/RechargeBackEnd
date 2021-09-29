@@ -69,8 +69,7 @@ namespace RepositoryLayer.Repos
         }
         public async Task PostWithService(EmployeewithServicesDTO employeewithServicesDTO)
         {
-            try
-            {
+            
                 var model = employeewithServicesDTO.Employee;
                 var entity = new RC_Partners_Employees()
                 {
@@ -95,10 +94,7 @@ namespace RepositoryLayer.Repos
                     MembershipNumber = modell.MembershipNumber
                 };
                 await _RewardRepo.PostReward(Rewards);
-            }catch(Exception ex)
-            {
-                
-            }
+            
         }
         private List<EmployeeServices> MappServices(List<EmployeeServicesDTO> model)
         {
@@ -149,6 +145,7 @@ namespace RepositoryLayer.Repos
                     Title = s.Service.Title,
                 }).ToList()
             }).ToList();
+            
             return c;
         }
         public void SoftDelete(long id)
