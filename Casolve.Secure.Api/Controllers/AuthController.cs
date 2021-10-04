@@ -103,14 +103,20 @@ namespace Secure.Api.Controllers
             return constructResponse(await _unitOfWork.Save());
         }
 
-        [HttpPost]
+       /* [HttpPost]
         [Route("Stage2PartnerPost")]
         public async Task<BaseResponse> Stage2PartnerPost([FromBody] SignUPStage2PartnerDTO model)
         {
             _unitOfWork.ExtendedUsersRepository.Stage2PartnerPost(model);
             return constructResponse(await _unitOfWork.Save());
+        }*/
+       [HttpPost]
+       [Route("Stage2PostPartner")]
+       public async Task<BaseResponse> Stage2PostPartner([FromBody] SignUPStage2PartnerDTO model)
+        {
+            await _unitOfWork.ExtendedUsersRepository.Stage2PartnerPost(model);
+            return constructResponse(await _unitOfWork.Save());
         }
-
         [HttpPost]
         [Route("Stage3Post")]
         public async Task<BaseResponse> Stage3Post([FromBody] signUpstage3DTO model)

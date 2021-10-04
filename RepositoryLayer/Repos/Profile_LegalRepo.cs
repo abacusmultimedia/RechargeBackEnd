@@ -90,7 +90,6 @@ namespace RepositoryLayer.Repos
                 Put(entity);
             }
         }
-
         public void PutSecurityQsandAs(QsAndAsDTO model)
         {
             var entity = GetWithCondition(x => x.User.Id == Utils.GetUserId(_serviceProvider)).FirstOrDefault();
@@ -105,13 +104,9 @@ namespace RepositoryLayer.Repos
                 Put(entity);
             }
         }
-
-
         public void SoftDelete(int id)
         {
             GetById(id).IsDeleted = true;
         }
-
-
     }
 }

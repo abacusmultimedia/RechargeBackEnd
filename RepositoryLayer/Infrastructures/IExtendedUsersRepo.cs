@@ -18,7 +18,7 @@ namespace RepositoryLayer.Infrastructures
        // Task<bool> stage1Post(SignUpstage1DTO model);
         void Stage2BusinessPost(SignUPStage2BusinessDTO model);
         Task Stage2PersonalPost(SignUPStage2PersonalDTO model);
-        void Stage2PartnerPost(SignUPStage2PartnerDTO model);
+        Task Stage2PartnerPost(SignUPStage2PartnerDTO model);
         Task<bool> Stage3Post(signUpstage3DTO model);
         void Stage4Post(signUpstage4DTO model);
         Task Stage5BusinessPost(SignUPStage5BusinessDTO model);

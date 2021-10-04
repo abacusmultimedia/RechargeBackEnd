@@ -52,6 +52,19 @@ namespace RepositoryLayer.Repos
         }
 
 
+        public void PutStage2Partner(SignUPStage2PartnerDTO model)
+        {
+            var userId = Utils.GetUserId(_serviceProvider);
+            var entity = GetWithCondition(x => x.UserID == userId).FirstOrDefault();
+            if (entity != null)
+            {
+                entity.BusinessName = model.BusinessName;
+                entity.BusinessRegNumber = model.BusinessRegNumber;
+                entity.ModifiedDate = DateTime.Now;
+                entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
+                Put(entity);
+            }
+        }
         public void Put(BusinessDetailsDTO model)
         {
             var entity = GetById(model.Id);
@@ -79,7 +92,7 @@ namespace RepositoryLayer.Repos
                 entity.BusinessName = model.businessName;
                 entity.Description = model.businessDescription;
                 entity.ModifiedDate = DateTime.Now;
-                entity.ModifiedBy = Utils.GetUserId(_serviceProvider); 
+                entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
                 entity.BusinessName = model.businessName;
                 entity.Website = model.website;
                 entity.LoyaltyMembership = model.loyaltyMembership;
@@ -95,12 +108,9 @@ namespace RepositoryLayer.Repos
             var entity = GetWithCondition(x => x.UserID == userId).FirstOrDefault();
             if (entity != null)
             {
-                entity.GSTNo = model.businessGSTNo;
-                entity.BusinessRegCertificateImg = model.uploadBusinessRegistrationNo;
-                /// Manager name  
-                /// Auth Person name  
-
-
+                entity.GSTNo = model.BusinessGSTNo;
+                entity.BusinessRegNumber = model.UploadBusinessRegistrationNo;
+                entity.BusinessRegCertificateImg = model.GvtIssuedPhotoID;
                 entity.ModifiedDate = DateTime.Now;
                 entity.ModifiedBy = Utils.GetUserId(_serviceProvider);
                 Put(entity);
@@ -112,8 +122,8 @@ namespace RepositoryLayer.Repos
             var userId = Utils.GetUserId(_serviceProvider);
             var entity = GetWithCondition(x => x.UserID == userId).FirstOrDefault();
             if (entity != null)
-            { 
-                entity.LoyaltyMembership = model; 
+            {
+                entity.LoyaltyMembership = model;
                 Put(entity);
             }
         }

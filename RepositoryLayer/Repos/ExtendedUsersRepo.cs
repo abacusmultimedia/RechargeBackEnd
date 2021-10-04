@@ -766,11 +766,20 @@ namespace RepositoryLayer.Repos
             await _userManager.UpdateAsync(userToUpdate);
             _BusinessInforRepo.PutStage2Peronal(model.loyaltyMembership);
         }
-        public void Stage2PartnerPost(SignUPStage2PartnerDTO model)
+        public async Task Stage2PartnerPost(SignUPStage2PartnerDTO model)
         {
-            /// wiating for design 
+            var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
+            var userToUpdate = await _userManager.FindByIdAsync(Utils.GetUserId(_serviceProvider));
+            userToUpdate.FirstName = model.Firstname;
+            userToUpdate.LastName = model.FamilyName;
+            userToUpdate.JobTitleId = model.JobTitleId;
+            userToUpdate.PhoneNumber = model.ContactNumber;
+            userToUpdate.PeronalGreeting = model.PersonalGreeting;
+            userToUpdate.SecondaryPhoneNumber = model.Landline;
+            await _userManager.UpdateAsync(userToUpdate);
+            _BusinessInforRepo.PutStage2Partner(model);
         }
-        public async Task<bool> Stage3Post(signUpstage3DTO model)
+            public async Task<bool> Stage3Post(signUpstage3DTO model)
         {
             var _userManager = _serviceProvider.GetRequiredService<UserManager<ExtendedUser>>();
             var userToUpdate = await _userManager.FindByIdAsync(Utils.GetUserId(_serviceProvider));
@@ -826,24 +835,17 @@ namespace RepositoryLayer.Repos
             {
                 SecurityAnswer1 = model.SecurityAnswer1,
                 SecurityAnswer2 = model.SecurityAnswer2,
-                SecurityAnswer3 = model.SecurityAnswer3,
                 SecurityQuestion1 = model.SecurityQuestion1,
                 SecurityQuestion2 = model.SecurityQuestion2,
-                SecurityQuestion3 = model.SecurityQuestion3
             };
 
             _LegalRepo.PutSecurityQsandAs(QsandAs);
 
-            // need to upload files to blob or Wasabi 
-            // get url and 
-
-            /// Saving them to DB 
             var partnerInfor = new Partner_BusinessInfo()
             {
-                businessGSTNo = model.businessGSTNo,
-                uploadBusinessRegistrationNo = model.uploadBusinessRegistrationNo,
-                accountManagerID = model.accountManagerID,
-                authorizedPerson = model.authorizedPerson
+                BusinessGSTNo = model.BusinessGSTNo,
+                UploadBusinessRegistrationNo = model.UploadBusinessRegistrationNo,
+                GvtIssuedPhotoID = model.GvtIssuedPhotoID
             };
             _BusinessInforRepo.PostPartnerBusinessinfo(partnerInfor);
         }
