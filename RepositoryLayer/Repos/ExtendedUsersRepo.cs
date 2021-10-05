@@ -68,7 +68,7 @@ namespace RepositoryLayer.Repos
                     return null;
                 }
 
-                if (!user.MemberStatus)
+                if (!user.MemberStatus) 
                 {
                     OtherConstants.messageType = MessageType.Error;
                     OtherConstants.isSuccessful = false;
@@ -844,8 +844,8 @@ namespace RepositoryLayer.Repos
             var partnerInfor = new Partner_BusinessInfo()
             {
                 BusinessGSTNo = model.BusinessGSTNo,
-                UploadBusinessRegistrationNo = model.UploadBusinessRegistrationNo,
-                GvtIssuedPhotoID = model.GvtIssuedPhotoID
+                UploadBusinessRegistrationNo = model.UploadBusinessRegistrationNoUrl,
+                GvtIssuedPhotoID = model.GvtIssuedPhotoIDUrl
             };
             _BusinessInforRepo.PostPartnerBusinessinfo(partnerInfor);
         }

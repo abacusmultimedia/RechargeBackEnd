@@ -46,8 +46,8 @@ namespace CommonLayer.DTOs
         public string SecurityAnswer1 { get; set; }
         public string SecurityAnswer2 { get; set; }
         public string BusinessGSTNo { get; set; }
-        public string GvtIssuedPhotoID { get; set; } // ImgUrl
-        public string UploadBusinessRegistrationNo { get; set; } // ImgUrl
+        public string GvtIssuedPhotoIDUrl { get; set; } // ImgUrl
+        public string UploadBusinessRegistrationNoUrl { get; set; } // ImgUrl
     }
 
     public class Partner_BusinessInfo
